@@ -1,6 +1,7 @@
 <p>your trust history: {{user_list}}
 <p>partner's trust history: {{foil_list}}
-  <form action="{{ interaction_pk }}" method="post">
+  <form action="{% url 'id_trust:reveal_interact' interaction_pk %}"
+      method="post">
       <button type="submit" name="choice" value=Trust>Trust</button>
       <button type="submit" name="choice" value=Distrust>Distrust</button>
   {% csrf_token %}</form>

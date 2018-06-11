@@ -1,0 +1,8 @@
+<p>your trust history: {{user_list}}
+<p>partner's trust history: {{foil_list}}
+  <form action="{% url 'id_trust:real_interact' interaction_pk %}" method="post">
+      <button type="submit" name="choice" value=Trust>Trust</button>
+      <button type="submit" name="choice" value=Distrust>Distrust</button>
+  {% csrf_token %}</form>
+<p>current score: {{score.0}} to {{score.1}}
+<p> <a href="{% url 'id_trust:home' %}">exchange with new partner</a>

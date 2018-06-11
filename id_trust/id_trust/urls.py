@@ -19,5 +19,8 @@ from id_trust import views
 app_name = 'id_trust'
 urlpatterns = [
     path('', views.home, name='home'),
-    path('<int:pk>', views.interact, name='interact'),
+    path('real/<int:pk>', views.interact,
+        {'secrets': False}, name='real_interact'),
+    path('reveal/<int:pk>', views.interact,
+        {'secrets': True}, name='reveal_interact'),
 ]

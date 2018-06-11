@@ -16,10 +16,10 @@ def home(request):
         'foil_list': [],
         's_results': [],
     }
-    return render(request, 'id_trust/interaction.html', context)
+    return render(request, 'id_trust/real_interaction.html', context)
 
 
-def interact(request, pk):
+def interact(request, pk, secrets):
     (interaction, created) = Interaction.objects.get_or_create(
             {'foil_strategy': random.choice(Strategy.choices)[0]},
             pk=pk)
@@ -55,4 +55,7 @@ def interact(request, pk):
         'foil_list': foil_list,
         's_results': s_results,
     }
-    return render(request, 'id_trust/interaction.html', context)
+    return render(request,
+            'id_trust/reveal_interaction.html' if secrets
+            else 'id_trust/real_interaction.html',
+            context)
