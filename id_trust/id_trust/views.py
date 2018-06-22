@@ -47,12 +47,14 @@ def interact(request, pk, secrets):
             "%s: (foil %.1f) (user %.1f)" %
             (k, v[0], v[1]) for (k, v) in strategy_lists.items()]
     score = interaction.score()
+    user_list_display = ["Trust" if t else "Distrust" for t in user_list]
+    foil_list_display = ["Trust" if t else "Distrust" for t in foil_list]
     context = {
         'interaction_pk': interaction.pk,
         'interaction': interaction,
         'score': score,
-        'user_list': user_list,
-        'foil_list': foil_list,
+        'user_list': user_list_display,
+        'foil_list': foil_list_display,
         's_results': s_results,
     }
     return render(request,
