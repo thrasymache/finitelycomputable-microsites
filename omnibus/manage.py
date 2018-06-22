@@ -3,6 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
+    # this is an unusable default - a specifc settings MUST be selected
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "omnibus.settings")
     try:
         from django.core.management import execute_from_command_line
