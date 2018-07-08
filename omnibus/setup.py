@@ -6,16 +6,20 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+version = '0.3.dev0'
 
 setup(
     name='omnibus',
-    version='0.1',
+    version=version,
     packages=find_packages(),
     include_package_data=True,
     license='AGPL-3.0-only',
     description='All of Sam Newbold\'s microsites together',
     long_description=README,
-    install_requires=['Django>=2.0,<2.1', 'django-choices>=1.6,<1.7'],
+    install_requires=[
+        'Django>=2.0,<2.1',
+        'django-choices>=1.6,<1.7',
+        'id_trust==' + version],
     url='https://www.example.com/',
     author='Samuel Newbold',
     author_email='sam@rwsh.org',
