@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='id_trust',
-    version='0.3.dev0',
+    version='0.4',
     packages=find_packages(),
     include_package_data=True,
     license='AGPL-3.0-only',

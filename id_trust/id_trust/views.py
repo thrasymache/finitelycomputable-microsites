@@ -7,10 +7,9 @@ from id_trust.models import Interaction, Strategy, deviation
 
 
 def home(request):
-    if not Interaction.objects.all(): Interaction().save()
     context = {
-        'interaction_pk':
-            Interaction.objects.all().aggregate(Max('pk'))['pk__max']+1,
+        'interaction_pk': 1+
+            (Interaction.objects.all().aggregate(Max('pk'))['pk__max'] or 0),
         'interaction': None,
         'score': (0, 0),
         'user_list': [],
