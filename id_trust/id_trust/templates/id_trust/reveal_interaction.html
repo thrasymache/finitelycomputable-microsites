@@ -9,6 +9,6 @@
 <p> <a href="{% url 'id_trust:home' %}">exchange with new partner</a>
 <p>Secrets you shouldn't know:
 <p>Interaction {{ interaction_pk }}
-  (secret foil_strategy {{ interaction.foil_strategy }})
+  (secret partner strategy: {{ interaction.get_foil_strategy_display }})
   {% for s in s_results %}   <p>{{s}}
   {% endfor %}

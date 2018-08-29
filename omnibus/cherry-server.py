@@ -1,4 +1,7 @@
 #! /usr/bin/env python3
+# This is a minor edit of the example config on the Digital Ocean tutorial for
+# deploying Django with CherryPy.
+# https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-applications-using-a-cherrypy-web-server-behind-nginx
 from omnibus.wsgi import application
 
 # Import CherryPy
