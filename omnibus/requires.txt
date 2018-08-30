@@ -1,4 +1,4 @@
-id_trust==0.2
-
 --extra-index-url=https://packagecloud.io/thrasymache/microsites/pypi/simple
+-e ../id_trust
+-e .
 
