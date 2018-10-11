@@ -6,7 +6,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-version = '0.6'
+version = '0.7'
 #version += '.dev0'
 
 setup(
@@ -17,7 +17,7 @@ setup(
     license='AGPL-3.0-only',
     description='A microsite to explore identifying game-theory strategies',
     long_description=README,
-    install_requires=['Django>=2.0,<2.1', 'django-choices>=1.6,<1.7'],
+    install_requires=['Django>=2.1.2,<2.2', 'django-choices>=1.6,<1.7'],
     url='https://www.example.com/id_trust',
     author='Samuel Newbold',
     author_email='sam@rwsh.org',
