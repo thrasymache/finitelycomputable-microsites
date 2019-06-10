@@ -17,7 +17,7 @@ setup(
     license='AGPL-3.0-only',
     description='A microsite to explore identifying game-theory strategies',
     long_description=README,
-    install_requires=['Django>=2.1.2,<2.2', 'django-choices>=1.6,<1.7'],
+    install_requires=['Django>2.1,<2.2', 'django-choices>=1.6,<1.7'],
     url='https://www.example.com/id_trust',
     author='Samuel Newbold',
     author_email='sam@rwsh.org',

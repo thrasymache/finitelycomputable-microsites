@@ -19,7 +19,7 @@ setup(
     long_description=README,
     scripts=['manage.py', 'cherry-server.py'],
     install_requires=[
-        'Django>=2.1.2,<2.2',
+        'Django>2.1,<2.2',
         'django-choices>=1.6,<1.7',
         'cherrypy>=16.0,<16.1',
         'id_trust==' + version],
