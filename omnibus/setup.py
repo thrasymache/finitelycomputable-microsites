@@ -6,7 +6,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-version = '0.7'
+version = '19.10'
 #version += '.dev0'
 
 setup(
@@ -19,7 +19,7 @@ setup(
     long_description=README,
     scripts=['manage.py', 'cherry-server.py'],
     install_requires=[
-        'Django>2.1,<2.2',
+        'Django>2.1,<3.0',
         'django-choices>=1.6,<1.7',
         'cherrypy>=16.0,<16.1',
         'id_trust==' + version],
