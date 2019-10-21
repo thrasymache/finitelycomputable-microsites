@@ -6,6 +6,7 @@ from omnibus.wsgi import application
 
 # Import CherryPy
 import cherrypy
+from sys import argv
 
 if __name__ == '__main__':
 
@@ -20,7 +21,10 @@ if __name__ == '__main__':
 
     # Configure the server object
     server.socket_host = "0.0.0.0"
-    server.socket_port = 8000
+    if len(argv) == 2:
+        server.socket_port = int(argv[1])
+    else:
+        server.socket_port = 8000
     server.thread_pool = 30
 
     # For SSL Support

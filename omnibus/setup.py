@@ -20,8 +20,8 @@ setup(
     scripts=['manage.py', 'cherry-server.py'],
     install_requires=[
         'Django>2.1,<3.0',
-        'django-choices>=1.6,<1.7',
-        'cherrypy>=16.0,<16.1',
+        'django-choices<1.7,>=1.6',
+        'cherrypy<19',
         'id_trust==' + version],
     url='https://www.example.com/',
     author='Samuel Newbold',
