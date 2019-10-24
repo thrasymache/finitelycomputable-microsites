@@ -1,0 +1,7 @@
+<form method="POST">
+    <input type="hidden" name="interaction" value=7 />
+    <input type="hidden" name="foil_trust" value="false" />
+    <button type="submit" name="user_trust" value="true">Trust</button>
+    <button type="submit" name="user_trust" value="false">Distrust</button>
+    {% csrf_token %}
+</form>

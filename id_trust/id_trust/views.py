@@ -1,9 +1,13 @@
 from collections import OrderedDict
 from django.db.models import Max
 from django.shortcuts import render
+from django.urls import reverse
+from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 import random
 
-from id_trust.models import Interaction, Strategy, deviation
+from id_trust.models import Interaction, Exchange, Strategy, deviation
 
 
 def home(request):
@@ -63,3 +67,89 @@ def interact(request, pk, secrets):
             'id_trust/reveal_interaction.html' if secrets
             else 'id_trust/real_interaction.html',
             context)
+
+
+class ExchangeCreate(CreateView):
+    model = Exchange
+    fields = ['interaction', 'foil_trust', 'user_trust']
+    template_name = "id_trust/interaction_begin.html"
+
+    def form_valid(self, form):
+        #form.foil_strategy = random.choice(Strategy.choices)[0]
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('id_trust:reveal_interact',
+                       kwargs={'pk': self.object.interaction_id})
+
+
+class Home(CreateView):
+    model = Interaction
+    fields = []#'foil_strategy']
+    template_name_suffix = "_begin"
+
+    def form_valid(self, form):
+        #form.foil_strategy = random.choice(Strategy.choices)[0]
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('id_trust:real_interact',
+                       kwargs={'pk': self.object.pk})
+
+
+class RevealInteract(DetailView):
+    template_name = 'id_trust/reveal_interaction.html'
+    fields = ['choice']
+    model = Interaction
+
+    def get_context_data(self, **kwargs):
+        context = super(RevealInteract, self).get_context_data(**kwargs)
+        #(interaction, created) = Interaction.objects.get_or_create(
+        #        {'foil_strategy': random.choice(Strategy.choices)[0]},
+        #        pk=pk)
+        # import ipdb; ipdb.set_trace()
+        foil_response = Strategy.get_choice(
+                self.object.foil_strategy).impl(
+                        [e.user_trust for e in self.object.exchange_set.all()])
+        user_trust = self.request.POST.get('choice')
+        if user_trust == 'Trust':
+            user_trust = True
+        elif user_trust == 'Distrust':
+            user_trust = False
+        if user_trust in [True, False]:
+            self.object.exchange_set.create(
+                    user_trust=user_trust,
+                    foil_trust=foil_response)
+        user_list = [i.user_trust for i in self.object.exchange_set.all()]
+        foil_list = [i.foil_trust for i in self.object.exchange_set.all()]
+        strategy_lists = OrderedDict()
+        if len(user_list):
+            for (k, v) in Strategy.choices:
+                st = Strategy.get_choice(k)
+                strategy_lists[v] = [deviation(user_list, foil_list, st)]
+                strategy_lists[v].append(deviation(foil_list, user_list, st))
+        s_results = [
+                "%s: (foil %.1f) (user %.1f)" %
+                (k, v[0], v[1]) for (k, v) in strategy_lists.items()]
+        score = self.object.score()
+        user_list_display = ", ".join(
+                ["Trust" if t else "Distrust" for t in user_list])
+        foil_list_display = ", ".join(
+                ["Trust" if t else "Distrust" for t in foil_list])
+        context.update({
+            'interaction_pk': self.object.pk,
+            'interaction': self.object,
+            'score': score,
+            'user_list': user_list_display,
+            'foil_list': foil_list_display,
+            's_results': s_results,
+        })
+        return context
+
+
+class Interact(UpdateView, RevealInteract):
+    template_name = 'id_trust/real_interaction.html'
+
+    def get_success_url(self):
+        return reverse('id_trust:real_interact',
+                       kwargs={'pk': self.object.pk})

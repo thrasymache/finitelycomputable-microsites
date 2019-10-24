@@ -23,4 +23,10 @@ urlpatterns = [
         {'secrets': False}, name='real_interact'),
     path('reveal/<int:pk>', views.interact,
         {'secrets': True}, name='reveal_interact'),
+    path('class_home', views.Home.as_view(), name='class_home'),
+    path('real/<int:pk>', views.Interact.as_view(), name='class_real_interact'),
+    path('reveal/<int:pk>', views.RevealInteract.as_view(),
+        name='class_reveal_interact'),
+    path('exchange_create/<int:interaction_id>', views.ExchangeCreate.as_view(),
+        name='exchange_create'),
 ]
