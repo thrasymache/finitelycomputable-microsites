@@ -1,5 +1,6 @@
+#! /usr/bin/env python
 import os
-from setuptools import find_packages, setup
+from setuptools import setup
 from finitelycomputable_microsites_setup import version, base_setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -9,21 +10,19 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='omnibus',
+    name='finitelycomputable-flask-blueprints',
     version=version,
-    packages=find_packages('.'),
-    description='The microsites of finitelycomputable.net run inside Django',
+    py_modules=['finitelycomputable.flask_blueprints'],
+    entry_points={
+        'console_scripts': [
+            'finitelycomputable-flask-blueprints = finitelycomputable.flask_blueprints:run']
+        },
+    description='The Flask-based wsgi app using blueprints to combine the microsites of finitelycomputable.net',
     long_description=README,
-    scripts=[
-        'manage.py',
-        'cherry-server.py',
-        'bjoern-server.py',
-        'finitelycomputable_microsites_setup.py'],
-    install_requires=[
-        'Django>2.1,<3.0',
-        'django-choices~=1.6',
-        'id_trust==' + version],
+    scripts=['finitelycomputable_microsites_setup.py'],
+    install_requires=['Flask~=1.1'],
     extras_require={
+        'helloworld': ['finitelycomputable-helloworld-flask~=' + version],
         'bjoern': ['bjoern<4'],
         'cheroot': ['cheroot<9'],
         'cherrypy': ['cherrypy<19'],

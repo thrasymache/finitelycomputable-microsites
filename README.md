@@ -62,6 +62,7 @@ permits the below usage)
 omnibus[cheroot] : `cheroot --bind 0.0.0.0:9000 omnibus.wsgi` (cheroot alone)
 omnibus[gunicorn] : `gunicorn -b 0.0.0.0:9000 omnibus.wsgi`
 omnibus[bjoern] : `bjoern-server.py 9000`
+omnibus[waitress] : waitress-serve --port=9000 omnibus.wsgi:application
 
 cherry-server.py and bjoern-server.py are scripts that are part of the omnibus
 package because cherrypy and bjoern take their configuration as arguments in a

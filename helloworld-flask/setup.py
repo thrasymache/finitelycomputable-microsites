@@ -1,5 +1,6 @@
+#! /usr/bin/env python
 import os
-from setuptools import find_packages, setup
+from setuptools import setup
 from finitelycomputable_microsites_setup import version, base_setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -9,15 +10,17 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='id_trust',
+    name='finitelycomputable-helloworld-flask',
     version=version,
-    packages=find_packages('.'),
-    description='A microsite to explore identifying game-theory strategies',
+    py_modules=['finitelycomputable.helloworld_flask'],
+    entry_points={
+        'console_scripts': [
+            'finitelycomputable-helloworld-flask = finitelycomputable.helloworld_flask:run']
+        },
+    description='A hello_world implementation in Flask',
     long_description=README,
     scripts=['finitelycomputable_microsites_setup.py'],
-    install_requires=[
-        'Django>2.1,<3.0',
-        'django-choices~=1.6'],
+    install_requires=['Flask~=1.1'],
     url='https://www.finitelycomputable.net/identification_of_trust',
     **base_setup
 )
