@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 import os
 from setuptools import setup
-from finitelycomputable_microsites_setup import version, base_setup
+from finitelycomputable_microsites_setup import (
+        version, base_setup, wsgi_extras_require,
+)
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
@@ -19,8 +21,9 @@ setup(
         },
     description='A hello_world implementation in Morepath',
     long_description=README,
+    long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
     install_requires=['morepath~=0.18'],
-    url='https://www.finitelycomputable.net/hello_world/',
+    url='http://www.finitelycomputable.net/hello_world/',
     **base_setup
 )

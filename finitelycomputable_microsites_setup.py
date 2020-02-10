@@ -1,4 +1,4 @@
-version = '20.2'
+version = '20.2.1'
 #version += 'a0'
 
 base_setup = {
@@ -34,3 +34,11 @@ django_setup = {
         'Framework :: Django :: 2.0',
     ],
 }
+
+wsgi_extras_require={
+        'bjoern': ['bjoern<4'],
+        'cheroot': ['cheroot<9'],
+        'cherrypy': ['cherrypy<19'],
+        'gunicorn': ['gunicorn<20'],
+        'waitress': ['waitress<1.4'],
+        },

@@ -19,6 +19,7 @@ setup(
         },
     description='The Morepath-based wsgi app using Morepath.mount to combine the microsites of finitelycomputable.net',
     long_description=README,
+    long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
     install_requires=['morepath~=0.18'],
     extras_require={
@@ -29,6 +30,6 @@ setup(
         'gunicorn': ['gunicorn<20'],
         'waitress': ['waitress<1.4'],
         },
-    url='https://www.finitelycomputable.net/',
+    url='http://www.finitelycomputable.net/wsgi_info',
     **base_setup
 )

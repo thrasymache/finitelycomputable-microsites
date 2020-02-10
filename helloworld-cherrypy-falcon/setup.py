@@ -19,7 +19,7 @@ setup(
         'console_scripts': [
             'finitelycomputable-helloworld-falcon = finitelycomputable.helloworld_falcon:run']
         },
-    description='A hello_world implementation in Falcon',
+    description='hello_world in Falcon from an implementation in CherryPy',
     long_description=README,
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],

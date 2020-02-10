@@ -14,6 +14,7 @@ setup(
     packages=find_packages('.'),
     description='The microsites of finitelycomputable.net run inside Django',
     long_description=README,
+    long_description_content_type="text/x-rst",
     scripts=[
         'manage.py',
         'cherry-server.py',
@@ -23,13 +24,7 @@ setup(
         'Django>2.1,<3.0',
         'django-choices~=1.6',
         'id_trust==' + version],
-    extras_require={
-        'bjoern': ['bjoern<4'],
-        'cheroot': ['cheroot<9'],
-        'cherrypy': ['cherrypy<19'],
-        'gunicorn': ['gunicorn<20'],
-        'waitress': ['waitress<1.4'],
-        },
-    url='https://www.finitelycomputable.net/',
+    extras_require=wsgi_extras_require,
+    url='http://www.finitelycomputable.net/wsgi_info',
     **base_setup
 )

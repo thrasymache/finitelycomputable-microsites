@@ -14,10 +14,11 @@ setup(
     packages=find_packages('.'),
     description='A microsite to explore identifying game-theory strategies',
     long_description=README,
+    long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
     install_requires=[
         'Django>2.1,<3.0',
         'django-choices~=1.6'],
-    url='https://www.finitelycomputable.net/identification_of_trust',
+    url='http://www.finitelycomputable.net/identification_of_trust',
     **base_setup
 )
