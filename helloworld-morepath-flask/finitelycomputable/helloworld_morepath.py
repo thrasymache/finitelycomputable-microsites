@@ -1,6 +1,7 @@
 import morepath
 from os import environ
 
+from finitelycomputable import helloworld_flask
 
 class HelloWorldApp(morepath.App):
     pass
@@ -16,7 +17,7 @@ class Root(object):
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return 'Morepath says "hello, world"\n'
+    return helloworld_flask.hello_world()
 
 
 if environ.get('BASE_PATH'):

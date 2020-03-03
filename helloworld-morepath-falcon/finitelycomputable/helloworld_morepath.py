@@ -1,6 +1,8 @@
 import morepath
 from os import environ
 
+from finitelycomputable import helloworld_falcon
+from falcon import Response
 
 class HelloWorldApp(morepath.App):
     pass
@@ -10,13 +12,15 @@ class CoreApp(morepath.App):
 
 
 @HelloWorldApp.path(path='/')
-class Root(object):
+class Root(helloworld_falcon.HelloWorld):
     pass
 
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return 'Morepath says "hello, world"\n'
+    resp = Response()
+    self.on_get(request, resp)
+    return resp.body
 
 
 if environ.get('BASE_PATH'):

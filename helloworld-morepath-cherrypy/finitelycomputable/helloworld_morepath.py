@@ -1,6 +1,7 @@
 import morepath
 from os import environ
 
+from finitelycomputable import helloworld_cherrypy
 
 class HelloWorldApp(morepath.App):
     pass
@@ -10,13 +11,13 @@ class CoreApp(morepath.App):
 
 
 @HelloWorldApp.path(path='/')
-class Root(object):
+class Root(helloworld_cherrypy.HelloWorld):
     pass
 
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return 'Morepath says "hello, world"\n'
+    return self.index()
 
 
 if environ.get('BASE_PATH'):

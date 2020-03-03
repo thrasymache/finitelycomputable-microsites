@@ -1,4 +1,4 @@
-version = '20.2.1'
+version = '20.3'
 #version += 'a0'
 
 base_setup = {
@@ -41,4 +41,4 @@ wsgi_extras_require={
         'cherrypy': ['cherrypy<19'],
         'gunicorn': ['gunicorn<20'],
         'waitress': ['waitress<1.4'],
-        },
+        }
