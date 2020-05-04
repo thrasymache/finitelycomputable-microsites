@@ -23,7 +23,7 @@ setup(
     long_description=README,
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
-    install_requires=['Flask~=1.1'],
+    install_requires=['Flask~=1.1', 'falcon~=2.0'],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/hello_world',
     **base_setup

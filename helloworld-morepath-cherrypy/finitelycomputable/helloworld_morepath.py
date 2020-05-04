@@ -30,8 +30,12 @@ else:
 
 
 def run():
-    from sys import argv
-    if len(argv)== 2:
-        morepath.run(application, port=(argv[1]))
-    else:
-        morepath.run(application, port=8080)
+    from sys import argv, exit, stderr
+    if len(argv) < 2 or argv[1] != 'run':
+        stderr.write(f'usage: {argv[0]} run [port]\n')
+        exit(1)
+    try:
+        port=int(argv[2])
+    except IndexError:
+        port=8080
+    morepath.run(application, ignore_cli=True, port=port)

@@ -1,4 +1,5 @@
 .*.swp
+.tox
 db.sqlite3
 __pycache__
 *.egg-info

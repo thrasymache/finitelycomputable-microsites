@@ -32,10 +32,13 @@ except ModuleNotFoundError:
 
 
 def run():
-    from sys import argv
+    from sys import argv, exit, stderr
     from wsgiref import simple_server
+    if len(argv) < 2 or argv[1] != 'run':
+        stderr.write(f'usage: {argv[0]} run [port]\n')
+        exit(1)
     try:
-        port=int(argv[1])
+        port=int(argv[2])
     except IndexError:
         port=8080
     simple_server.make_server('127.0.0.1', port, application).serve_forever()

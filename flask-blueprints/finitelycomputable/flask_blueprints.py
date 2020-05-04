@@ -31,8 +31,12 @@ except ModuleNotFoundError:
 
 
 def run():
-    from sys import argv
-    if len(argv)== 2:
-        application.run(port=(argv[1]))
-    else:
-        application.run(port=8080)
+    from sys import argv, exit, stderr
+    if len(argv) < 2 or argv[1] != 'run':
+        stderr.write(f'usage: {argv[0]} run [port]\n')
+        exit(1)
+    try:
+        port=int(argv[2])
+    except IndexError:
+        port=8080
+    application.run(port=port)
