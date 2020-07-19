@@ -18,18 +18,19 @@ f'''{version_text} using {__name__} {version} on Python {python_version()}
 at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
     )
 
-cherrypy.tree.mount(WsgiInfo(), join(base_path, 'wsgi_info/'), {'/': {}})
+def setup_server():
+    cherrypy.tree.mount(WsgiInfo(), join(base_path, 'wsgi_info/'), {'/': {}})
+    try:
+        from finitelycomputable.helloworld_cherrypy import HelloWorld
+        cherrypy.tree.mount(
+                HelloWorld(), join(base_path,'hello_world/'), {'/': {}})
+        included_apps.append('helloworld_cherrypy')
+    except ModuleNotFoundError:
+        pass
+    return cherrypy.tree
 
 
-try:
-    from finitelycomputable.helloworld_cherrypy import HelloWorld
-    cherrypy.tree.mount(HelloWorld(), join(base_path,'hello_world/'), {'/': {}})
-    included_apps.append('helloworld_cherrypy')
-except ModuleNotFoundError:
-    pass
-
-
-application = cherrypy.tree
+application = setup_server()
 
 
 def run():

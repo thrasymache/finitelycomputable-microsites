@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, cli
 from os import environ
 from platform import python_version
 from posixpath import join
@@ -28,15 +28,23 @@ try:
     included_apps.append('helloworld_flask')
 except ModuleNotFoundError:
     pass
+included_apps = [app.__module__
+        for name, app in locals().items() if name in ['helloworld_blue']]
 
 
 def run():
     from sys import argv, exit, stderr
-    if len(argv) < 2 or argv[1] != 'run':
-        stderr.write(f'usage: {argv[0]} run [port]\n')
+    usage = f'usage: {argv[0]} run|routes [port]\n'
+    if len(argv) < 2:
+        stderr.write(usage)
         exit(1)
-    try:
-        port=int(argv[2])
-    except IndexError:
-        port=8080
-    application.run(port=port)
+    if argv[1] == 'run':
+        try:
+            port=int(argv[2])
+        except IndexError:
+            port=8080
+        application.run(port=port)
+    else:
+        environ['FLASK_APP'] = __name__
+        stderr.write(environ['FLASK_APP'])
+        cli.main()

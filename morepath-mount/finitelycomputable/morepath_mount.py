@@ -39,11 +39,21 @@ application = CoreApp()
 
 def run():
     from sys import argv, exit, stderr
-    if len(argv) < 2 or argv[1] != 'run':
-        stderr.write(f'usage: {argv[0]} run [port]\n')
+    usage = f'usage: {argv[0]} run|routes [port]\n'
+    if len(argv) < 2:
+        stderr.write(usage)
         exit(1)
-    try:
-        port=int(argv[2])
-    except IndexError:
-        port=8080
-    morepath.run(application, ignore_cli=True, port=port)
+    if argv[1] == 'run':
+        try:
+            port=int(argv[2])
+        except IndexError:
+            port=8080
+        morepath.run(application, ignore_cli=True, port=port)
+    elif argv[1] == 'routes':
+        import dectate
+        for app in application.commit():
+            for view in dectate.query_app(app, 'view'):
+                print(view[0].key_dict())
+    else:
+        stderr.write(usage)
+        exit(1)

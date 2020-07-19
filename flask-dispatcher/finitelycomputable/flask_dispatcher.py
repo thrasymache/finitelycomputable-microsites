@@ -29,19 +29,23 @@ try:
     included_apps.append('helloworld_flask')
 except ModuleNotFoundError:
     try:
-        environ['BASE_PATH'] = hello_base
-        from finitelycomputable.helloworld_cherrypy import (
+        from finitelycomputable.helloworld_falcon import (
                 application as helloworld_app)
-        environ['BASE_PATH'] = base_path
-        included_apps.append('helloworld_cherrypy')
+        included_apps.append('helloworld_falcon')
     except ModuleNotFoundError:
         try:
-            from finitelycomputable.helloworld_falcon import (
+            from finitelycomputable.helloworld_morepath import (
                     application as helloworld_app)
-            included_apps.append('helloworld_falcon')
+            included_apps.append('helloworld_morepath')
         except ModuleNotFoundError:
-            pass
-if 'helloworld_app' in dir():
+            try:
+                environ['BASE_PATH'] = hello_base
+                from finitelycomputable.helloworld_cherrypy import (
+                        application as helloworld_app)
+                included_apps.append('helloworld_cherrypy')
+            except ModuleNotFoundError:
+                environ['BASE_PATH'] = base_path
+if 'helloworld_app' in locals():
     application.wsgi_app = DispatcherMiddleware(application.wsgi_app, {
             hello_base: helloworld_app
     })

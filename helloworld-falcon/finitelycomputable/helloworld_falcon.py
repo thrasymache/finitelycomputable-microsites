@@ -3,6 +3,9 @@ from os import environ
 from posixpath import join
 
 
+class API(falcon.API):
+    '''this will have __module__ == finitelycomputable.helloworld_falcon'''
+
 class HelloWorld(object):
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
@@ -10,7 +13,7 @@ class HelloWorld(object):
         resp.body = 'Falcon says "hello, world"\n'
 
 
-application = falcon.API()
+application = API()
 application.req_options.strip_url_path_trailing_slash = True
 base_path = join('/', environ.get('BASE_PATH', ''))
 application.add_route(base_path, HelloWorld())

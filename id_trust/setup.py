@@ -1,6 +1,8 @@
 import os
 from setuptools import find_packages, setup
-from finitelycomputable_microsites_setup import version, base_setup
+from finitelycomputable_microsites_setup import (
+        version, base_setup, wsgi_extras_require,
+)
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
@@ -19,6 +21,7 @@ setup(
     install_requires=[
         'Django>2.1,<3.0',
         'django-choices~=1.6'],
+    extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/identification_of_trust',
     **base_setup
 )

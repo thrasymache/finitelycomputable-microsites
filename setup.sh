@@ -6,8 +6,10 @@
 python id_trust/setup.py $*
 python omnibus/setup.py $*
 python cherrypy-mount/setup.py $*
+python django-apps/setup.py $*
 python falcon-addroute/setup.py $*
 python flask-blueprints/setup.py $*
+python flask-dispatcher/setup.py $*
 python helloworld-cherrypy/setup.py $*
 python helloworld-falcon/setup.py $*
 python helloworld-flask/setup.py $*

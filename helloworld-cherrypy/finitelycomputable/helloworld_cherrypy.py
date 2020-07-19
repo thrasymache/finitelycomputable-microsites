@@ -2,14 +2,21 @@ import cherrypy
 from os import environ
 
 
+class Application(cherrypy.Application):
+    '''this will have __module__ == finitelycomputable.helloworld_cherrypy'''
+
+
 class HelloWorld(object):
     @cherrypy.expose
     def index(self):
         return 'CherryPy says "hello, world"\n'
 
 
+def setup_server():
+    return cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
+
 base_path = environ.get('BASE_PATH', '')
-application = cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
+application = setup_server()
 
 
 def run():
