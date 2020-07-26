@@ -1,8 +1,10 @@
 -e cherrypy-mount
+-e django-apps
 -e falcon-addroute
 -e flask-blueprints
 -e flask-dispatcher
 -e helloworld-cherrypy
+-e helloworld-django
 -e helloworld-falcon
 -e helloworld-flask
 -e helloworld-morepath

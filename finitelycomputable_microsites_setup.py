@@ -1,5 +1,5 @@
-version = '20.7'
-#version += 'a0'
+version = '20.8'
+version += 'a0'
 
 base_setup = {
     'package_dir': {'': '.'},
@@ -28,12 +28,14 @@ base_setup = {
     },
 }
 
-django_setup = {
-    'classifiers': [
+django_classifiers = [
         'Framework :: Django',
-        'Framework :: Django :: 2.0',
-    ],
-}
+        'Framework :: Django :: 3.0',
+    ]
+
+django_setup = base_setup.copy()
+django_setup['classifiers'] = django_setup['classifiers'].copy()
+django_setup['classifiers'].extend(django_classifiers)
 
 wsgi_extras_require={
         'bjoern': ['bjoern<4'],

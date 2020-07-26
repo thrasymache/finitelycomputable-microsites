@@ -23,7 +23,7 @@ setup(
         'bjoern-server.py',
         'finitelycomputable_microsites_setup.py'],
     install_requires=[
-        'Django>2.1,<3.0',
+        'Django~=3.0',
         'django-choices~=1.6',
         'id_trust==' + version],
     extras_require=wsgi_extras_require,

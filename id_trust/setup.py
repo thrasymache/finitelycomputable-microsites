@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
     install_requires=[
-        'Django>2.1,<3.0',
+        'Django~=3.0',
         'django-choices~=1.6'],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/identification_of_trust',

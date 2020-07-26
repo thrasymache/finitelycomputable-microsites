@@ -2,7 +2,7 @@
 """
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import include, path
 from os import environ
 from platform import python_version
 from posixpath import join
@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(join(base_path, 'wsgi_info/'), wsgi_info),
     path(join(base_path, 'wsgi_info'), wsgi_info),
+    path(join(base_path, 'hello_world/'),
+         include('finitelycomputable.helloworld_django.urls')),
 ]
