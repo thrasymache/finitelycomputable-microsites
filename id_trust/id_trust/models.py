@@ -60,6 +60,7 @@ class Strategy(DjangoChoices):
 class Interaction(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     foil_strategy = models.CharField(max_length=1, choices=Strategy.choices)
+    #        default = 'D')
 
     def score(self):
         user_result = foil_result = 0

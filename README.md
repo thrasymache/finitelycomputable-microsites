@@ -69,4 +69,3 @@ package because cherrypy and bjoern take their configuration as arguments in a
 Python function call, while the cheroot and gunicorn packages each provide a
 short executable script of the same name to pass arguments on the command line.
 (For example you can run `cat $(which gunicorn)` to view the one for gunicorn.
-

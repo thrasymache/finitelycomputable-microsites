@@ -18,6 +18,7 @@ try:
 except ModuleNotFoundError:
     pass
 
+
 version_url = os.environ.get('MICROSITES_VERSION_PATH')
 if version_url:
     urlpatterns += [
