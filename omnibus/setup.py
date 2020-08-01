@@ -25,7 +25,7 @@ setup(
     install_requires=[
         'Django~=3.0',
         'django-choices~=1.6',
-        'id_trust==' + version],
+        'finitelycomputable-idtrust-django==' + version],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/wsgi_info',
     **base_setup

@@ -23,7 +23,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'id_trust.apps.IdTrustConfig',
+    'finitelycomputable.idtrust_django.apps.IdTrustConfig',
 ]
 
 MIDDLEWARE = [

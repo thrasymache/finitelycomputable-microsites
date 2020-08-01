@@ -9,11 +9,11 @@ import os
 
 urlpatterns = []
 try:
-    import id_trust
+    from finitelycomputable.idtrust_django import views
     root = os.environ.get('ID_TRUST_ROOT', 'identification_of_trust/')
     urlpatterns += [
-        path(root, include('id_trust.urls')),
-        path('', id_trust.views.home, name='home'),
+        path(root, include('finitelycomputable.idtrust_django.urls')),
+        path('', views.home, name='home'),
     ]
 except ModuleNotFoundError:
     pass

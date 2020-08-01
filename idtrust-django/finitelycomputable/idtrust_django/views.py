@@ -7,7 +7,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 import random
 
-from id_trust.models import Interaction, Exchange, Strategy, deviation
+from finitelycomputable.idtrust_django.models import (
+        Interaction, Exchange, Strategy, deviation
+)
 
 
 def home(request):
