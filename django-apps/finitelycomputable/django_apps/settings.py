@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'finitelycomputable.helloworld_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+try:
+    import finitelycomputable.helloworld_django
+    INSTALLED_APPS += 'finitelycomputable.helloworld_django',
+except ModuleNotFoundError:
+    pass
+try:
+    import finitelycomputable.idtrust_django
+    INSTALLED_APPS += 'finitelycomputable.idtrust_django.apps.IdTrustConfig'
+except ModuleNotFoundError:
+    pass
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

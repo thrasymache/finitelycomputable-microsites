@@ -23,6 +23,25 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(join(base_path, 'wsgi_info/'), wsgi_info),
     path(join(base_path, 'wsgi_info'), wsgi_info),
+]
+
+try:
+    from finitelycomputable.helloworld_django import urls
+    urlpatterns += [
     path(join(base_path, 'hello_world/'),
          include('finitelycomputable.helloworld_django.urls')),
-]
+    ]
+    included_apps.append('helloworld_django')
+except ModuleNotFoundError:
+    pass
+
+try:
+    from finitelycomputable.idtrust_django import views
+    root = environ.get('ID_TRUST_ROOT', 'identification_of_trust/')
+    urlpatterns += [
+        path(root, include('finitelycomputable.idtrust_django.urls')),
+        path('', views.home, name='home'),
+    ]
+    included_apps.append('idtrust_django')
+except ModuleNotFoundError:
+    pass

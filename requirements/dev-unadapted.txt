@@ -9,3 +9,5 @@
 -e helloworld-flask
 -e helloworld-morepath
 -e morepath-mount
+-e idtrust-django
+-e omnibus

@@ -24,7 +24,6 @@ setup(
         'finitelycomputable_microsites_setup.py'],
     install_requires=[
         'Django~=3.0',
-        'django-choices~=1.6',
         'finitelycomputable-idtrust-django==' + version],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/wsgi_info',
