@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView
 import random
 
 from finitelycomputable.idtrust_django.models import (
-        Interaction, Exchange, Strategy, deviation
+        Interaction, Exchange, Strategy, deviation,
 )
 
 
@@ -29,9 +29,8 @@ def interact(request, pk, secrets):
     (interaction, created) = Interaction.objects.get_or_create(
             {'foil_strategy': random.choice(Strategy.choices)[0]},
             pk=pk)
-    foil_response = Strategy.get_choice(
-            interaction.foil_strategy).impl(
-                    [e.user_trust for e in interaction.exchange_set.all()])
+    foil_response = Strategy.impl(interaction.foil_strategy)(
+            [e.user_trust for e in interaction.exchange_set.all()])
     user_trust = request.POST.get('choice')
     if user_trust == 'Trust':
         user_trust = True
@@ -46,7 +45,7 @@ def interact(request, pk, secrets):
     strategy_lists = OrderedDict()
     if len(user_list):
         for (k, v) in Strategy.choices:
-            st = Strategy.get_choice(k)
+            st = Strategy.impl(k)
             strategy_lists[v] = [deviation(user_list, foil_list, st)]
             strategy_lists[v].append(deviation(foil_list, user_list, st))
     s_results = [
@@ -110,9 +109,8 @@ class RevealInteract(DetailView):
         #        {'foil_strategy': random.choice(Strategy.choices)[0]},
         #        pk=pk)
         # import ipdb; ipdb.set_trace()
-        foil_response = Strategy.get_choice(
-                self.object.foil_strategy).impl(
-                        [e.user_trust for e in self.object.exchange_set.all()])
+        foil_response = Strategy.impl(interaction.foil_strategy)(
+                [e.user_trust for e in self.object.exchange_set.all()])
         user_trust = self.request.POST.get('choice')
         if user_trust == 'Trust':
             user_trust = True
@@ -127,7 +125,7 @@ class RevealInteract(DetailView):
         strategy_lists = OrderedDict()
         if len(user_list):
             for (k, v) in Strategy.choices:
-                st = Strategy.get_choice(k)
+                st = Strategy.impl(k)
                 strategy_lists[v] = [deviation(user_list, foil_list, st)]
                 strategy_lists[v].append(deviation(foil_list, user_list, st))
         s_results = [

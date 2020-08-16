@@ -23,10 +23,7 @@ setup(
     long_description=README,
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
-    install_requires=[
-        'Django~=3.0',
-        'django-choices @ git+https://github.com/adamchainz/django-choices.git@document_django_3_support'
-        ],
+    install_requires=['Django~=3.0'],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/identification_of_trust',
     **django_setup
