@@ -21,10 +21,10 @@ publically you will need to (at a minimum) list your hostname in
 ALLOWED\_HOSTS and set the SECURE\* settings based upon whether it will be
 served using SSL.
 
-### ID\_TRUST\_ROOT
+### BASE\_PATH
 This value gives the root url of the identification of trust microsite. If it
 is not set then it defaults to `identification_of_trust/`. you can use
-`ID_TRUST_ROOT= ` to run it without any path prefixed, and you can run two
+`BASE_PATH= ` to run it without any path prefixed, and you can run two
 separate servers on the same host (likely running different versions or
 different configurations) by giving each a different values for this
 environemnt variable.

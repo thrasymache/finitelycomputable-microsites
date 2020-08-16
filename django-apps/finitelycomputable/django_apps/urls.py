@@ -1,6 +1,6 @@
 """django_apps URL Configuration
 """
-from django.contrib import admin
+#from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import include, path
 from os import environ
@@ -16,11 +16,12 @@ included_apps = []
 def wsgi_info(request):
     return HttpResponse(
 f'''{version_text} using {__name__} {version} on Python {python_version()}
-at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
+at {base_path} with {', '.join(included_apps) or "nothing"}\n''',
+        content_type='text/plain',
     )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path(join(base_path, 'wsgi_info/'), wsgi_info),
     path(join(base_path, 'wsgi_info'), wsgi_info),
 ]
@@ -37,7 +38,7 @@ except ModuleNotFoundError:
 
 try:
     from finitelycomputable.idtrust_django import views
-    root = environ.get('ID_TRUST_ROOT', 'identification_of_trust/')
+    root = environ.get('BASE_PATH', 'identification_of_trust/')
     urlpatterns += [
         path(root, include('finitelycomputable.idtrust_django.urls')),
         path('', views.home, name='home'),

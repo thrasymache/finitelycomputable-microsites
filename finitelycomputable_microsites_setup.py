@@ -1,5 +1,5 @@
 version = '20.8'
-version += 'a3'
+version += 'a4'
 
 base_setup = {
     'package_dir': {'': '.'},

@@ -15,28 +15,17 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.finitelycomputable.net', '.localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
 ]
 
 try:
@@ -46,17 +35,14 @@ except ModuleNotFoundError:
     pass
 try:
     import finitelycomputable.idtrust_django
-    INSTALLED_APPS += 'finitelycomputable.idtrust_django.apps.IdTrustConfig'
+    INSTALLED_APPS += 'finitelycomputable.idtrust_django.apps.IdTrustConfig',
 except ModuleNotFoundError:
     pass
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -87,7 +73,9 @@ WSGI_APPLICATION = 'finitelycomputable.django_apps.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # this will be installed in a virtualenv - find the database relative
+        # to the working directory rather than relative to this file.
+        'NAME': os.path.join(os.getcwd(), 'db.sqlite3'),
     }
 }
 

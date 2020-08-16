@@ -8,7 +8,7 @@ def run():
         argv[1] = 'runserver'
     command_line = (
         argv[0:2] +
-        ['--settings', 'finitelycomputable.django_apps.settings'] +
+        ['--settings', 'finitelycomputable.django_apps.settings.dev'] +
         argv[2:]
     )
     execute_from_command_line(command_line)

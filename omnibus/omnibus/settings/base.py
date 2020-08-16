@@ -57,7 +57,7 @@ WSGI_APPLICATION = 'omnibus.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # this will be installed in a vritualenv - find the database relative
+        # this will be installed in a virtualenv - find the database relative
         # to the working directory rather than relative to this file.
         'NAME': os.path.join(os.getcwd(), 'db.sqlite3'),
     }

@@ -1,11 +1,8 @@
-from omnibus.settings.base import *
+from finitelycomputable.django_apps.settings.base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'finitelycomputable.nfshost.com',
-    'www.finitelycomputable.net',
-    'localhost', '127.0.0.1']
+ALLOWED_HOSTS += 'finitelycomputable.nfshost.com',
 #CSRF_COOKIE_SECURE = True
 INSTALLED_APPS += [
 ]
@@ -18,5 +15,4 @@ MIDDLEWARE += [
 #SECURE_HSTS_SECONDS = 60
 #SECURE_SSL_REDIRECT = True
 #SESSION_COOKIE_SECURE = True
-ROOT_URLCONF = 'omnibus.urls'
 X_FRAME_OPTIONS = 'DENY'
