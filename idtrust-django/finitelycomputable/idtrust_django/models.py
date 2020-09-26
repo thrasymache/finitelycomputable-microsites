@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 def alternate_strategy(inputs, strategy):
@@ -73,8 +74,12 @@ class Strategy(models.TextChoices):
 
 class Interaction(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
-    foil_strategy = models.CharField(max_length=1, choices=Strategy.choices)
-    #        default = 'D')
+    foil_strategy = models.CharField(choices=Strategy.choices, max_length=1)
+    # user_miscommunication  = models.FloatField(default=0.0)
+    # foil_miscommunication  = models.FloatField(default=0.0)
+    user_guess = models.CharField(choices=Strategy.choices, max_length=1,
+            blank=True)
+
 
     def score(self):
         user_result = foil_result = 0
@@ -92,8 +97,13 @@ class Interaction(models.Model):
                 pass
         return user_result, foil_result
 
+    def get_absolute_url(self):
+        return reverse('id_trust:interact', kwargs={'pk': self.pk})
+
 
 class Exchange(models.Model):
     interaction = models.ForeignKey(Interaction, on_delete=models.CASCADE)
     user_trust = models.BooleanField()
+    # user_effect = models.BooleanField(default=False)
     foil_trust = models.BooleanField()
+    # foil_effect = models.BooleanField(default=False)

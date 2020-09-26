@@ -1,23 +1,27 @@
 from django.test import Client, TestCase
 
+from . import models
+
+
 class IdTrustViews(TestCase):
     def setUp(self):
         self.c = Client()
 
-    def test_home(self):
+    def test_home_200(self):
         resp = self.c.get('/identification_of_trust/')
         self.assertEqual(resp.status_code, 200)
-        self.assertGreater(len(resp.content), 485)
-        self.assertLess(len(resp.content), 495)
 
-    def test_real_interact(self):
-        resp = self.c.get('/identification_of_trust/real/1')
+    def test_interact_get_200(self):
+        resp = self.c.get('/identification_of_trust/interact/1')
         self.assertEqual(resp.status_code, 200)
-        self.assertGreater(len(resp.content), 485)
-        self.assertLess(len(resp.content), 495)
 
-    def test_reveal_interact(self):
-        resp = self.c.get('/identification_of_trust/reveal/1')
+    def test_post_trust_creates_exchange(self):
+        self.assertEqual(models.Exchange.objects.count(), 0)
+        resp = self.c.post('/identification_of_trust/interact/1',
+                {'choice': 'Trust'})
         self.assertEqual(resp.status_code, 200)
-        self.assertGreater(len(resp.content), 580)
-        self.assertLess(len(resp.content), 590)
+        self.assertEqual(models.Exchange.objects.count(), 1)
+
+    def test_class_home_get_200(self):
+        resp = self.c.get('/identification_of_trust/class_home')
+        self.assertEqual(resp.status_code, 200)

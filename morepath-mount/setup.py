@@ -27,8 +27,8 @@ setup(
         'bjoern': ['bjoern<4'],
         'cheroot': ['cheroot<9'],
         'cherrypy': ['cherrypy<19'],
-        'gunicorn': ['gunicorn<20'],
-        'waitress': ['waitress<1.4'],
+        'gunicorn': ['gunicorn~=20.0'],
+        'waitress': ['waitress~=1.4'],
         },
     url='http://www.finitelycomputable.net/wsgi_info',
     **base_setup

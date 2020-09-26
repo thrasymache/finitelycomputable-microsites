@@ -1,0 +1,33 @@
+your intended trust history: {{user_intent}}<p>
+{% if interaction.user_guess %}
+your apparent trust history: {{user_appears}}<p>
+partner's intended trust history: {{foil_intent}}<p>
+{% endif %}
+partner's apparent trust history: {{foil_appears}}<p>
+  <form action="{% url 'id_trust:interact' interaction_pk %}"
+      method="post">
+      <button type="submit" name="choice" value=Trust>Trust</button>
+      <button type="submit" name="choice" value=Distrust>Distrust</button>
+  {% csrf_token %}</form>
+<p>current score: {{score.0}} to {{score.1}}
+{% if interaction.user_guess %}
+  {% if interaction.user_guess == interaction.foil_strategy %}
+    <p>You guessed right!: {{ interaction.get_user_guess_display }}
+  {% else %}
+    <p>You guessed wrong: {{ interaction.get_user_guess_display }}
+    <p>When the truth was: {{ interaction.get_foil_strategy_display }})
+  {% endif %}
+  <p>How far off are the pair of you from each of the strategies?
+    {% for s in s_results %}   <p>{{s}}
+    {% endfor %}
+{% else %}
+  Who are you exchanging with?<p>
+  <form action="{% url 'id_trust:interact' interaction_pk %}" method="post">
+    {% for value, label in strategies.choices %}
+      <button type="submit" name="user_guess" value={{value}}>{{ label }}
+      </button>
+    {% endfor %}
+    {% csrf_token %}
+  </form><p>
+{% endif %}
+<p> <a href="{% url 'id_trust:home' %}">exchange with new partner</a>
