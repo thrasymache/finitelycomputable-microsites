@@ -1,9 +1,9 @@
 your intended trust history: {{user_intent}}<p>
 {% if interaction.user_guess %}
-your apparent trust history: {{user_appears}}<p>
+your apparent trust history: {{user_effect}}<p>
 partner's intended trust history: {{foil_intent}}<p>
 {% endif %}
-partner's apparent trust history: {{foil_appears}}<p>
+partner's apparent trust history: {{foil_effect}}<p>
   <form action="{% url 'id_trust:interact' interaction_pk %}"
       method="post">
       <button type="submit" name="choice" value=Trust>Trust</button>

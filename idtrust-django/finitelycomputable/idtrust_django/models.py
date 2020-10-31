@@ -75,8 +75,8 @@ class Strategy(models.TextChoices):
 class Interaction(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     foil_strategy = models.CharField(choices=Strategy.choices, max_length=1)
-    # user_miscommunication  = models.FloatField(default=0.0)
-    # foil_miscommunication  = models.FloatField(default=0.0)
+    user_miscommunication  = models.FloatField()
+    foil_miscommunication  = models.FloatField()
     user_guess = models.CharField(choices=Strategy.choices, max_length=1,
             blank=True)
 
@@ -84,13 +84,13 @@ class Interaction(models.Model):
     def score(self):
         user_result = foil_result = 0
         for e in self.exchange_set.all():
-            if e.user_trust and e.foil_trust:
+            if e.user_intent and e.foil_effect:
                 user_result += 2
                 foil_result += 2
-            elif e.user_trust:
+            elif e.user_intent:
                 user_result -= 1
                 foil_result += 3
-            elif e.foil_trust:
+            elif e.foil_effect:
                 user_result += 3
                 foil_result -= 1
             else:
@@ -103,7 +103,7 @@ class Interaction(models.Model):
 
 class Exchange(models.Model):
     interaction = models.ForeignKey(Interaction, on_delete=models.CASCADE)
-    user_trust = models.BooleanField()
-    # user_effect = models.BooleanField(default=False)
-    foil_trust = models.BooleanField()
-    # foil_effect = models.BooleanField(default=False)
+    user_intent = models.BooleanField()
+    user_effect = models.BooleanField()
+    foil_intent = models.BooleanField()
+    foil_effect = models.BooleanField()

@@ -29,29 +29,40 @@ def home(request):
     return render(request, 'id_trust/interaction.html', context)
 
 
+def effect(intent, miscommunication):
+    return intent ^ bool(miscommunication > random.random())
+
+
 def interact_core(request, pk):
     (interaction, created) = Interaction.objects.get_or_create(
-            {'foil_strategy': random.choice(Strategy.choices)[0]},
-            pk=pk)
-    foil_response = Strategy.impl(interaction.foil_strategy)(
-            [e.user_trust for e in interaction.exchange_set.all()])
-    user_trust = request.POST.get('choice')
-    if user_trust == 'Trust':
-        user_trust = True
-    elif user_trust == 'Distrust':
-        user_trust = False
-    if user_trust in [True, False]:
+            pk=pk,
+            defaults={
+                'foil_strategy': random.choice(Strategy.choices)[0],
+                'user_miscommunication': 0.0,
+                'foil_miscommunication': 0.0
+            })
+    foil_intent = Strategy.impl(interaction.foil_strategy)(
+            [e.user_effect for e in interaction.exchange_set.all()])
+    user_intent = request.POST.get('choice')
+    if user_intent == 'Trust':
+        user_intent = True
+    elif user_intent == 'Distrust':
+        user_intent = False
+    if user_intent in [True, False]:
         interaction.exchange_set.create(
-                user_trust=user_trust,
-                foil_trust=foil_response)
+            user_intent=user_intent,
+            user_effect=effect(user_intent, interaction.user_miscommunication),
+            foil_intent=foil_intent,
+            foil_effect=effect(foil_intent, interaction.foil_miscommunication),
+        )
     user_guess = request.POST.get('user_guess')
     if user_guess:
         interaction.user_guess = user_guess
         interaction.save()
-    user_intent = [i.user_trust for i in interaction.exchange_set.all()]
-    user_appears = user_intent
-    foil_intent = [i.foil_trust for i in interaction.exchange_set.all()]
-    foil_appears = foil_intent
+    user_intent = [j.user_intent for j in interaction.exchange_set.all()]
+    user_effect = [j.user_effect for j in interaction.exchange_set.all()]
+    foil_intent = [j.foil_intent for j in interaction.exchange_set.all()]
+    foil_effect = [j.foil_effect for j in interaction.exchange_set.all()]
     strategy_lists = OrderedDict()
     if len(user_intent):
         for (k, v) in Strategy.choices:
@@ -67,8 +78,8 @@ def interact_core(request, pk):
         'interaction': interaction,
         'score': score,
         'user_intent': trust_list_display(user_intent),
-        'user_appears': trust_list_display(user_appears),
-        'foil_appears': trust_list_display(foil_appears),
+        'user_effect': trust_list_display(user_effect),
+        'foil_effect': trust_list_display(foil_effect),
         'foil_intent': trust_list_display(foil_intent),
         's_results': s_results,
         'strategies': Strategy,
@@ -81,7 +92,7 @@ def interact(request, pk):
 
 class ExchangeCreate(CreateView):
     model = Exchange
-    fields = ['interaction', 'user_trust']
+    fields = ['interaction', 'user_intent']
     template_name = "id_trust/exchange_form.html"
 
     def get_context_data(self, **kwargs):
@@ -93,7 +104,7 @@ class ExchangeCreate(CreateView):
         interaction = form.instance.interaction
         form.instance.foil_trust = Strategy.impl(
             form.instance.interaction.foil_strategy)(
-            [e.user_trust for e in interaction.exchange_set.all()]
+            [e.user_intent for e in interaction.exchange_set.all()]
         )
         return super().form_valid(form)
 
@@ -104,7 +115,7 @@ class ExchangeCreate(CreateView):
 
 class Home(CreateView):
     model = Exchange
-    fields = ['user_trust']
+    fields = ['user_intent']
     template_name = "id_trust/interaction_begin.html"
 
     def form_valid(self, form):
@@ -112,7 +123,7 @@ class Home(CreateView):
             foil_strategy = random.choice(Strategy.choices)[0]
         )
         form.instance.foil_trust = Strategy.impl(interaction.foil_strategy)(
-            [e.user_trust for e in interaction.exchange_set.all()]
+            [e.user_intent for e in interaction.exchange_set.all()]
         )
         return super().form_valid(form)
 
