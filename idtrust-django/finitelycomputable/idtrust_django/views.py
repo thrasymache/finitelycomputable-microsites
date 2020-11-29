@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from django.db.models import Max
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
@@ -15,18 +15,23 @@ def trust_list_display(trust_list):
     return ", ".join(["Trust" if t else "Distrust" for t in trust_list])
 
 def home(request):
-    context = {
-        'interaction_pk': 1+
-            (Interaction.objects.all().aggregate(Max('pk'))['pk__max'] or 0),
-        'interaction': None,
-        'score': (0, 0),
-        'user_intent': [],
-        'user_appears': [],
-        'foil_appears': [],
-        'foil_intent': [],
-        's_results': [],
-    }
-    return render(request, 'id_trust/interaction.html', context)
+    if request.method != 'POST':
+        return render(request, 'id_trust/interaction_begin.html', {})
+    try:
+        user_miscommunication = float(request.POST.get('user_miscommunication'))
+    except (ValueError, TypeError):
+        user_miscommunication = 0.0
+    try:
+        foil_miscommunication = float(request.POST.get('foil_miscommunication'))
+    except (ValueError, TypeError):
+        foil_miscommunication = 0.0
+    obj = Interaction.objects.create(
+        foil_strategy=random.choice(Strategy.choices)[0],
+        user_miscommunication=user_miscommunication,
+        foil_miscommunication=foil_miscommunication,
+    )
+    interact_core(request, obj.pk)
+    return redirect(obj)
 
 
 def effect(intent, miscommunication):
@@ -34,16 +39,11 @@ def effect(intent, miscommunication):
 
 
 def interact_core(request, pk):
-    (interaction, created) = Interaction.objects.get_or_create(
-            pk=pk,
-            defaults={
-                'foil_strategy': random.choice(Strategy.choices)[0],
-                'user_miscommunication': 0.0,
-                'foil_miscommunication': 0.0
-            })
+    from django.shortcuts import get_object_or_404
+    interaction = get_object_or_404(Interaction, pk=pk)
     foil_intent = Strategy.impl(interaction.foil_strategy)(
             [e.user_effect for e in interaction.exchange_set.all()])
-    user_intent = request.POST.get('choice')
+    user_intent = request.POST.get('user_intent')
     if user_intent == 'Trust':
         user_intent = True
     elif user_intent == 'Distrust':
@@ -74,7 +74,6 @@ def interact_core(request, pk):
             (k, v[0], v[1]) for (k, v) in strategy_lists.items()]
     score = interaction.score()
     return {
-        'interaction_pk': interaction.pk,
         'interaction': interaction,
         'score': score,
         'user_intent': trust_list_display(user_intent),
