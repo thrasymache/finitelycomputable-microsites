@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView
 import random
 
 from finitelycomputable.idtrust_django.models import (
-        Interaction, Exchange, Strategy, deviation,
+        Interaction, Exchange, Strategy, pct_deviation,
 )
 
 def trust_list_display(trust_list):
@@ -63,24 +63,25 @@ def interact_core(request, pk):
     user_effect = [j.user_effect for j in interaction.exchange_set.all()]
     foil_intent = [j.foil_intent for j in interaction.exchange_set.all()]
     foil_effect = [j.foil_effect for j in interaction.exchange_set.all()]
-    strategy_lists = OrderedDict()
+    strategy_list = []
     if len(user_intent):
         for (k, v) in Strategy.choices:
             st = Strategy.impl(k)
-            strategy_lists[v] = [deviation(user_intent, foil_intent, st)]
-            strategy_lists[v].append(deviation(foil_intent, user_intent, st))
-    s_results = [
-            "%s: (foil %.1f) (user %.1f)" %
-            (k, v[0], v[1]) for (k, v) in strategy_lists.items()]
-    score = interaction.score()
+            strategy_list.append({
+                'strategy': v,
+                'foil_intent': 100-pct_deviation(foil_intent, user_effect, st),
+                'foil_effect': 100-pct_deviation(foil_effect, user_effect, st),
+                'user_intent': 100-pct_deviation(user_intent, foil_effect, st),
+                'user_effect': 100-pct_deviation(user_effect, foil_effect, st),
+            })
+    strategy_list.sort(key=lambda t: t['foil_intent'], reverse=True)
     return {
         'interaction': interaction,
-        'score': score,
         'user_intent': trust_list_display(user_intent),
         'user_effect': trust_list_display(user_effect),
         'foil_effect': trust_list_display(foil_effect),
         'foil_intent': trust_list_display(foil_intent),
-        's_results': s_results,
+        'strategy_list': strategy_list,
         'strategies': Strategy,
     }
 

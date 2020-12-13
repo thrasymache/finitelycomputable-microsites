@@ -1,4 +1,4 @@
-version = '20.11'
+version = '20.12'
 #version += 'a1'
 
 base_setup = {

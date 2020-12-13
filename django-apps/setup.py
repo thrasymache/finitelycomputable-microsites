@@ -17,7 +17,10 @@ setup(
     packages=find_namespace_packages(),
     entry_points={
         'console_scripts': [
-            'finitelycomputable-django-apps = finitelycomputable.django_apps:run']
+            'finitelycomputable-django-apps = finitelycomputable.django_apps.entry_points:run',
+            'finitelycomputable-django-apps-bjoern = finitelycomputable.django_apps.entry_points:bjoern',
+            'finitelycomputable-django-apps-cherry = finitelycomputable.django_apps.entry_points:cherry',
+            ]
         },
     description='The microsites of finitelycomputable.net run inside Django',
     long_description=README,

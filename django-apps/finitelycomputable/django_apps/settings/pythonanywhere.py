@@ -1,15 +1,9 @@
-from omnibus.settings.base import *
+from finitelycomputable.django_apps.settings.base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'thrasymache.pythonanywhere.com',
-    'localhost', '127.0.0.1']
+ALLOWED_HOSTS += 'thrasymache.pythonanywhere.com',
 CSRF_COOKIE_SECURE = True
-INSTALLED_APPS += [
-]
-MIDDLEWARE += [
-]
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True

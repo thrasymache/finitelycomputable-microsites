@@ -12,7 +12,7 @@ partner's apparent trust history: {{foil_effect}}<p>
       <button type="submit" name="user_intent" value="Distrust">Distrust</button>
       {% csrf_token %}
   </form>
-<p>current score: {{score.0}} to {{score.1}}
+<p>current score: {{interaction.score.0}} to {{interaction.score.1}}
 {% if interaction.user_guess %}
   {% if interaction.user_guess == interaction.foil_strategy %}
     <p>You guessed right!: {{ interaction.get_user_guess_display }}
@@ -20,8 +20,13 @@ partner's apparent trust history: {{foil_effect}}<p>
     <p>You guessed wrong: {{ interaction.get_user_guess_display }}
     <p>(When the truth was: {{ interaction.get_foil_strategy_display }})
   {% endif %}
-  <p>How far off are the pair of you from each of the strategies?
-    {% for s in s_results %}   <br>{{s}}
+  <p>What percentage of the time did you act like one of the basic strategies?
+    {% for j in strategy_list %}
+    <br>{{j.strategy}}:
+      (your partner's intent {{j.foil_intent}}%)
+      (your partner appeared to you {{j.foil_effect}}%)
+      (your intent {{j.user_intent}}%)
+      (your appearance to your partner {{j.user_effect}}%)
     {% endfor %}
 {% else %}
   Who are you exchanging with?<p>

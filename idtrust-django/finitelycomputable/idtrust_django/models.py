@@ -10,7 +10,10 @@ def alternate_strategy(inputs, strategy):
     return result
 
 
-def deviation(inputs, outputs, strategy):
+def pct_deviation(outputs, inputs, strategy):
+    return round(100 * deviation(outputs, inputs, strategy))
+
+def deviation(outputs, inputs, strategy):
     result = 0
     for n in range(len(inputs)):
         subset = inputs[:n]

@@ -1,6 +1,6 @@
 """django_apps URL Configuration
 """
-#from django.contrib import admin
+from django.conf import settings
 from django.http import HttpResponse
 from django.urls import include, path
 from os import environ
@@ -21,22 +21,24 @@ at {base_path} with {', '.join(included_apps) or "nothing"}\n''',
     )
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
     path(join(base_path, 'wsgi_info/'), wsgi_info),
     path(join(base_path, 'wsgi_info'), wsgi_info),
 ]
 
-try:
-    from finitelycomputable.helloworld_django import urls
+if 'django.contrib.admin' in settings.INSTALLED_APPS:
+    from django.contrib import admin
+    urlpatterns += [
+        path('admin/', admin.site.urls),
+    ]
+
+if 'finitelycomputable.helloworld_django' in settings.INSTALLED_APPS:
     urlpatterns += [
     path(join(base_path, 'hello_world/'),
          include('finitelycomputable.helloworld_django.urls')),
     ]
     included_apps.append('helloworld_django')
-except ModuleNotFoundError:
-    pass
 
-try:
+if 'finitelycomputable.idtrust_django.apps.IdTrustConfig' in settings.INSTALLED_APPS:
     from finitelycomputable.idtrust_django import views
     root = environ.get('BASE_PATH', 'identification_of_trust/')
     urlpatterns += [
@@ -44,5 +46,3 @@ try:
         path('', views.home, name='home'),
     ]
     included_apps.append('idtrust_django')
-except ModuleNotFoundError:
-    pass
