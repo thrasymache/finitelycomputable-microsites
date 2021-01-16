@@ -101,7 +101,7 @@ class Interaction(models.Model):
         return user_result, foil_result
 
     def get_absolute_url(self):
-        return reverse('id_trust:interact', kwargs={'pk': self.pk})
+        return reverse('id_trust:blind_interact', kwargs={'pk': self.pk})
 
 
 class Exchange(models.Model):

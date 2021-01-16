@@ -1,5 +1,5 @@
-version = '20.12'
-#version += 'a1'
+version = '21.1'
+version += 'a1'
 
 base_setup = {
     'package_dir': {'': '.'},
@@ -18,6 +18,8 @@ base_setup = {
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: WSGI',

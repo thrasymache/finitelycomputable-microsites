@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from django.db.models import Max
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
@@ -14,23 +14,25 @@ from finitelycomputable.idtrust_django.models import (
 def trust_list_display(trust_list):
     return ", ".join(["Trust" if t else "Distrust" for t in trust_list])
 
-def home(request):
+
+def home(request, blind=True):
     if request.method != 'POST':
-        return render(request, 'id_trust/interaction_begin.html', {})
+        return render(request, 'id_trust/interaction_begin.html',
+                {'blind': blind})
     try:
         user_miscommunication = float(request.POST.get('user_miscommunication'))
     except (ValueError, TypeError):
-        user_miscommunication = 0.0
+        user_miscommunication = round(random.random() / 2, 2)
     try:
         foil_miscommunication = float(request.POST.get('foil_miscommunication'))
     except (ValueError, TypeError):
-        foil_miscommunication = 0.0
+        foil_miscommunication = round(random.random() / 2, 2)
     obj = Interaction.objects.create(
         foil_strategy=random.choice(Strategy.choices)[0],
         user_miscommunication=user_miscommunication,
         foil_miscommunication=foil_miscommunication,
     )
-    interact_core(request, obj.pk)
+    interact_core(request, obj.pk, not blind)
     return redirect(obj)
 
 
@@ -38,8 +40,7 @@ def effect(intent, miscommunication):
     return intent ^ bool(miscommunication > random.random())
 
 
-def interact_core(request, pk):
-    from django.shortcuts import get_object_or_404
+def interact_core(request, pk, blind):
     interaction = get_object_or_404(Interaction, pk=pk)
     foil_intent = Strategy.impl(interaction.foil_strategy)(
             [e.user_effect for e in interaction.exchange_set.all()])
@@ -81,13 +82,14 @@ def interact_core(request, pk):
         'user_effect': trust_list_display(user_effect),
         'foil_effect': trust_list_display(foil_effect),
         'foil_intent': trust_list_display(foil_intent),
+        'blind': blind,
         'strategy_list': strategy_list,
         'strategies': Strategy,
     }
 
-def interact(request, pk):
+def interact(request, pk, blind):
     return render(request, 'id_trust/interaction.html',
-        interact_core(request, pk))
+        interact_core(request, pk, blind))
 
 
 class ExchangeCreate(CreateView):

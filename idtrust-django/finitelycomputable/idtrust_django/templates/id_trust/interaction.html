@@ -1,13 +1,20 @@
-the chance you are misunderstood is {{ interaction.user_miscommunication }}<br>
-the chance you misunderstand your partner is {{ interaction.foil_miscommunication }}<p>
+{% if interaction.user_guess or not blind %}
+  the chance you are misunderstood is {{ interaction.user_miscommunication }}<br>
+  the chance you misunderstand your partner is {{ interaction.foil_miscommunication }}<p>
+{% endif %}
 your intended trust history: {{user_intent}}<br>
 {% if interaction.user_guess %}
 your apparent trust history: {{user_effect}}<p>
 partner's intended trust history: {{foil_intent}}<p>
 {% endif %}
 partner's apparent trust history: {{foil_effect}}<p>
-  <form action="{% url 'id_trust:interact' interaction.pk %}"
+{% if blind %}
+  <form action="{% url 'id_trust:blind_interact' interaction.pk %}"
       method="post">
+{% else %}
+  <form action="{% url 'id_trust:reveal_interact' interaction.pk %}"
+      method="post">
+{% endif %}
       <button type="submit" name="user_intent" value="Trust">Trust</button>
       <button type="submit" name="user_intent" value="Distrust">Distrust</button>
       {% csrf_token %}
@@ -28,9 +35,11 @@ partner's apparent trust history: {{foil_effect}}<p>
       (your intent {{j.user_intent}}%)
       (your appearance to your partner {{j.user_effect}}%)
     {% endfor %}
+    <p>
 {% else %}
   Who are you exchanging with?<p>
-  <form action="{% url 'id_trust:interact' interaction.pk %}" method="post">
+  <form action="{% url 'id_trust:blind_interact' interaction.pk %}"
+    method="post">
     {% for value, label in strategies.choices %}
       <button type="submit" name="user_guess" value={{value}}>{{ label }}
       </button>
@@ -38,4 +47,14 @@ partner's apparent trust history: {{foil_effect}}<p>
     {% csrf_token %}
   </form><p>
 {% endif %}
-<p> <a href="{% url 'id_trust:home' %}">exchange with new partner</a>
+{% if interaction.user_guess %}
+{% elif blind %}
+  <a href="{% url 'id_trust:reveal_interact' interaction.pk %}">
+    reveal the level of miscommunication
+  </a><br>
+{% else %}
+  <a href="{% url 'id_trust:blind_interact' interaction.pk %}">
+    hide the level of miscommunication
+  </a><br>
+{% endif %}
+<a href="{% url 'id_trust:blind_home' %}">exchange with new partner</a>
