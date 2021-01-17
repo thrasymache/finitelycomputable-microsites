@@ -1,9 +1,12 @@
 image: ubuntu/lts
 packages:
+  - python3.6
+  - python3.7
+  - python3.8
   - tox
 sources:
   - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
 tasks:
   - test: |
         cd finitelycomputable-microsites
-        tox -e py38-unadapted -e py38-flask.cycle
+        tox

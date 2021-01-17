@@ -10,6 +10,9 @@ class HelloWorld(object):
         return helloworld_flask.hello_world()
 
 
+def setup_server():
+    return cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
+
 base_path = environ.get('BASE_PATH', '')
 application = cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
 

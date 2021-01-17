@@ -15,6 +15,9 @@ class HelloWorld(object):
         return resp.body
 
 
+def setup_server():
+    return cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
+
 base_path = environ.get('BASE_PATH', '')
 application = cherrypy.tree.mount(HelloWorld(), base_path, {'/': {}})
 
