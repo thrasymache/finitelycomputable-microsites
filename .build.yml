@@ -1,0 +1,9 @@
+image: ubuntu/lts
+packages:
+  - tox
+sources:
+  - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
+tasks:
+  - test: |
+        cd finitelycomputable-microsites
+        tox -e py38-unadapted -e py38-flask.cycle
