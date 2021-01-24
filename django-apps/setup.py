@@ -2,7 +2,7 @@
 import os
 from setuptools import find_namespace_packages, setup
 from finitelycomputable_microsites_setup import (
-        version, django_setup, wsgi_extras_require,
+        version, django_setup, wsgi_extras_require, django_version,
 )
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -26,7 +26,7 @@ setup(
     long_description=README,
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
-    install_requires=['Django~=3.0'],
+    install_requires=[django_version],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/wsgi_info',
     **django_setup
