@@ -4,7 +4,6 @@
 # independently-installable unit) to be built from the same directory, but back
 # in the 70s they understood how to do this sort of thing.
 python idtrust-django/setup.py $*
-python omnibus/setup.py $*
 python cherrypy-mount/setup.py $*
 python django-apps/setup.py $*
 python falcon-addroute/setup.py $*

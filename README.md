@@ -16,10 +16,10 @@ or, you can use a password manager or some other password generator.
 
 ### DJANGO\_SETTINGS\_MODULE
 Django will not run without this value. Use
-`DJANGO_SETTINGS_MODULE=omnibus.settings.dev` to develop locally.  To deploy
-publically you will need to (at a minimum) list your hostname in
-ALLOWED\_HOSTS and set the SECURE\* settings based upon whether it will be
-served using SSL.
+`DJANGO_SETTINGS_MODULE=finitelycomputable.django_apps.settings.dev` to develop
+locally.  To deploy publically you will need to (at a minimum) list your
+hostname in ALLOWED\_HOSTS and set the SECURE\* settings based upon whether it
+will be served using SSL.
 
 ### BASE\_PATH
 This value gives the root url of the identification of trust microsite. If it
@@ -39,11 +39,10 @@ situations. It also lets you display which version and configuration is
 running, if you so choose.
 
 **Installing base packages**
-Install id-trust and omnibus into a virtual environment. You can work
-around them not being in PyPi by building eggs and installing id-trust
-first and omnibus second. This installs the whole Django Project into
-the virtual environment, and as a result the following commands can be
-run from anywhere.
+Install finitelycomputable-django-apps and finitelycomputable-idtrust-django
+into a virtual environment.  This installs the whole Django Project into the
+virtual environment, and as a result the following commands can be run from
+anywhere.
 
 To create an empty database when first running the site or when
 starting a server in a new directory, run `manage.py migrate`. (Since
@@ -55,17 +54,19 @@ environment and different working directories.)
 The following pip install arguments permit you to run an HTTP server on port
 9000 with the corresponding commands:
 
-omnibus : `manage.py runserver 9000` (Django development server)
-omnibus[cherrypy] : `cherry-server.py 9000` (cheroot using CherryPy)
+finitelycomputable-django-apps: `manage.py runserver 9000` (Django dev server)
+finitelycomputable-django-apps[cherrypy] : `cherry-server.py 9000` (cheroot using CherryPy)
 (note that cheroot is a dependency of cherrypy, so the above pip install also
 permits the below usage)
-omnibus[cheroot] : `cheroot --bind 0.0.0.0:9000 omnibus.wsgi` (cheroot alone)
-omnibus[gunicorn] : `gunicorn -b 0.0.0.0:9000 omnibus.wsgi`
-omnibus[bjoern] : `bjoern-server.py 9000`
-omnibus[waitress] : waitress-serve --port=9000 omnibus.wsgi:application
+finitelycomputable-django-apps[cheroot] : `cheroot --bind 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi` (cheroot alone)
+finitelycomputable-django-apps[gunicorn] : `gunicorn -b 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi
+finitelycomputable-django-apps[bjoern] : `bjoern-server.py 9000`
+finitelycomputable-django-apps[waitress] : waitress-serve --port=9000 finitelycomputable.django\_apps.wsgi:application
 
-cherry-server.py and bjoern-server.py are scripts that are part of the omnibus
-package because cherrypy and bjoern take their configuration as arguments in a
-Python function call, while the cheroot and gunicorn packages each provide a
-short executable script of the same name to pass arguments on the command line.
-(For example you can run `cat $(which gunicorn)` to view the one for gunicorn.
+
+cherry-server.py and bjoern-server.py are scripts that are part of the
+finitelycomputable-django-apps package because cherrypy and bjoern take their
+configuration as arguments in a Python function call, while the cheroot and
+gunicorn packages each provide a short executable script of the same name to
+pass arguments on the command line.  (For example you can run `cat $(which
+gunicorn)` to view the one for gunicorn.
