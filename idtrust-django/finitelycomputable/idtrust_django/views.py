@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView
 import random
 
 from finitelycomputable.idtrust_django.models import (
-        Interaction, Exchange, Strategy, pct_deviation,
+        Dialog, Exchange, Strategy, pct_deviation,
 )
 
 def trust_list_display(trust_list):
@@ -27,7 +27,7 @@ def home(request, blind=True):
         foil_miscommunication = float(request.POST.get('foil_miscommunication'))
     except (ValueError, TypeError):
         foil_miscommunication = round(random.random() / 2, 2)
-    obj = Interaction.objects.create(
+    obj = Dialog.objects.create(
         foil_strategy=random.choice(Strategy.choices)[0],
         user_miscommunication=user_miscommunication,
         foil_miscommunication=foil_miscommunication,
@@ -41,7 +41,7 @@ def effect(intent, miscommunication):
 
 
 def interact_core(request, pk, blind):
-    interaction = get_object_or_404(Interaction, pk=pk)
+    interaction = get_object_or_404(Dialog, pk=pk)
     foil_intent = Strategy.impl(interaction.foil_strategy)(
             [e.user_effect for e in interaction.exchange_set.all()])
     user_intent = request.POST.get('user_intent')
@@ -121,7 +121,7 @@ class Home(CreateView):
     template_name = "id_trust/interaction_begin.html"
 
     def form_valid(self, form):
-        interaction = form.instance.interaction = Interaction.objects.create(
+        interaction = form.instance.interaction = Dialog.objects.create(
             foil_strategy = random.choice(Strategy.choices)[0]
         )
         form.instance.foil_trust = Strategy.impl(interaction.foil_strategy)(
@@ -137,7 +137,7 @@ class Home(CreateView):
 class Interact(DetailView):
     template_name = 'id_trust/interaction.html'
     fields = ['choice']
-    model = Interaction
+    model = Dialog
 
     def get_context_data(self, **kwargs):
         context = super(Interact, self).get_context_data(**kwargs)

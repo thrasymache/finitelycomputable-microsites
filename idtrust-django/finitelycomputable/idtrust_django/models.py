@@ -75,7 +75,7 @@ class Strategy(models.TextChoices):
 # sub-second, or have a better strategy
 
 
-class Interaction(models.Model):
+class Dialog(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
     foil_strategy = models.CharField(choices=Strategy.choices, max_length=1)
     user_miscommunication  = models.FloatField()
@@ -105,7 +105,7 @@ class Interaction(models.Model):
 
 
 class Exchange(models.Model):
-    interaction = models.ForeignKey(Interaction, on_delete=models.CASCADE)
+    interaction = models.ForeignKey(Dialog, on_delete=models.CASCADE)
     user_intent = models.BooleanField()
     user_effect = models.BooleanField()
     foil_intent = models.BooleanField()
