@@ -75,8 +75,28 @@ class Strategy(models.TextChoices):
 # sub-second, or have a better strategy
 
 
+class Journey(models.Model):
+    start_time = models.DateTimeField(auto_now_add=True)
+
+    def results(self):
+        total_exchanges = correct_guesses = completed_dialogs = 0
+        for d in self.dialog_set.all():
+            if d.user_guess:
+                completed_dialogs += 1
+                correct_guesses += d.user_guess == d.foil_strategy
+                total_exchanges += d.exchange_set.count()
+        if not completed_dialogs:
+            return {}
+        return {
+            'correct_guesses': correct_guesses,
+            'completed_dialogs': completed_dialogs,
+            'mean_exchanges':
+                format(total_exchanges / completed_dialogs, ".1f"),
+            'total_exchanges': total_exchanges }
+
 class Dialog(models.Model):
     start_time = models.DateTimeField(auto_now_add=True)
+    journey = models.ForeignKey(Journey, on_delete=models.CASCADE)
     foil_strategy = models.CharField(choices=Strategy.choices, max_length=1)
     user_miscommunication  = models.FloatField()
     foil_miscommunication  = models.FloatField()

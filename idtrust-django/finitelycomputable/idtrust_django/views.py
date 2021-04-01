@@ -8,17 +8,23 @@ from django.views.generic.edit import CreateView, UpdateView
 import random
 
 from finitelycomputable.idtrust_django.models import (
-        Dialog, Exchange, Strategy, pct_deviation,
+        Journey, Dialog, Exchange, Strategy, pct_deviation,
 )
 
 def trust_list_display(trust_list):
     return ", ".join(["Trust" if t else "Distrust" for t in trust_list])
 
 
-def home(request, blind=True):
+def new_dialogue(request, blind=True, journey_id=None):
+    if journey_id is not None:
+        journey = get_object_or_404(Journey, pk=journey_id)
+    else:
+        journey = None
     if request.method != 'POST':
-        return render(request, 'id_trust/interaction_begin.html',
-                {'blind': blind})
+        return render(request, 'id_trust/interaction_begin.html', {
+                'blind': blind,
+                'journey': journey,
+        })
     try:
         user_miscommunication = float(request.POST.get('user_miscommunication'))
     except (ValueError, TypeError):
@@ -27,7 +33,10 @@ def home(request, blind=True):
         foil_miscommunication = float(request.POST.get('foil_miscommunication'))
     except (ValueError, TypeError):
         foil_miscommunication = round(random.random() / 2, 2)
+    if journey_id is None:
+        journey = Journey.objects.create()
     obj = Dialog.objects.create(
+        journey=journey,
         foil_strategy=random.choice(Strategy.choices)[0],
         user_miscommunication=user_miscommunication,
         foil_miscommunication=foil_miscommunication,

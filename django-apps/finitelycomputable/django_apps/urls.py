@@ -43,6 +43,6 @@ if 'finitelycomputable.idtrust_django.apps.IdTrustConfig' in settings.INSTALLED_
     root = environ.get('BASE_PATH', 'identification_of_trust/')
     urlpatterns += [
         path(root, include('finitelycomputable.idtrust_django.urls')),
-        path('', views.home, name='home'),
+        path('', views.new_dialogue, name='home'),
     ]
     included_apps.append('idtrust_django')

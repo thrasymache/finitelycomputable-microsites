@@ -57,4 +57,14 @@ partner's apparent trust history: {{foil_effect}}<p>
     hide the level of miscommunication
   </a><br>
 {% endif %}
-<a href="{% url 'id_trust:blind_home' %}">exchange with new partner</a>
+{% with j_results=interaction.journey.results %}<br>
+  {% if j_results %}
+    you have guessed correctly {{j_results.correct_guesses}} of
+    {{j_results.completed_dialogs}} times, averaging
+    {{j_results.mean_exchanges}}
+    exchanges per dialog<br>
+  {% endif %}
+{% endwith %}
+<a href="{% url 'id_trust:blind_continue' interaction.journey_id %}">
+  exchange with new partner</a><br>
+<a href="{% url 'id_trust:blind_begin' %}">start a new journey</a>

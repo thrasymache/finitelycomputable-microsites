@@ -15,12 +15,32 @@
     <button type="submit" name="user_intent" value="Distrust">Distrust</button>
     {% csrf_token %}
 </form><p>
-{% if blind %}
-  <a href="{% url 'id_trust:reveal_home' %}">
+{% if journey %}
+  {% with j_results=journey.results %}
+    {% if j_results %}
+      You have guessed correctly {{j_results.correct_guesses}} of
+      {{j_results.completed_dialogs}} times, averaging
+      {{j_results.mean_exchanges}}
+      exchanges per dialog.
+    {% else %}
+      You have not completed any dialogs yet.
+    {% endif %}
+    <br>
+  {% endwith %}
+  {% if blind %}
+    <a href="{% url 'id_trust:reveal_continue' journey.id %}">
     choose the level of miscommunication
-  </a>
-{% else %}
-  <a href="{% url 'id_trust:blind_home' %}">
+  {% else %}
+    <a href="{% url 'id_trust:blind_continue' journey.id %}">
     have the level of miscommunication be assigned
-  </a>
+  {% endif %}
+{% else %}
+  {% if blind %}
+    <a href="{% url 'id_trust:reveal_begin' %}">
+    choose the level of miscommunication
+  {% else %}
+    <a href="{% url 'id_trust:blind_begin' %}">
+    have the level of miscommunication be assigned
+  {% endif %}
 {% endif %}
+</a>

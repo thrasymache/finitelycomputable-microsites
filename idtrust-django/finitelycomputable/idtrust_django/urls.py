@@ -5,9 +5,12 @@ from finitelycomputable.idtrust_django import views
 
 app_name = 'id_trust'
 urlpatterns = [
-    path('', views.home, name='blind_home'),
-    path('choose_miscommunication', views.home,
-        {'blind': False}, name='reveal_home'),
+    path('', views.new_dialogue, name='blind_begin'),
+    path('choose_miscommunication', views.new_dialogue,
+        {'blind': False}, name='reveal_begin'),
+    path('journey/<int:journey_id>', views.new_dialogue, name='blind_continue'),
+    path('journey/<int:journey_id>/choose_miscommunication',
+        views.new_dialogue, {'blind': False}, name='reveal_continue'),
     path('interact/<int:pk>', views.interact, {'blind': True},
         name='blind_interact'),
     path('interact/<int:pk>/reveal_miscommunication', views.interact,
