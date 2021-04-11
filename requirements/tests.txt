@@ -1,3 +1,5 @@
 ipdb
 pytest
 webtest
+pytest_django
+pytest-env

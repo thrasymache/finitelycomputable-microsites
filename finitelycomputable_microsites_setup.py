@@ -1,4 +1,4 @@
-version = '21.3'
+version = '21.4'
 #version += 'a1'
 
 base_setup = {
@@ -39,7 +39,7 @@ django_setup = base_setup.copy()
 django_setup['classifiers'] = django_setup['classifiers'].copy()
 django_setup['classifiers'].extend(django_classifiers)
 
-django_version = 'Django~=3.1'
+django_version = 'Django~=3.2.0'
 flask_version = 'Flask~=1.1'
 cherrypy_version = 'CherryPy~=18.6'
 morepath_version = 'morepath~=0.19'

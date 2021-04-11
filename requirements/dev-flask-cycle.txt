@@ -8,3 +8,8 @@
 -e flask-blueprints
 -e flask-dispatcher
 -e morepath-mount
+
+# otherwise pytest-django will fail
+-e django-apps
+-e helloworld-django
+-e idtrust-django

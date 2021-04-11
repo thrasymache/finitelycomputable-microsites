@@ -43,7 +43,7 @@ def run():
             port=int(argv[2])
         except IndexError:
             port=8080
-        simple_server.make_server('127.0.0.1', port, application).serve_forever()
+        simple_server.make_server('0.0.0.0', port, application).serve_forever()
     else:
         stderr.write(usage)
         exit(1)

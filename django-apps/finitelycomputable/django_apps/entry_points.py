@@ -22,7 +22,7 @@ def bjoern():
     import bjoern
     import sys
     try:
-        bjoern.run(application, "127.0.0.1", 8000)
+        bjoern.run(application, "0.0.0.0", 8000)
     except KeyboardInterrupt:
         sys.exit(1)
 
