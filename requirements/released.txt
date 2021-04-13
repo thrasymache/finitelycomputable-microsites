@@ -1,0 +1,3 @@
+finitelycomputable-django-apps[gunicorn,waitress,cheroot]
+finitelycomputable-helloworld-django
+finitelycomputable-idtrust-django

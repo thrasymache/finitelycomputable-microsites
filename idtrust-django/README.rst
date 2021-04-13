@@ -1,8 +1,9 @@
-=======================
-Identification of Trust
-=======================
+================================
+Identification of Trust (Django)
+================================
 
-This is the implementation of the Identification of Trust microsite.
+This is a implementation of the Identification of Trust microsite using the
+Django framework
 
 Installation::
 

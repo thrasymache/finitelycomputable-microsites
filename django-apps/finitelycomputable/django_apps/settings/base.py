@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from jinja2 import PackageLoader
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,8 +51,16 @@ ROOT_URLCONF = 'finitelycomputable.django_apps.urls'
 
 TEMPLATES = [
     {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'OPTIONS': {
+            'loader': PackageLoader(
+                'finitelycomputable.idtrust_common', 'templates'
+            ),
+            'environment': 'finitelycomputable.idtrust_django.views.DjangoEnvironment',
+        },
+    },
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

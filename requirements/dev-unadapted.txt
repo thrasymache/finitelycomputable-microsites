@@ -10,3 +10,4 @@
 -e helloworld-morepath
 -e morepath-mount
 -e idtrust-django
+-e idtrust-flask

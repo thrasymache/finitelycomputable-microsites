@@ -15,15 +15,29 @@ def trust_list_display(trust_list):
     return ", ".join(["Trust" if t else "Distrust" for t in trust_list])
 
 
+from django.urls import reverse
+
+from jinja2 import Environment
+
+
+def DjangoEnvironment(**options):
+    env = Environment(**options)
+    env.globals.update({
+        'url': reverse,
+        'reverse': reverse,
+    })
+    return env
+
 def new_dialogue(request, blind=True, journey_id=None):
     if journey_id is not None:
         journey = get_object_or_404(Journey, pk=journey_id)
     else:
         journey = None
     if request.method != 'POST':
-        return render(request, 'id_trust/interaction_begin.html', {
+        return render(request, 'interaction_begin.html', {
                 'blind': blind,
                 'journey': journey,
+                'form': None,
         })
     try:
         user_miscommunication = float(request.POST.get('user_miscommunication'))
@@ -97,14 +111,14 @@ def interact_core(request, pk, blind):
     }
 
 def interact(request, pk, blind):
-    return render(request, 'id_trust/interaction.html',
+    return render(request, 'interaction.html',
         interact_core(request, pk, blind))
 
 
 class ExchangeCreate(CreateView):
     model = Exchange
     fields = ['interaction', 'user_intent']
-    template_name = "id_trust/exchange_form.html"
+    template_name = "exchange_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -127,7 +141,7 @@ class ExchangeCreate(CreateView):
 class Home(CreateView):
     model = Exchange
     fields = ['user_intent']
-    template_name = "id_trust/interaction_begin.html"
+    template_name = "interaction_begin.html"
 
     def form_valid(self, form):
         interaction = form.instance.interaction = Dialog.objects.create(
@@ -144,7 +158,7 @@ class Home(CreateView):
 
 
 class Interact(DetailView):
-    template_name = 'id_trust/interaction.html'
+    template_name = 'interaction.html'
     fields = ['choice']
     model = Dialog
 

@@ -3,9 +3,11 @@
 # configure multiple distributions (which are the smallest
 # independently-installable unit) to be built from the same directory, but back
 # in the 70s they understood how to do this sort of thing.
+python idtrust-common/setup.py $*
+python idtrust-flask/setup.py $*
 python idtrust-django/setup.py $*
-python cherrypy-mount/setup.py $*
 python django-apps/setup.py $*
+python cherrypy-mount/setup.py $*
 python falcon-addroute/setup.py $*
 python flask-blueprints/setup.py $*
 python flask-dispatcher/setup.py $*

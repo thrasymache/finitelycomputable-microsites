@@ -9,23 +9,25 @@ partner's intended trust history: {{foil_intent}}<p>
 {% endif %}
 partner's apparent trust history: {{foil_effect}}<p>
 {% if blind %}
-  <form action="{% url 'id_trust:blind_interact' interaction.pk %}"
+  <form action="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}"
       method="post">
 {% else %}
-  <form action="{% url 'id_trust:reveal_interact' interaction.pk %}"
+  <form action="{{ reverse('id_trust:reveal_interact', args=[interaction.pk]) }}"
       method="post">
 {% endif %}
       <button type="submit" name="user_intent" value="Trust">Trust</button>
       <button type="submit" name="user_intent" value="Distrust">Distrust</button>
-      {% csrf_token %}
+      <input type="hidden" name="csrfmiddlewaretoken" value={{ csrf_token }}>
   </form>
-<p>current score: {{interaction.score.0}} to {{interaction.score.1}}
+{% with your_score, foil_score = interaction.score() %}
+  <p>current score: {{ your_score }} to {{ foil_score }}
+{% endwith %}
 {% if interaction.user_guess %}
   {% if interaction.user_guess == interaction.foil_strategy %}
-    <p>You guessed right!: {{ interaction.get_user_guess_display }}
+    <p>You guessed right!: {{ interaction.get_user_guess_display() }}
   {% else %}
-    <p>You guessed wrong: {{ interaction.get_user_guess_display }}
-    <p>(When the truth was: {{ interaction.get_foil_strategy_display }})
+    <p>You guessed wrong: {{ interaction.get_user_guess_display() }}
+    <p>(When the truth was: {{ interaction.get_foil_strategy_display() }})
   {% endif %}
   <p>What percentage of the time did you act like one of the basic strategies?
     {% for j in strategy_list %}
@@ -38,33 +40,33 @@ partner's apparent trust history: {{foil_effect}}<p>
     <p>
 {% else %}
   Who are you exchanging with?<p>
-  <form action="{% url 'id_trust:blind_interact' interaction.pk %}"
+  <form action="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}"
     method="post">
     {% for value, label in strategies.choices %}
       <button type="submit" name="user_guess" value={{value}}>{{ label }}
       </button>
     {% endfor %}
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value={{ csrf_token }}>
   </form><p>
 {% endif %}
 {% if interaction.user_guess %}
 {% elif blind %}
-  <a href="{% url 'id_trust:reveal_interact' interaction.pk %}">
+  <a href="{{ reverse('id_trust:reveal_interact', args=[interaction.pk]) }}">
     reveal the level of miscommunication
   </a><br>
 {% else %}
-  <a href="{% url 'id_trust:blind_interact' interaction.pk %}">
+  <a href="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}">
     hide the level of miscommunication
   </a><br>
 {% endif %}
-{% with j_results=interaction.journey.results %}<br>
+{% with j_results=interaction.journey.results() %}<br>
   {% if j_results %}
-    you have guessed correctly {{j_results.correct_guesses}} of
+    you have guessed correctly {{j_results['correct_guesses']}} of
     {{j_results.completed_dialogs}} times, averaging
     {{j_results.mean_exchanges}}
     exchanges per dialog<br>
   {% endif %}
 {% endwith %}
-<a href="{% url 'id_trust:blind_continue' interaction.journey_id %}">
+<a href="{{ reverse('id_trust:blind_continue', args=[interaction.journey_id]) }}">
   exchange with new partner</a><br>
-<a href="{% url 'id_trust:blind_begin' %}">start a new journey</a>
+<a href="{{ reverse('id_trust:blind_begin') }}">start a new journey</a>

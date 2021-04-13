@@ -1,0 +1,6 @@
+ARG BASE=alpine
+FROM python:${BASE}
+WORKDIR /srv
+COPY requirements/ requirements/
+RUN pip install -r requirements/released.txt 
+RUN DJANGO_SECRET_KEY=nothing finitelycomputable-django-apps migrate
