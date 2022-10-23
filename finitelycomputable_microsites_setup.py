@@ -1,4 +1,4 @@
-version = '21.4.1'
+version = '22.10'
 #version += 'a1'
 
 base_setup = {
@@ -7,7 +7,7 @@ base_setup = {
     'data_files': [('', ['README.rst', 'LICENSE.txt'])],
     'include_package_data': False,
     'license': 'AGPL-3.0-only',
-    'python_requires': '>=3.6',
+    'python_requires': '>=3.7',
     'author': 'Samuel Newbold',
     'author_email': 'sam@rwsh.org',
     'classifiers': [
@@ -16,10 +16,10 @@ base_setup = {
         'License :: OSI Approved :: GNU Affero General Public License v3',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: WSGI',
@@ -32,18 +32,18 @@ base_setup = {
 
 django_classifiers = [
         'Framework :: Django',
-        'Framework :: Django :: 3.0',
+        'Framework :: Django :: 4.1',
     ]
 
 django_setup = base_setup.copy()
 django_setup['classifiers'] = django_setup['classifiers'].copy()
 django_setup['classifiers'].extend(django_classifiers)
 
-django_version = 'Django~=3.2.0'
-flask_version = 'Flask~=1.1'
+django_version = 'Django~=4.1.0'
+flask_version = 'Flask~=2.2'
 cherrypy_version = 'CherryPy~=18.6'
 morepath_version = 'morepath~=0.19'
-falcon_version = 'falcon~=2.0'
+falcon_version = 'falcon~=3.1'
 
 wsgi_extras_require={
         'bjoern': ['bjoern~=3.0'],
