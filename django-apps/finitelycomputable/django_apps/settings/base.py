@@ -14,12 +14,14 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CSRF_COOKIE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 ALLOWED_HOSTS = ['.finitelycomputable.net', '.localhost', '127.0.0.1']
-
+CSRF_TRUSTED_ORIGINS = ['https://*.finitelycomputable.net', 'https://finitelycomputable.nfshost.com',
+        'http://*.localhost', 'http://127.0.0.1']
 
 # Application definition
 

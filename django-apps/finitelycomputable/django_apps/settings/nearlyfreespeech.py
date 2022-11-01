@@ -3,6 +3,7 @@ from finitelycomputable.django_apps.settings.base import *
 DEBUG = False
 
 ALLOWED_HOSTS += 'finitelycomputable.nfshost.com',
+CSRF_TRUSTED_ORIGINS += 'https://finitelycomputable.nfshost.com',
 CSRF_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 #SECURE_HSTS_INCLUDE_SUBDOMAINS = True
