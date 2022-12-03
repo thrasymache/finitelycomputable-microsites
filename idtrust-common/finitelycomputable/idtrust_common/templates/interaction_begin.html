@@ -27,19 +27,17 @@
     {% endif %}
     <br>
   {% endwith %}
+  <a href="{{ blind_toggle_url }}">
   {% if blind %}
-    <a href="{{ url('id_trust:reveal_continue', args=[journey.id]) }}">
     choose the level of miscommunication
   {% else %}
-    <a href="{{ url('id_trust:blind_continue', args=[journey.id]) }}">
     have the level of miscommunication be assigned
   {% endif %}
 {% else %}
+  <a href="{{ blind_toggle_url }}">
   {% if blind %}
-    <a href="{{ url('id_trust:reveal_begin') }}">
     choose the level of miscommunication
   {% else %}
-    <a href="{{ url('id_trust:blind_begin') }}">
     have the level of miscommunication be assigned
   {% endif %}
 {% endif %}

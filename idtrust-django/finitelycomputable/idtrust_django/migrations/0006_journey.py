@@ -5,19 +5,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
-def delete_default_journey(apps, schema_editor):
-    Journey = apps.get_model('id_trust', 'Journey')
-    Journey.objects.filter(id=1).delete()
-
-
-def create_default_journey(apps, schema_editor):
-    Journey = apps.get_model('id_trust', 'Journey')
-    journey = Journey(id=1, start_time=datetime.datetime(
-        1970, 1, 1, 0, 0, tzinfo=datetime.timezone.utc
-    ))
-    journey.save()
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -32,7 +19,6 @@ class Migration(migrations.Migration):
                 ('start_time', models.DateTimeField(auto_now_add=True)),
             ],
         ),
-        migrations.RunPython(create_default_journey, delete_default_journey),
         migrations.AddField(
             model_name='dialog',
             name='journey',

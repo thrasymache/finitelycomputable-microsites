@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  web:
+    image: thrasymache/finitelycomputable-microsites:released
+    environment:
+      - DJANGO_SECRET_KEY
+      - DJANGO_SETTINGS_MODULE=settings.linode_settings
+      - PYTHONPATH=.
+    volumes:
+      - ./settings:/srv/settings
+    command: gunicorn finitelycomputable.django_apps.wsgi -b 0.0.0.0
+    ports:
+      - "80:8000"
+

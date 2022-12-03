@@ -8,11 +8,11 @@ from django.views.generic.edit import CreateView, UpdateView
 import random
 
 from finitelycomputable.idtrust_django.models import (
-        Journey, Dialog, Exchange, Strategy, pct_deviation,
+        Journey, Dialog, Exchange
 )
-
-def trust_list_display(trust_list):
-    return ", ".join(["Trust" if t else "Distrust" for t in trust_list])
+from finitelycomputable.idtrust_common.strategies import (
+    effect, pct_deviation, impl, trust_list_display, Strategy
+)
 
 
 from django.urls import reverse
@@ -23,8 +23,7 @@ from jinja2 import Environment
 def DjangoEnvironment(**options):
     env = Environment(**options)
     env.globals.update({
-        'url': reverse,
-        'reverse': reverse,
+        # this is where I had url and reverse, when the templates used them
     })
     return env
 
@@ -34,10 +33,20 @@ def new_dialogue(request, blind=True, journey_id=None):
     else:
         journey = None
     if request.method != 'POST':
+        if journey_id is not None:
+            blind_toggle_url = reverse(
+               'id_trust:reveal_continue' if blind else 'id_trust:blind_continue',
+               kwargs={'journey_id': journey_id},
+            )
+        else:
+            blind_toggle_url = reverse(
+               'id_trust:reveal_begin' if blind else 'id_trust:blind_begin'
+            )
         return render(request, 'interaction_begin.html', {
                 'blind': blind,
                 'journey': journey,
                 'form': None,
+                'blind_toggle_url': blind_toggle_url,
         })
     try:
         user_miscommunication = float(request.POST.get('user_miscommunication'))
@@ -51,21 +60,17 @@ def new_dialogue(request, blind=True, journey_id=None):
         journey = Journey.objects.create()
     obj = Dialog.objects.create(
         journey=journey,
-        foil_strategy=random.choice(Strategy.choices)[0],
+        foil_strategy=random.choice(Strategy.choices())[0],
         user_miscommunication=user_miscommunication,
         foil_miscommunication=foil_miscommunication,
     )
-    interact_core(request, obj.pk, not blind)
+    interact_core(request, obj.id, not blind)
     return redirect(obj)
-
-
-def effect(intent, miscommunication):
-    return intent ^ bool(miscommunication > random.random())
 
 
 def interact_core(request, pk, blind):
     interaction = get_object_or_404(Dialog, pk=pk)
-    foil_intent = Strategy.impl(interaction.foil_strategy)(
+    foil_intent = impl(interaction.foil_strategy)(
             [e.user_effect for e in interaction.exchange_set.all()])
     user_intent = request.POST.get('user_intent')
     if user_intent == 'Trust':
@@ -74,6 +79,7 @@ def interact_core(request, pk, blind):
         user_intent = False
     if user_intent in [True, False]:
         interaction.exchange_set.create(
+            interaction_id=interaction.id,
             user_intent=user_intent,
             user_effect=effect(user_intent, interaction.user_miscommunication),
             foil_intent=foil_intent,
@@ -89,8 +95,8 @@ def interact_core(request, pk, blind):
     foil_effect = [j.foil_effect for j in interaction.exchange_set.all()]
     strategy_list = []
     if len(user_intent):
-        for (k, v) in Strategy.choices:
-            st = Strategy.impl(k)
+        for (k, v) in Strategy.choices():
+            st = impl(k)
             strategy_list.append({
                 'strategy': v,
                 'foil_intent': 100-pct_deviation(foil_intent, user_effect, st),
@@ -99,6 +105,21 @@ def interact_core(request, pk, blind):
                 'user_effect': 100-pct_deviation(user_effect, foil_effect, st),
             })
     strategy_list.sort(key=lambda t: t['foil_intent'], reverse=True)
+    form_action_url = reverse(
+       'id_trust:blind_interact' if blind else 'id_trust:reveal_interact',
+       args=[interaction.id],
+    )
+    blind_toggle_url = reverse(
+       'id_trust:reveal_interact' if blind else 'id_trust:blind_interact',
+       args=[interaction.id],
+    )
+    new_partner_url = reverse(
+       'id_trust:blind_continue' if blind else 'id_trust:reveal_continue',
+       kwargs={'journey_id': interaction.journey_id},
+    )
+    new_journey_url = reverse(
+       'id_trust:blind_begin' if blind else 'id_trust:reveal_begin',
+    )
     return {
         'interaction': interaction,
         'user_intent': trust_list_display(user_intent),
@@ -108,6 +129,10 @@ def interact_core(request, pk, blind):
         'blind': blind,
         'strategy_list': strategy_list,
         'strategies': Strategy,
+        'blind_toggle_url': blind_toggle_url,
+        'form_action_url': form_action_url,
+        'new_partner_url': new_partner_url,
+        'new_journey_url': new_journey_url,
     }
 
 def interact(request, pk, blind):
@@ -127,9 +152,9 @@ class ExchangeCreate(CreateView):
 
     def form_valid(self, form):
         interaction = form.instance.interaction
-        form.instance.foil_trust = Strategy.impl(
+        form.instance.foil_trust = impl(
             form.instance.interaction.foil_strategy)(
-            [e.user_intent for e in interaction.exchange_set.all()]
+            [e.user_intent for e in interaction.exchange_set]
         )
         return super().form_valid(form)
 
@@ -145,10 +170,10 @@ class Home(CreateView):
 
     def form_valid(self, form):
         interaction = form.instance.interaction = Dialog.objects.create(
-            foil_strategy = random.choice(Strategy.choices)[0]
+            foil_strategy = random.choice(Strategy.choices())[0]
         )
-        form.instance.foil_trust = Strategy.impl(interaction.foil_strategy)(
-            [e.user_intent for e in interaction.exchange_set.all()]
+        form.instance.foil_trust = impl(interaction.foil_strategy)(
+            [e.user_intent for e in interaction.exchange_set]
         )
         return super().form_valid(form)
 

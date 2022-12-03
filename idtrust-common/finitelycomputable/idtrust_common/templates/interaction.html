@@ -8,13 +8,7 @@ your apparent trust history: {{user_effect}}<p>
 partner's intended trust history: {{foil_intent}}<p>
 {% endif %}
 partner's apparent trust history: {{foil_effect}}<p>
-{% if blind %}
-  <form action="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}"
-      method="post">
-{% else %}
-  <form action="{{ reverse('id_trust:reveal_interact', args=[interaction.pk]) }}"
-      method="post">
-{% endif %}
+  <form action="{{ form_action_url }}" method="post">
       <button type="submit" name="user_intent" value="Trust">Trust</button>
       <button type="submit" name="user_intent" value="Distrust">Distrust</button>
       <input type="hidden" name="csrfmiddlewaretoken" value={{ csrf_token }}>
@@ -40,9 +34,8 @@ partner's apparent trust history: {{foil_effect}}<p>
     <p>
 {% else %}
   Who are you exchanging with?<p>
-  <form action="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}"
-    method="post">
-    {% for value, label in strategies.choices %}
+  <form action="{{ form_action_url }}" method="post">
+    {% for value, label in strategies.choices() %}
       <button type="submit" name="user_guess" value={{value}}>{{ label }}
       </button>
     {% endfor %}
@@ -51,13 +44,9 @@ partner's apparent trust history: {{foil_effect}}<p>
 {% endif %}
 {% if interaction.user_guess %}
 {% elif blind %}
-  <a href="{{ reverse('id_trust:reveal_interact', args=[interaction.pk]) }}">
-    reveal the level of miscommunication
-  </a><br>
+  <a href="{{ blind_toggle_url }}">reveal the level of miscommunication</a><br>
 {% else %}
-  <a href="{{ reverse('id_trust:blind_interact', args=[interaction.pk]) }}">
-    hide the level of miscommunication
-  </a><br>
+  <a href="{{ blind_toggle_url }}">hide the level of miscommunication</a><br>
 {% endif %}
 {% with j_results=interaction.journey.results() %}<br>
   {% if j_results %}
@@ -67,6 +56,6 @@ partner's apparent trust history: {{foil_effect}}<p>
     exchanges per dialog<br>
   {% endif %}
 {% endwith %}
-<a href="{{ reverse('id_trust:blind_continue', args=[interaction.journey_id]) }}">
+<a href="{{ new_partner_url }}">
   exchange with new partner</a><br>
-<a href="{{ reverse('id_trust:blind_begin') }}">start a new journey</a>
+<a href="{{ new_journey_url }}">start a new journey</a>

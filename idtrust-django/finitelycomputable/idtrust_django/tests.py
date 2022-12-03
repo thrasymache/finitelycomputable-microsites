@@ -62,24 +62,26 @@ class IdTrustViews(TestCase):
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(models.Dialog.objects.count(), 1)
 
-    def test_post_reveal_begin_creates_interaction(self):
-        self.assertEqual(models.Dialog.objects.count(), 0)
+    def test_post_reveal_continue_creates_interaction(self):
+        default_create()
+        self.assertEqual(models.Dialog.objects.count(), 1)
         resp = self.c.post(
-            '/identification_of_trust/journey/1/choose_miscommunication', {
+            '/identification_of_trust/journey/2/choose_miscommunication', {
                 'user_intent': 'Trust',
                 'user_miscommunication': 0.1,
                 'foil_miscommunication': 0.1, })
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(models.Dialog.objects.count(), 1)
+        self.assertEqual(models.Dialog.objects.count(), 2)
 
     def test_post_blind_continue_creates_interaction(self):
-        self.assertEqual(models.Dialog.objects.count(), 0)
-        resp = self.c.post('/identification_of_trust/journey/1',
+        default_create()
+        self.assertEqual(models.Dialog.objects.count(), 1)
+        resp = self.c.post('/identification_of_trust/journey/2',
                 {'user_intent': 'Trust'})
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(models.Dialog.objects.count(), 1)
+        self.assertEqual(models.Dialog.objects.count(), 2)
 
-    def test_post_reveal_continue_creates_interaction(self):
+    def test_post_reveal_begin_creates_interaction(self):
         self.assertEqual(models.Dialog.objects.count(), 0)
         resp = self.c.post('/identification_of_trust/', {
             'user_intent': 'Trust',
@@ -106,14 +108,15 @@ class IdTrustViews(TestCase):
         self.assertEqual(models.Exchange.objects.count(), 1)
 
     def test_post_user_guess_sets_user_guess(self):
+        from finitelycomputable.idtrust_common.strategies import Strategy
         self.assertEqual(models.Exchange.objects.count(), 0)
         default_create()
         resp = self.c.post('/identification_of_trust/interact/1',
-                {'user_guess': 'innocent'})
+                {'user_guess': Strategy.Innocent.value})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(models.Exchange.objects.count(), 0)
-        self.assertEqual(models.Dialog.objects.first().user_guess,
-                'innocent')
+        self.assertEqual(models.Dialog.objects.get(id=1).user_guess,
+                Strategy.Innocent.value)
 
     def test_class_get_home_200(self):
         resp = self.c.get('/identification_of_trust/class_home')
