@@ -12,4 +12,6 @@
 # otherwise pytest-django will fail
 -e django-apps
 -e helloworld-django
+-e idtrust-common
 -e idtrust-django
+-e idtrust-flask

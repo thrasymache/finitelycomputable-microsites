@@ -3,6 +3,7 @@ import os
 from setuptools import find_namespace_packages, setup
 from finitelycomputable_microsites_setup import (
         version, django_setup, wsgi_extras_require, django_version,
+        jinja2_version,
 )
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -26,6 +27,7 @@ setup(
     install_requires=[
         django_version,
         'finitelycomputable-idtrust-common~=' + version,
+        jinja2_version,
     ],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/identification_of_trust',

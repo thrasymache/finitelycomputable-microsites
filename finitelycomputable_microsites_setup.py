@@ -1,4 +1,4 @@
-version = '22.10.1'
+version = '22.11'
 #version += 'a1'
 
 base_setup = {
@@ -39,11 +39,14 @@ django_setup = base_setup.copy()
 django_setup['classifiers'] = django_setup['classifiers'].copy()
 django_setup['classifiers'].extend(django_classifiers)
 
-django_version = 'Django~=4.1.0'
-flask_version = 'Flask~=2.2'
 cherrypy_version = 'CherryPy~=18.6'
-morepath_version = 'morepath~=0.19'
+django_version = 'Django~=4.1.0'
 falcon_version = 'falcon~=3.1'
+flask_version = 'Flask~=2.2'
+morepath_version = 'morepath~=0.19'
+peewee_version = 'peewee~=3.15'
+
+jinja2_version = 'jinja2~=3.1', # to avoid cannot import name 'soft_unicode' from 'markupsafe'
 
 wsgi_extras_require={
         'bjoern': ['bjoern~=3.0'],

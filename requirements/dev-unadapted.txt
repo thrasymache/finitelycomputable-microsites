@@ -9,6 +9,6 @@
 -e helloworld-flask
 -e helloworld-morepath
 -e morepath-mount
+-e idtrust-common
 -e idtrust-django
 -e idtrust-flask
--e idtrust-common

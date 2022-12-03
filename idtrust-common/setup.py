@@ -2,7 +2,7 @@
 import os
 from setuptools import find_namespace_packages, setup
 from finitelycomputable_microsites_setup import (
-        version, base_setup, wsgi_extras_require,
+        version, base_setup, wsgi_extras_require, peewee_version,
 )
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
@@ -22,7 +22,9 @@ setup(
     long_description=README,
     long_description_content_type="text/x-rst",
     scripts=['finitelycomputable_microsites_setup.py'],
-    install_requires=[],
+    install_requires=[
+       peewee_version,
+        ],
     url='http://www.finitelycomputable.net/identification_of_trust',
     **base_setup
 )
