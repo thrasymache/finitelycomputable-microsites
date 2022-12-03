@@ -11,3 +11,4 @@
 -e morepath-mount
 -e idtrust-django
 -e idtrust-flask
+-e idtrust-common
