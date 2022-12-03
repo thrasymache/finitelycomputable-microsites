@@ -1,0 +1,14 @@
+from finitelycomputable.django_apps.settings.base import *
+
+DEBUG = False
+
+ALLOWED_HOSTS += '172.104.148.158', 'li1664-158.members.linode.com',
+
+#CSRF_COOKIE_SECURE = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#SECURE_HSTS_PRELOAD = True
+#SECURE_HSTS_SECONDS = 60
+#SECURE_SSL_REDIRECT = True
+#SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
