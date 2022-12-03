@@ -21,7 +21,7 @@ base_path = join('/', environ.get('BASE_PATH', ''))
 
 
 import random
-from finitelycomputable.idtrust_common.db_peewee import (
+from finitelycomputable.idtrust_db_peewee import (
     IdTrustJourney,
     IdTrustDialog,
     IdTrustExchange,
