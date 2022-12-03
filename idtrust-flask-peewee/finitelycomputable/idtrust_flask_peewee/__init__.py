@@ -104,6 +104,7 @@ def interact(pk, blind=False):
         defaults={'blind': True}, methods =('GET', 'POST'))
 @blueprint.route('journey/<int:journey_id>/choose_miscommunication',
         defaults={'blind': False}, methods=('GET', 'POST'))
+@blueprint.endpoint('home')
 def new_dialogue(blind, journey_id=None):
     if journey_id is not None:
         try:

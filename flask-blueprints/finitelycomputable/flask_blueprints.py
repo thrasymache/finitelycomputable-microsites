@@ -28,8 +28,23 @@ try:
     included_apps.append('helloworld_flask')
 except ModuleNotFoundError:
     pass
+
+try:
+    from finitelycomputable.idtrust_flask_peewee import blueprint as idtrust_blue
+    application.register_blueprint(
+            idtrust_blue, url_prefix = join(base_path, 'identification_of_trust'))
+    application.add_url_rule(
+        base_path, endpoint='home',
+        defaults={'blind': True}, methods=('GET', 'POST'))
+    included_apps.append('idtrust_flask_peewee')
+except ModuleNotFoundError:
+    pass
+
 included_apps = [app.__module__
-        for name, app in locals().items() if name in ['helloworld_blue']]
+        for name, app in locals().items() if name in [
+            'helloworld_blue',
+            'idtrust_blue'
+        ]]
 
 
 def run():
