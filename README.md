@@ -54,14 +54,14 @@ environment and different working directories.)
 The following pip install arguments permit you to run an HTTP server on port
 9000 with the corresponding commands:
 
-finitelycomputable-django-apps: `manage.py runserver 9000` (Django dev server)
-finitelycomputable-django-apps[cherrypy] : `cherry-server.py 9000` (cheroot using CherryPy)
+- finitelycomputable-django-apps: `manage.py runserver 9000` (Django dev server)
+- finitelycomputable-django-apps[cherrypy] : `cherry-server.py 9000` (cheroot using CherryPy)
 (note that cheroot is a dependency of cherrypy, so the above pip install also
 permits the below usage)
-finitelycomputable-django-apps[cheroot] : `cheroot --bind 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi` (cheroot alone)
-finitelycomputable-django-apps[gunicorn] : `gunicorn -b 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi
-finitelycomputable-django-apps[bjoern] : `bjoern-server.py 9000`
-finitelycomputable-django-apps[waitress] : waitress-serve --port=9000 finitelycomputable.django\_apps.wsgi:application
+- finitelycomputable-django-apps[cheroot] : `cheroot --bind 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi` (cheroot alone)
+- finitelycomputable-django-apps[gunicorn] : `gunicorn -b 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi
+- finitelycomputable-django-apps[bjoern] : `bjoern-server.py 9000`
+- finitelycomputable-django-apps[waitress] : waitress-serve --port=9000 finitelycomputable.django\_apps.wsgi:application
 
 
 cherry-server.py and bjoern-server.py are scripts that are part of the
@@ -70,3 +70,22 @@ configuration as arguments in a Python function call, while the cheroot and
 gunicorn packages each provide a short executable script of the same name to
 pass arguments on the command line.  (For example you can run `cat $(which
 gunicorn)` to view the one for gunicorn.
+
+## Packaging
+individual packages have symlinks to a project-wide dist directory that is not
+part of the repo, this enables you to have working copies / worktrees that
+cannot be used to make distributions (e.g. to ensure that all needed files are
+version-controlled).
+
+1. You will want to install the distribution requirements in a virtualenv:
+   `pip install -U requirements/dist.txt`
+2.  `setup.sh clean --all bdist_wheel` --
+   is needed to avoid the build directory being part of the wheel, which causes
+   various wheel checks to fail
+3.  `setup.sh sdist bdist_wheel`
+4. `check-wheel-contents dist/\*.whl`
+5. `twine check dist/\*`
+6. `twine upload dist/\*` -- you will need to have your own PyPi account for
+   this and to have given the packages a unique name, or the upload will be
+   rejected for you not having write permission for the finitelycomputabe-*
+   packages.
