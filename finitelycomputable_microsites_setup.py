@@ -1,9 +1,9 @@
-version = '22.11'
+version = '22.11.1'
 #version += 'a1'
 
 base_setup = {
     'package_dir': {'': '.'},
-    'package_data': {'': ['templates/*/*']},
+    'package_data': {'': ['templates/*', 'templates/*/*']},
     'data_files': [('', ['README.rst', 'LICENSE.txt'])],
     'include_package_data': False,
     'license': 'AGPL-3.0-only',

@@ -79,10 +79,11 @@ version-controlled).
 
 1. You will want to install the distribution requirements in a virtualenv:
    `pip install -U requirements/dist.txt`
-2.  `setup.sh sdist bdist\_wheel`
-3. `check-wheel-contents dist/\*.whl`
-4. `twine check dist/\*`
-5. `twine upload dist/\*` -- you will need to have your own PyPi account for
+2.  `setup.sh clean --all`
+3.  `setup.sh sdist bdist\_wheel`
+4. `check-wheel-contents dist/\*.whl`
+5. `twine check dist/\*`
+6. `twine upload dist/\*` -- you will need to have your own PyPi account for
    this and to have given the packages a unique name, or the upload will be
    rejected for you not having write permission for the finitelycomputabe-*
    packages.
