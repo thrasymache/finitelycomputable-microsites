@@ -1,5 +1,6 @@
 finitelycomputable-django-apps[gunicorn,waitress,cheroot]
 finitelycomputable-helloworld-django
+finitelycomputable-helloworld-flask
 finitelycomputable-idtrust-django
 finitelycomputable-flask-blueprints
 finitelycomputable-idtrust-flask-peewee

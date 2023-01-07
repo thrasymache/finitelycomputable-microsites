@@ -26,6 +26,7 @@ setup(
     install_requires=[
         flask_version,
         'finitelycomputable-idtrust-common~=' + version,
+        'finitelycomputable-idtrust-db-peewee~=' + version,
     ],
     extras_require=wsgi_extras_require,
     url='http://www.finitelycomputable.net/identification_of_trust',

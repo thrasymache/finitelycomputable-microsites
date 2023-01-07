@@ -14,5 +14,5 @@
 -e helloworld-django
 -e idtrust-common
 -e idtrust-django
--e idtrust-flask-peewee
 -e idtrust-db-peewee
+-e idtrust-flask-peewee

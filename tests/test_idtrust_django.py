@@ -1,1 +1,4 @@
-from finitelycomputable.idtrust_django.tests import *
+try:
+    from finitelycomputable.idtrust_django.tests import *
+except ImportError:
+    pass

@@ -4,6 +4,7 @@ packages:
   - python3.9
   - python3.10
   - tox
+  - python3-venv
 sources:
   - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
 tasks:

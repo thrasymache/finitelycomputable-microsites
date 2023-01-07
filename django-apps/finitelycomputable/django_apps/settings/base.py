@@ -36,6 +36,7 @@ try:
     INSTALLED_APPS += 'finitelycomputable.helloworld_django',
 except ModuleNotFoundError:
     pass
+
 try:
     import finitelycomputable.idtrust_django
     INSTALLED_APPS += 'finitelycomputable.idtrust_django.apps.IdTrustConfig',

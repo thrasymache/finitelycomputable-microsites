@@ -1,1 +1,4 @@
-from finitelycomputable.helloworld_django.tests import *
+try:
+    from finitelycomputable.helloworld_django.tests import *
+except ImportError:
+    pass

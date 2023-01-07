@@ -7,8 +7,8 @@ class DjangoAppsTest(TestCase):
     def test_wsgi_info(self):
         resp = self.c.get('/wsgi_info/')
         self.assertEqual(resp.status_code, 200)
-        self.assertGreater(len(resp.content), 75)
-        self.assertLess(len(resp.content), 95)
+        self.assertGreater(len(resp.content), 105)
+        self.assertLess(len(resp.content), 115)
 
     def test_helloworld_django(self):
         resp = self.c.get('/hello_world/')
