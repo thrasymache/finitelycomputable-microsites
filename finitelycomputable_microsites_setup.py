@@ -1,4 +1,4 @@
-version = '22.12'
+version = '23.1'
 #version += 'a1'
 
 base_setup = {
@@ -20,6 +20,7 @@ base_setup = {
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: WSGI',
@@ -40,7 +41,7 @@ django_setup['classifiers'] = django_setup['classifiers'].copy()
 django_setup['classifiers'].extend(django_classifiers)
 
 cherrypy_version = 'CherryPy~=18.6'
-django_version = 'Django~=4.1.0'
+django_version = 'Django~=4.1.5'
 falcon_version = 'falcon~=3.1'
 flask_version = 'Flask~=2.2'
 morepath_version = 'morepath~=0.19'
@@ -50,8 +51,8 @@ jinja2_version = 'jinja2~=3.1', # to avoid cannot import name 'soft_unicode' fro
 
 wsgi_extras_require={
         'bjoern': ['bjoern~=3.0'],
-        'cheroot': ['cheroot~=8.0'],
+        'cheroot': ['cheroot~=9.0'],
         'cherrypy': ['cherrypy~=18.0'],
         'gunicorn': ['gunicorn~=20.0'],
-        'waitress': ['waitress~=1.4'],
+        'waitress': ['waitress~=2.1'],
         }
