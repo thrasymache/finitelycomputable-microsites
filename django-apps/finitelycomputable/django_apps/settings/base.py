@@ -15,7 +15,7 @@ from jinja2 import PackageLoader
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CSRF_COOKIE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CSRF_COOKIE_PATH = os.environ.get('BASE_PATH', '/')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']

@@ -22,7 +22,11 @@ def bjoern():
     import bjoern
     import sys
     try:
-        bjoern.run(application, "0.0.0.0", 8000)
+        if len(sys.argv) == 2:
+            socket_port = int(sys.argv[1])
+        else:
+            socket_port = 8000
+        bjoern.run(application, "0.0.0.0", socket_port)
     except KeyboardInterrupt:
         sys.exit(1)
 

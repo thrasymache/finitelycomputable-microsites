@@ -54,22 +54,22 @@ environment and different working directories.)
 The following pip install arguments permit you to run an HTTP server on port
 9000 with the corresponding commands:
 
-- finitelycomputable-django-apps: `manage.py runserver 9000` (Django dev server)
-- finitelycomputable-django-apps[cherrypy] : `cherry-server.py 9000` (cheroot using CherryPy)
+- finitelycomputable-django-apps: `finitelycomputable-django-apps runserver 9000` (Django dev server)
+- finitelycomputable-django-apps[cherrypy] : `finitelycomputable-django-apps-cherry 9000` (cheroot using CherryPy)
 (note that cheroot is a dependency of cherrypy, so the above pip install also
 permits the below usage)
 - finitelycomputable-django-apps[cheroot] : `cheroot --bind 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi` (cheroot alone)
 - finitelycomputable-django-apps[gunicorn] : `gunicorn -b 0.0.0.0:9000 finitelycomputable.django\_apps.wsgi
-- finitelycomputable-django-apps[bjoern] : `bjoern-server.py 9000`
+- finitelycomputable-django-apps[bjoern] : `finitelycomputable-django-apps-bjoern 9000`
 - finitelycomputable-django-apps[waitress] : waitress-serve --port=9000 finitelycomputable.django\_apps.wsgi:application
 
 
-cherry-server.py and bjoern-server.py are scripts that are part of the
-finitelycomputable-django-apps package because cherrypy and bjoern take their
-configuration as arguments in a Python function call, while the cheroot and
-gunicorn packages each provide a short executable script of the same name to
-pass arguments on the command line.  (For example you can run `cat $(which
-gunicorn)` to view the one for gunicorn.
+finitelycomputable-django-apps-cherry and finitelycomputable-django-apps-bjoern
+are scripts that are part of the the finitelycomputable-django-apps package
+because cherrypy and bjoern take their configuration as arguments in a Python
+function call, while the cheroot and gunicorn packages each provide a short
+executable script of the same name to pass arguments on the command line.
+(For example you can run `cat $(which gunicorn)` to view the one for gunicorn.
 
 ## Packaging
 individual packages have symlinks to a project-wide dist directory that is not
