@@ -15,4 +15,5 @@
 -e idtrust-common
 -e idtrust-django
 -e idtrust-db-peewee
+-e idtrust-app-flask
 -e idtrust-flask-peewee

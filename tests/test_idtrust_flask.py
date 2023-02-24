@@ -1,7 +1,7 @@
 import pytest
 
-from finitelycomputable import idtrust_flask_peewee
-from finitelycomputable.idtrust_db_peewee import (
+from finitelycomputable import idtrust_flask
+from finitelycomputable.idtrust_db.models import (
     SqliteDatabase, IdTrustJourney, IdTrustDialog, IdTrustExchange, MODELS
 )
 from finitelycomputable.idtrust_common.strategies import Strategy
@@ -26,7 +26,7 @@ def dialog(journey):
 
 @pytest.fixture
 def client():
-        idtrust_flask_peewee.application.config['TESTING'] = True
+        idtrust_flask.application.config['TESTING'] = True
 
         # Bind model classes to test db. Since we have a complete list of
         # all models, we do not need to recursively bind dependencies.
@@ -36,7 +36,7 @@ def client():
         test_db.create_tables(MODELS)
         IdTrustJourney.create(id=1)
 
-        with idtrust_flask_peewee.application.test_client() as client:
+        with idtrust_flask.application.test_client() as client:
             yield client
         test_db.drop_tables(MODELS)
         test_db.close()

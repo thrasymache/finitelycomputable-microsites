@@ -2,6 +2,7 @@ from datetime import datetime
 from peewee import *
 from finitelycomputable.idtrust_common import logic
 from finitelycomputable.idtrust_common.strategies import Strategy
+from finitelycomputable import idtrust_urlfor
 
 database = SqliteDatabase('db.sqlite3')
 
@@ -36,12 +37,7 @@ class IdTrustDialog(BaseModel):
     def get_foil_strategy_display(self):
         return Strategy(self.foil_strategy).name
     def get_absolute_url(self):
-        # temporarily safe reverse dependency: currently idtrust-flask-peewee
-        # is the only package that needs this one, so we can expect flask to be
-        # installed. This will not always be true.
-        import flask
-        return flask.url_for(
-            'idtrust.interact',
+        return idtrust_urlfor.interact(
             pk=self.id,
             blind=True,
         )

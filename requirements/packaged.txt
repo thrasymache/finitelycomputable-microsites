@@ -5,4 +5,5 @@ finitelycomputable-idtrust-django
 finitelycomputable-flask-blueprints
 finitelycomputable-helloworld-flask
 finitelycomputable-idtrust-db-peewee
+finitelycomputable-idtrust-app-flask
 finitelycomputable-idtrust-flask-peewee
