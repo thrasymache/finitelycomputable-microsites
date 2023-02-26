@@ -4,8 +4,9 @@
 # independently-installable unit) to be built from the same directory, but back
 # in the 70s they understood how to do this sort of thing.
 python3 idtrust-common/setup.py $*
-python3 idtrust-flask-peewee/setup.py $*
+python3 idtrust-app-flask/setup.py $*
 python3 idtrust-db-peewee/setup.py $*
+python3 idtrust-flask-peewee/setup.py $*
 python3 idtrust-django/setup.py $*
 python3 django-apps/setup.py $*
 python3 cherrypy-mount/setup.py $*
