@@ -78,7 +78,7 @@ cannot be used to make distributions (e.g. to ensure that all needed files are
 version-controlled).
 
 1. You will want to install the distribution requirements in a virtualenv:
-   `pip install -U requirements/dist.txt`
+   `pip install -U -r requirements/dist.txt`
 2.  `setup.sh clean --all`
 3.  `setup.sh sdist bdist\_wheel`
 4. `check-wheel-contents dist/\*.whl`

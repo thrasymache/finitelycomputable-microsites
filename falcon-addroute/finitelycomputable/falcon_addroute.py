@@ -10,13 +10,13 @@ class WsgiInfo(object):
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
-        resp.body = (
+        resp.text = (
 f'''{version_text} using {__name__} {version} on Python {python_version()}
 at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
     )
 
 
-application = falcon.API()
+application = falcon.App()
 application.req_options.strip_url_path_trailing_slash = True
 base_path = join('/', environ.get('BASE_PATH', ''))
 version_text = environ.get('MICROSITES_VERSION_TEXT', '')
