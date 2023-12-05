@@ -1,0 +1,9 @@
+name='finitelycomputable-idtrust-app-flask'
+description='The Flask-dependent code for a microsite to explore identifying game-theory strategies'
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-idtrust-app-flask = finitelycomputable.idtrust_flask:run']
+    }
+url='http://www.finitelycomputable.net/identification_of_trust'
+
+install_requires.append('finitelycomputable-idtrust-common~=' + version)

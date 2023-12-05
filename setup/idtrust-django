@@ -1,0 +1,9 @@
+name='finitelycomputable-idtrust-django'
+description='A Django microsite to explore identifying game-theory strategies'
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-idtrust-django = finitelycomputable.idtrust_django:run']
+    }
+url='http://www.finitelycomputable.net/identification_of_trust'
+
+install_requires.append('finitelycomputable-idtrust-common~=' + version)

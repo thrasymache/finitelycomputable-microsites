@@ -1,9 +1,8 @@
 import morepath
+from importlib.metadata import version
 from os import environ
 from platform import python_version
 from posixpath import join
-
-from finitelycomputable_microsites_setup import version
 
 
 base_path = join('/', environ.get('BASE_PATH', ''))
@@ -19,9 +18,11 @@ class Root(object):
 
 @CoreApp.view(model=Root, name='wsgi_info')
 def wsgi_info(self, request):
-    return (
-f'''{version_text} using {__name__} {version} on Python {python_version()}
-at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
+    return (f'''\
+{version_text} using {__name__} \
+{version('finitelycomputable-morepath-mount')} on Python {python_version()}
+at {base_path} with {', '.join(included_apps) or "nothing"}
+'''
     )
 
 try:

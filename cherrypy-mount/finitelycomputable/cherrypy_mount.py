@@ -1,9 +1,8 @@
 import cherrypy
+from importlib.metadata import version
 from os import environ
 from platform import python_version
 from posixpath import join
-
-from finitelycomputable_microsites_setup import version
 
 
 version_text = environ.get('MICROSITES_VERSION_TEXT', '')
@@ -13,10 +12,12 @@ included_apps = []
 class WsgiInfo(object):
     @cherrypy.expose
     def index(self):
-        return (
-f'''{version_text} using {__name__} {version} on Python {python_version()}
-at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
-    )
+        return (f'''\
+{version_text} using {__name__} \
+{version('finitelycomputable-cherrypy-mount')} on Python {python_version()}
+at {base_path} with {', '.join(included_apps) or "nothing"}
+'''
+        )
 
 def setup_server():
     cherrypy.tree.mount(WsgiInfo(), join(base_path, 'wsgi_info/'), {'/': {}})

@@ -1,0 +1,11 @@
+name='finitelycomputable-morepath-mount'
+description='The Morepath-based wsgi app using Morepath.mount to combine the microsites of finitelycomputable.net'
+#py_modules=['finitelycomputable.morepath_mount']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-morepath-mount = finitelycomputable.morepath_mount:run']
+    }
+extras_require.update({
+        'helloworld': ['finitelycomputable-helloworld-morepath~=' + version]
+        })
+url='http://www.finitelycomputable.net/wsgi_info'

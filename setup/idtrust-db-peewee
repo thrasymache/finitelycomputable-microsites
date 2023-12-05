@@ -1,0 +1,7 @@
+name='finitelycomputable-idtrust-db-peewee'
+description='Peewee implementation of database layer for the Identification of Trust microsite'
+entry_points={
+    'console_scripts': []
+    }
+url='http://www.finitelycomputable.net/identification_of_trust'
+#install_requires=[ peewee_version ]

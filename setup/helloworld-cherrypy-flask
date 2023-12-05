@@ -1,0 +1,8 @@
+name='finitelycomputable-helloworld-cherrypy-flask'
+description='hello_world in CherryPy from an implementation in Flask'
+# py_modules=['finitelycomputable.helloworld_cherrypy']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-helloworld-cherrypy = finitelycomputable.helloworld_cherrypy:run']
+    }
+url='http://www.finitelycomputable.net/hello_world'

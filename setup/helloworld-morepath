@@ -1,0 +1,8 @@
+name='finitelycomputable-helloworld-morepath'
+description='A hello_world implementation in Morepath'
+#py_modules=['finitelycomputable.helloworld_morepath']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-helloworld-morepath = finitelycomputable.helloworld_morepath:run']
+    }
+url='http://www.finitelycomputable.net/hello_world/'

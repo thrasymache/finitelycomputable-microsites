@@ -1,0 +1,4 @@
+install_requires.append('Django~=4.2.6')
+classifiers.append('Framework :: Django')
+classifiers.append('Framework :: Django :: 4.2')
+

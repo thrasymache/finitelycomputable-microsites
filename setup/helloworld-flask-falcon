@@ -1,0 +1,8 @@
+name='finitelycomputable-helloworld-flask-falcon'
+description='hello_world in Flask from an implementation in Falcon'
+#py_modules=['finitelycomputable.helloworld_flask']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-helloworld-flask = finitelycomputable.helloworld_flask:run']
+    }
+url='http://www.finitelycomputable.net/hello_world'

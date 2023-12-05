@@ -1,0 +1,11 @@
+name='finitelycomputable-flask-dispatcher'
+description='The Flask-based wsgi app using werkzeug.middleware.dispatcher to combine the microsites of finitelycomputable.net'
+#    py_modules=['finitelycomputable.flask_dispatcher']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-flask-dispatcher = finitelycomputable.flask_dispatcher:run']
+    }
+extras_require.update({
+        'helloworld': ['finitelycomputable-helloworld-flask~=' + version],
+        })
+url='http://www.finitelycomputable.net/wsgi_info'

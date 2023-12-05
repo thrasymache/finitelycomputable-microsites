@@ -1,19 +1,20 @@
 import falcon
+from importlib.metadata import version
 from os import environ
 from platform import python_version
 from posixpath import join
-
-from finitelycomputable_microsites_setup import version
 
 
 class WsgiInfo(object):
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
-        resp.text = (
-f'''{version_text} using {__name__} {version} on Python {python_version()}
-at {base_path} with {', '.join(included_apps) or "nothing"}\n'''
-    )
+        resp.text = (f'''\
+{version_text} using {__name__} \
+{version('finitelycomputable-falcon-addroute')} on Python {python_version()}
+at {base_path} with {', '.join(included_apps) or "nothing"}
+'''
+        )
 
 
 application = falcon.App()
