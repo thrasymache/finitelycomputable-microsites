@@ -1,4 +1,4 @@
-setup-targets ::= cherrypy-mount/setup.py django-apps/setup.py \
+setup-files ::= cherrypy-mount/setup.py django-apps/setup.py \
 	flask-dispatcher/setup.py flask-blueprints/setup.py \
 	falcon-addroute/setup.py \
 	helloworld-cherrypy/setup.py \
@@ -15,9 +15,25 @@ setup-targets ::= cherrypy-mount/setup.py django-apps/setup.py \
 	idtrust-db-peewee/setup.py idtrust-django/setup.py \
 	morepath-mount/setup.py \
 
-all: $(setup-targets)
+check: latest.whl latest.tar.gz
+	twine check $(setup-files:%/setup.py=%/latest.whl)
+	twine check $(setup-files:%/setup.py=%/latest.tar.gz)
+check-wheel-contents: latest.whl
+	check-wheel-contents `readlink $(setup-files:%/setup.py=%/latest.whl)`
+setup-clean: $(setup-files:setup.py=setup-clean)
 clean:
-	rm $(setup-targets)
+	rm -r $(setup-files) */build
+setup.py: $(setup-files)
+latest.tar.gz: $(setup-files:%/setup.py=%/latest.tar.gz)
+latest.whl: $(setup-files:%/setup.py=%/latest.whl)
+upload: check
+	# only upload most recent version when that isn't everything anyway
+	twine upload $(setup-files:%/setup.py=%/latest.whl) \
+		$(setup-files:%/setup.py=%/latest.tar.gz)
+
+.PHONY: setup.py check clean setup-clean latest.tar.gz latest.whl \
+	$(setup-files:setup.py=setup-clean)
+	$(setup-files:setup.py=twine-check)
 
 cherrypy-mount/setup.py: setup/cherrypy setup/wsgi
 django-apps/setup.py: setup/django setup/wsgi
@@ -53,3 +69,13 @@ setup-gen.awk: setup/preamble setup/invocation
 %/setup.py: setup-gen.awk setup/%
 	$^ >$@
 	chmod a+x $@
+
+%/setup-clean: %/setup.py
+	$< clean --all
+
+%/latest.tar.gz: %/setup.py
+	$< sdist bdist_wheel
+	ln -sbT dist/`$< --fullname`.tar.gz $@
+
+%/latest.whl: %/setup.py | %/latest.tar.gz
+	ln -sbT dist/`$< --fullname | sed -e s/-/_/g -e s/_23/-23/`-py3-none-any.whl $@

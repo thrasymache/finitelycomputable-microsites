@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-idtrust-db-peewee'
 description='Peewee implementation of database layer for the Identification of Trust microsite'

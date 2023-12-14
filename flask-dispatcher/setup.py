@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-flask-dispatcher'
 description='The Flask-based wsgi app using werkzeug.middleware.dispatcher to combine the microsites of finitelycomputable.net'

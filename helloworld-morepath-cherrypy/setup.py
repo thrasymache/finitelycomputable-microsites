@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-helloworld-morepath-cherrypy'
 description='hello_world in Morepath from an implementation in CherryPy'

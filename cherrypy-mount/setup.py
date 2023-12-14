@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-cherrypy-mount'
 description='The CherryPy-based wsgi app using tree.mount() for the microsites of finitelycomputable.net'

@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-idtrust-django'
 description='A Django microsite to explore identifying game-theory strategies'

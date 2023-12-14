@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-helloworld-cherrypy-flask'
 description='hello_world in CherryPy from an implementation in Flask'

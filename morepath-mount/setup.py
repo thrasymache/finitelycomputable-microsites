@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.11'
+version = '23.12'
 
 name='finitelycomputable-morepath-mount'
 description='The Morepath-based wsgi app using Morepath.mount to combine the microsites of finitelycomputable.net'

@@ -79,11 +79,18 @@ version-controlled).
 
 1. You will want to install the distribution requirements in a virtualenv:
    `pip install -U -r requirements/dist.txt`
-2.  `setup.sh clean --all`
-3.  `setup.sh sdist bdist\_wheel`
-4. `check-wheel-contents dist/\*.whl`
-5. `twine check dist/\*`
-6. `twine upload dist/\*` -- you will need to have your own PyPi account for
+2.  `make latest.whl latest.tar.gz`
+   this will build any setup.py files whose components have changed, then build
+   the bdist_wheel and sdist packages of those, and make symlinks latest.tar.gz
+   and latest.whl respectively to them.
+4. `make check-wheel-contents`
+5. `make check`
+6. `make upload` -- you will need to have your own PyPi account for
    this and to have given the packages a unique name, or the upload will be
    rejected for you not having write permission for the finitelycomputabe-*
    packages.
+
+Note, that the check-wheel-contents target just uses the check-wheel-contents
+script and passes to it all of the latest built packages, and that the check
+and upload targets just pass the latest built packages to twine check and twine
+upload respectively.
