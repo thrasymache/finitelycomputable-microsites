@@ -10,6 +10,7 @@ setup-files ::= cherrypy-mount/setup.py django-apps/setup.py \
 	helloworld-flask-falcon/setup.py helloworld-flask-morepath/setup.py \
 	helloworld-morepath/setup.py helloworld-morepath-cherrypy/setup.py \
 	helloworld-morepath-falcon/setup.py helloworld-morepath-flask/setup.py \
+	helloworld-quart/setup.py \
 	idtrust-common/setup.py \
 	idtrust-app-flask/setup.py idtrust-flask-peewee/setup.py \
 	idtrust-db-peewee/setup.py idtrust-django/setup.py \
@@ -28,8 +29,8 @@ latest.tar.gz: $(setup-files:%/setup.py=%/latest.tar.gz)
 latest.whl: $(setup-files:%/setup.py=%/latest.whl)
 upload: check
 	# only upload most recent version when that isn't everything anyway
-	twine upload $(setup-files:%/setup.py=%/latest.whl) \
-		$(setup-files:%/setup.py=%/latest.tar.gz)
+	twine upload `readlink $(setup-files:%/setup.py=%/latest.whl)` \
+		`readlink $(setup-files:%/setup.py=%/latest.tar.gz)`
 
 .PHONY: setup.py check clean setup-clean latest.tar.gz latest.whl \
 	$(setup-files:setup.py=setup-clean)
@@ -57,6 +58,7 @@ helloworld-morepath/setup.py: setup/morepath setup/wsgi
 helloworld-morepath-cherrypy/setup.py: setup/morepath setup/wsgi
 helloworld-morepath-falcon/setup.py: setup/morepath setup/falcon setup/wsgi
 helloworld-morepath-flask/setup.py: setup/morepath setup/wsgi
+helloworld-quart/setup.py: setup/quart
 idtrust-db-peewee/setup.py: setup/peewee
 idtrust-django/setup.py: setup/jinja2 setup/django setup/wsgi
 idtrust-app-flask/setup.py: setup/flask setup/wsgi

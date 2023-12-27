@@ -8,6 +8,7 @@
 -e helloworld-falcon
 -e helloworld-flask
 -e helloworld-morepath
+-e helloworld-quart
 -e morepath-mount
 -e idtrust-common
 -e idtrust-django
