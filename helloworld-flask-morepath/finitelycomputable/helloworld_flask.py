@@ -1,8 +1,14 @@
-from flask import Blueprint, Flask, request
+import flask
 from os import environ
 from posixpath import join
 
 from finitelycomputable import helloworld_morepath
+
+
+class Flask(flask.Flask):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
+class Blueprint(flask.Blueprint):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
 
 
 application = Flask(__name__)
@@ -13,7 +19,7 @@ model = helloworld_morepath.Root()
 
 @blueprint.route('/')
 def hello_world():
-    return helloworld_morepath.hello_world(model, request)
+    return helloworld_morepath.hello_world(model, flask.request)
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

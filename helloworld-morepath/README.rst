@@ -2,4 +2,5 @@
 HelloWorld-Morepath
 ===================
 
-This application provides a single endpoint wherever it is mounted. 
+finitelycomputable.helloworld_morepath provides a hello_world endpoint using
+the Morepath framework wherever it is mounted.

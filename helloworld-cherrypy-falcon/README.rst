@@ -1,5 +1,5 @@
 ==========================
-HelloWorld-Cherrypy-Falcon
+HelloWorld-CherryPy-Falcon
 ==========================
 
 This application adapts the hello_world endpoint provided in

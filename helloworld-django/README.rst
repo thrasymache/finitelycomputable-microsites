@@ -2,4 +2,5 @@
 HelloWorld-Django
 =================
 
-This application provides a single endpoint wherever it is mounted. 
+This application provides a hello_world endpoint wherever it is mounted using
+the Django framework.

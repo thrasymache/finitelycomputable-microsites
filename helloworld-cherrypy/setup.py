@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.12'
+version = '23.13'
 
 name='finitelycomputable-helloworld-cherrypy'
 description='A hello_world implementation in CherryPy'

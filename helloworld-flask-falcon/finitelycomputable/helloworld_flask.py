@@ -1,9 +1,15 @@
 from falcon import Response
-from flask import Blueprint, Flask, request
+import flask
 from os import environ
 from posixpath import join
 
 from finitelycomputable import helloworld_falcon
+
+
+class Flask(flask.Flask):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
+class Blueprint(flask.Blueprint):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
 
 
 application = Flask(__name__)
@@ -15,7 +21,7 @@ impl = helloworld_falcon.HelloWorld()
 @blueprint.route('/')
 def hello_world():
     resp = Response()
-    impl.on_get(request, resp)
+    impl.on_get(flask.request, resp)
     return resp.body
 
 

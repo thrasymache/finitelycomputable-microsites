@@ -1,8 +1,14 @@
-from flask import Blueprint, Flask
+import flask
 from os import environ
 from posixpath import join
 
 from finitelycomputable import helloworld_cherrypy
+
+
+class Flask(flask.Flask):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
+class Blueprint(flask.Blueprint):
+    '''this will have __module__ == finitelycomputable.helloworld_flask'''
 
 
 application = Flask(__name__)

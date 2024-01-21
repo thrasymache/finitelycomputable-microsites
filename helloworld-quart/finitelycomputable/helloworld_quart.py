@@ -5,9 +5,9 @@ from posixpath import join
 
 
 class Quart(quart.Quart):
-    '''this will have __module__ == finitelycomputable.helloworld_flask'''
+    '''this will have __module__ == finitelycomputable.helloworld_quart'''
 class Blueprint(quart.Blueprint):
-    '''this will have __module__ == finitelycomputable.helloworld_flask'''
+    '''this will have __module__ == finitelycomputable.helloworld_quart'''
 
 
 application = Quart(__name__)

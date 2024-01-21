@@ -1,0 +1,8 @@
+name='finitelycomputable-helloworld-quart-morepath'
+description='hello_world in Quart from an implementation in Morepath'
+#py_modules=['finitelycomputable.helloworld_quart']
+entry_points={
+    'console_scripts': [
+        'finitelycomputable-helloworld-quart = finitelycomputable.helloworld_quart:run']
+    }
+url='http//www.finitelycomputable.net/hello_world'

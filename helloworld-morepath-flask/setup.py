@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.12'
+version = '23.13'
 
 name='finitelycomputable-helloworld-morepath-flask'
 description='hello_world in Morepath from an implementation in Flask'

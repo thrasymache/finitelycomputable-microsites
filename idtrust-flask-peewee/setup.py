@@ -26,7 +26,7 @@ classifiers = [
 install_requires = []
 extras_require = {}
 
-version = '23.12'
+version = '23.13'
 
 name='finitelycomputable-idtrust-flask-peewee'
 description='A Flask+peewee microsite to explore identifying game-theory strategies'

@@ -1,0 +1,20 @@
+-e helloworld-quart
+-e helloworld-cherrypy-quart
+-e helloworld-morepath-cherrypy
+-e helloworld-falcon-morepath
+-e helloworld-flask-falcon
+
+-e cherrypy-mount
+-e falcon-addroute
+-e flask-blueprints
+-e flask-dispatcher
+-e morepath-mount
+
+# otherwise pytest-django will fail
+-e django-apps
+-e helloworld-django
+-e idtrust-common
+-e idtrust-django
+-e idtrust-db-peewee
+-e idtrust-app-flask
+-e idtrust-flask-peewee

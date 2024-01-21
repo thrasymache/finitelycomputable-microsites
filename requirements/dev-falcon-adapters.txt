@@ -2,6 +2,7 @@
 -e helloworld-cherrypy-falcon
 -e helloworld-flask-falcon
 -e helloworld-morepath-falcon
+-e helloworld-quart-falcon
 
 -e cherrypy-mount
 -e falcon-addroute

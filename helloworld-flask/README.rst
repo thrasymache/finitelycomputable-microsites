@@ -2,4 +2,5 @@
 HelloWorld-Flask
 ================
 
-This application provides a single endpoint wherever it is mounted. 
+finitelycomputable.helloworld_flask provides a hello_world endpoint using
+the Flask framework wherever it is mounted.

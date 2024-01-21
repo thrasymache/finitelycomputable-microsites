@@ -2,4 +2,5 @@
 HelloWorld-Falcon
 =================
 
-This application provides a single endpoint wherever it is mounted. 
+finitelycomputable.helloworld_falcon provides a hello_world endpoint using
+the Falcon framework wherever it is mounted.
