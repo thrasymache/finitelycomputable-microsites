@@ -1,6 +1,6 @@
 name='finitelycomputable-cherrypy-mount'
 description='The CherryPy-based wsgi app using tree.mount() for the microsites of finitelycomputable.net'
-url='http://www.finitelycomputable.net/wsgi_info'
+url='https://www.finitelycomputable.net/wsgi_info'
 entry_points={
     'console_scripts': [
         'finitelycomputable-cherrypy-mount = finitelycomputable.cherrypy_mount:run']

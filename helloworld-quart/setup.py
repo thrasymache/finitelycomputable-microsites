@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-quart = finitelycomputable.helloworld_quart:run']
     }
-url='http://www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'
 install_requires.append('Quart~=0.19')
 
 setup(

@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-cherrypy = finitelycomputable.helloworld_cherrypy:run']
     }
-url='http://www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'
 install_requires.append('CherryPy~=18.6')
 classifiers.append('Framework :: CherryPy')
 

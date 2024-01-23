@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-falcon = finitelycomputable.helloworld_falcon:run']
     }
-url='http//www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'
 install_requires.append('falcon~=3.1')
 extras_require.update({
     'bjoern': ['bjoern~=3.0'],

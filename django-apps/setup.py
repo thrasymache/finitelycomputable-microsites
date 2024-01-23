@@ -37,7 +37,7 @@ entry_points={
         ]
     }
 description='The microsites of finitelycomputable.net run inside Django'
-url='http://www.finitelycomputable.net/wsgi_info'
+url='https://www.finitelycomputable.net/wsgi_info'
 install_requires.append('Django~=4.2.6')
 classifiers.append('Framework :: Django')
 classifiers.append('Framework :: Django :: 4.2')

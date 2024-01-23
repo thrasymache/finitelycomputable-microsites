@@ -38,7 +38,7 @@ entry_points={
 extras_require.update({
         'helloworld': ['finitelycomputable-helloworld-morepath~=' + version]
         })
-url='http://www.finitelycomputable.net/wsgi_info'
+url='https://www.finitelycomputable.net/wsgi_info'
 install_requires.append('morepath~=0.19')
 extras_require.update({
     'bjoern': ['bjoern~=3.0'],

@@ -5,4 +5,4 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-django = finitelycomputable.helloworld_django:run']
     }
-url='http://www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'

@@ -33,7 +33,7 @@ description='Peewee implementation of database layer for the Identification of T
 entry_points={
     'console_scripts': []
     }
-url='http://www.finitelycomputable.net/identification_of_trust'
+url='https://www.finitelycomputable.net/identification_of_trust'
 #install_requires=[ peewee_version ]
 install_requires.append('peewee~=3.15')
 setup(

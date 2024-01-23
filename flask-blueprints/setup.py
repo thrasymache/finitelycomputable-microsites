@@ -38,7 +38,7 @@ entry_points={
 extras_require.update({
         'helloworld': ['finitelycomputable-helloworld-flask~=' + version]
         })
-url='http://www.finitelycomputable.net/wsgi_info'
+url='https://www.finitelycomputable.net/wsgi_info'
 install_requires.append('Flask~=3.0')
 classifiers.append('Framework :: Flask')
 

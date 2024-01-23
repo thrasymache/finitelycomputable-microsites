@@ -36,7 +36,7 @@ entry_points = {
     'console_scripts': [
         'finitelycomputable-falcon-addroute = finitelycomputable.falcon_addroute:run']
     }
-url = 'http://www.finitelycomputable.net/wsgi_info'
+url = 'https://www.finitelycomputable.net/wsgi_info'
 install_requires.append('falcon~=3.1')
 extras_require.update({
     'bjoern': ['bjoern~=3.0'],

@@ -28,7 +28,8 @@ check-wheel-contents: latest.whl
 	check-wheel-contents `readlink $(setup-files:%/setup.py=%/latest.whl)`
 setup-clean: $(setup-files:setup.py=setup-clean)
 clean:
-	rm -r $(setup-files) */build
+	rm -r $(setup-files) $(setup-files:%/setup.py=%/latest.whl) \
+		$(setup-files:%/setup.py=%/latest.tar.gz) */build
 setup.py: $(setup-files)
 latest.tar.gz: $(setup-files:%/setup.py=%/latest.tar.gz)
 latest.whl: $(setup-files:%/setup.py=%/latest.whl)

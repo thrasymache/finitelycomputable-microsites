@@ -34,7 +34,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-idtrust-app-flask = finitelycomputable.idtrust_flask:run']
     }
-url='http://www.finitelycomputable.net/identification_of_trust'
+url='https://www.finitelycomputable.net/identification_of_trust'
 
 install_requires.append('finitelycomputable-idtrust-common~=' + version)
 install_requires.append('Flask~=3.0')

@@ -6,4 +6,4 @@ entry_points = {
     'console_scripts': [
         'finitelycomputable-falcon-addroute = finitelycomputable.falcon_addroute:run']
     }
-url = 'http://www.finitelycomputable.net/wsgi_info'
+url = 'https://www.finitelycomputable.net/wsgi_info'

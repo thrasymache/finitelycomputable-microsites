@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-flask = finitelycomputable.helloworld_flask:run']
     }
-url='http//www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'
 install_requires.append('Flask~=3.0')
 classifiers.append('Framework :: Flask')
 

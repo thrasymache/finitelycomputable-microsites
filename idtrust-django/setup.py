@@ -34,7 +34,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-idtrust-django = finitelycomputable.idtrust_django:run']
     }
-url='http://www.finitelycomputable.net/identification_of_trust'
+url='https://www.finitelycomputable.net/identification_of_trust'
 
 install_requires.append('finitelycomputable-idtrust-common~=' + version)
 install_requires.append('jinja2~=3.1')  # to avoid cannot import name 'soft_unicode' from 'markupsafe'

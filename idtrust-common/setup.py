@@ -33,7 +33,7 @@ description='Shared files needed for the Identification of Trust microsite'
 entry_points={
     'console_scripts': []
     }
-url='http://www.finitelycomputable.net/identification_of_trust'
+url='https://www.finitelycomputable.net/identification_of_trust'
 setup(
     name=name,
     classifiers=classifiers,

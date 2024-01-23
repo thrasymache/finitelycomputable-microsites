@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-morepath = finitelycomputable.helloworld_morepath:run']
     }
-url='http://www.finitelycomputable.net/hello_world/'
+url='https://www.finitelycomputable.net/hello_world/'
 install_requires.append('morepath~=0.19')
 install_requires.append('falcon~=3.1')
 extras_require.update({

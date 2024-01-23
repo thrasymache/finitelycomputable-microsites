@@ -35,7 +35,7 @@ entry_points={
     'console_scripts': [
         'finitelycomputable-helloworld-django = finitelycomputable.helloworld_django:run']
     }
-url='http://www.finitelycomputable.net/hello_world'
+url='https://www.finitelycomputable.net/hello_world'
 install_requires.append('Django~=4.2.6')
 classifiers.append('Framework :: Django')
 classifiers.append('Framework :: Django :: 4.2')
