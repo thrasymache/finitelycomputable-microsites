@@ -1,0 +1,4 @@
+name	finitelycomputable-helloworld-flask
+description	A hello_world implementation in Flask
+project.urls	Homepage = "https://www.finitelycomputable.net/hello_world"
+project.scripts	finitelycomputable-helloworld-flask = "finitelycomputable.helloworld_flask:run"

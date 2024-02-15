@@ -1,8 +1,0 @@
-name='finitelycomputable-helloworld-quart'
-description='A hello_world implementation in Quart'
-#py_modules=['finitelycomputable.helloworld_quart']
-entry_points={
-    'console_scripts': [
-        'finitelycomputable-helloworld-quart = finitelycomputable.helloworld_quart:run']
-    }
-url='https://www.finitelycomputable.net/hello_world'

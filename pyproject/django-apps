@@ -1,0 +1,6 @@
+name	finitelycomputable-django-apps
+description	The microsites of finitelycomputable.net run inside Django
+project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
+project.scripts	finitelycomputable-django-apps = "finitelycomputable.django_apps.entry_points:run"
+project.scripts	finitelycomputable-django-apps-bjoern = "finitelycomputable.django_apps.entry_points:bjoern"
+project.scripts	finitelycomputable-django-apps-cherry = "finitelycomputable.django_apps.entry_points:cherry"

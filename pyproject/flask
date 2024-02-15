@@ -1,0 +1,3 @@
+dependencies	Flask~=3.0
+classifiers	Framework :: Flask
+

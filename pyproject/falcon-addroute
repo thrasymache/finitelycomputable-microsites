@@ -1,0 +1,4 @@
+name	finitelycomputable-falcon-addroute
+description	The Falcon-based wsgi app for the microsites of finitelycomputable.net
+project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
+project.scripts	finitelycomputable-falcon-addroute = "finitelycomputable.falcon_addroute:run"

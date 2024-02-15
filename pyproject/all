@@ -1,0 +1,20 @@
+requires-python	>=3.7
+classifiers	Development Status :: 3 - Alpha
+classifiers	Environment :: Web Environment
+classifiers	Intended Audience :: Developers
+classifiers	License :: OSI Approved :: GNU Affero General Public License v3
+classifiers	Operating System :: OS Independent
+classifiers	Programming Language :: Python
+classifiers	Programming Language :: Python :: 3.7
+classifiers	Programming Language :: Python :: 3.8
+classifiers	Programming Language :: Python :: 3.9
+classifiers	Programming Language :: Python :: 3.10
+classifiers	Programming Language :: Python :: 3.11
+classifiers	Topic :: Internet :: WWW/HTTP
+classifiers	Topic :: Internet :: WWW/HTTP :: Dynamic Content
+classifiers	Topic :: Internet :: WWW/HTTP :: WSGI
+project.urls	Documentation = "https://github.com/thrasymache/microsites"
+project.urls	Source = "https://github.com/thrasymache/microsites"
+project.urls	Gitlab = "https://gitlab.com/thrasymache/microsites"
+project.urls	sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
+project.urls	NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"

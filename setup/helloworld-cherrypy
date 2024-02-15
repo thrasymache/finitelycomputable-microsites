@@ -1,8 +1,0 @@
-name='finitelycomputable-helloworld-cherrypy'
-description='A hello_world implementation in CherryPy'
-#py_modules=['finitelycomputable.helloworld_cherrypy']
-entry_points={
-    'console_scripts': [
-        'finitelycomputable-helloworld-cherrypy = finitelycomputable.helloworld_cherrypy:run']
-    }
-url='https://www.finitelycomputable.net/hello_world'

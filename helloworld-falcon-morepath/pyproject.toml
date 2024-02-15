@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
+license = {text = "AGPL-3.0-only"}
+readme = "README.rst"
+version = "24.1"
+name = "finitelycomputable-helloworld-falcon-morepath"
+requires-python = ">=3.7"
+description = "hello_world in Falcon from an implementation in Morepath"
+dependencies = [
+  "falcon~=3.1",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Affero General Public License v3",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+  "Topic :: Internet :: WWW/HTTP :: WSGI",
+]
+
+[project.optional-dependencies]
+bjoern = ["bjoern~=3.0"]
+cheroot = ["cheroot~=9.0"]
+cherrypy = ["cherrypy~=18.0"]
+gunicorn = ["gunicorn~=20.0"]
+waitress = ["waitress~=2.1"]
+
+[project.scripts]
+finitelycomputable-helloworld-falcon = "finitelycomputable.helloworld_falcon:run"
+
+[project.urls]
+Homepage = "https://www.finitelycomputable.net/hello_world"
+Documentation = "https://github.com/thrasymache/microsites"
+Source = "https://github.com/thrasymache/microsites"
+Gitlab = "https://gitlab.com/thrasymache/microsites"
+sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
+NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"

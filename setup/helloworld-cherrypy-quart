@@ -1,8 +1,0 @@
-name='finitelycomputable-helloworld-cherrypy-quart'
-description='hello_world in CherryPy from an implementation in Quart'
-# py_modules=['finitelycomputable.helloworld_cherrypy']
-entry_points={
-    'console_scripts': [
-        'finitelycomputable-helloworld-cherrypy = finitelycomputable.helloworld_cherrypy:run']
-    }
-url='https://www.finitelycomputable.net/hello_world'

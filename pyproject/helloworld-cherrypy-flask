@@ -1,0 +1,4 @@
+name	finitelycomputable-helloworld-cherrypy-flask
+description	hello_world in CherryPy from an implementation in Flask
+project.urls	Homepage = "https://www.finitelycomputable.net/hello_world"
+project.scripts	finitelycomputable-helloworld-cherrypy = "finitelycomputable.helloworld_cherrypy:run"

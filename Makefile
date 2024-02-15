@@ -1,97 +1,101 @@
-setup-files ::= cherrypy-mount/setup.py django-apps/setup.py \
-	flask-dispatcher/setup.py flask-blueprints/setup.py \
-	falcon-addroute/setup.py \
-	helloworld-cherrypy/setup.py \
-	helloworld-cherrypy-falcon/setup.py helloworld-cherrypy-flask/setup.py \
-	helloworld-cherrypy-morepath/setup.py helloworld-cherrypy-quart/setup.py \
-	helloworld-django/setup.py \
-	helloworld-falcon/setup.py helloworld-falcon-cherrypy/setup.py \
-	helloworld-falcon-flask/setup.py helloworld-falcon-morepath/setup.py \
-	helloworld-flask/setup.py helloworld-flask-cherrypy/setup.py \
-	helloworld-flask-falcon/setup.py helloworld-flask-morepath/setup.py \
-	helloworld-flask-quart/setup.py helloworld-falcon-quart/setup.py \
-	helloworld-morepath/setup.py helloworld-morepath-cherrypy/setup.py \
-	helloworld-morepath-falcon/setup.py helloworld-morepath-flask/setup.py \
-	helloworld-morepath-quart/setup.py \
-	helloworld-quart/setup.py helloworld-quart-cherrypy/setup.py \
-	helloworld-quart-falcon/setup.py helloworld-quart-flask/setup.py \
-	helloworld-quart-morepath/setup.py \
-	idtrust-common/setup.py \
-	idtrust-app-flask/setup.py idtrust-flask-peewee/setup.py \
-	idtrust-db-peewee/setup.py idtrust-django/setup.py \
-	morepath-mount/setup.py \
+dist-dirs ::= cherrypy-mount/. django-apps/. flask-dispatcher/. \
+	flask-blueprints/. falcon-addroute/. morepath-mount/. \
+	helloworld-cherrypy/. helloworld-cherrypy-falcon/. \
+	helloworld-cherrypy-flask/. helloworld-cherrypy-morepath/. \
+	helloworld-cherrypy-quart/. \
+	helloworld-django/. \
+	helloworld-falcon/. helloworld-falcon-cherrypy/. \
+	helloworld-falcon-flask/. helloworld-falcon-morepath/. \
+	helloworld-falcon-quart/. \
+	helloworld-flask/. helloworld-flask-cherrypy/. \
+	helloworld-flask-falcon/. helloworld-flask-morepath/. \
+	helloworld-flask-quart/. \
+	helloworld-morepath/. helloworld-morepath-cherrypy/. \
+	helloworld-morepath-falcon/. helloworld-morepath-flask/. \
+	helloworld-morepath-quart/. \
+	helloworld-quart/. helloworld-quart-cherrypy/. \
+	helloworld-quart-falcon/. helloworld-quart-flask/. \
+	helloworld-quart-morepath/. \
+	idtrust-common/. idtrust-app-flask/. idtrust-flask-peewee/. \
+	idtrust-db-peewee/. idtrust-django/. \
+
+toml-files ::= $(dist-dirs:%/.=%/pyproject.toml)
+whl-files ::= $(dist-dirs:%/.=%/latest.whl)
+sdist-files ::= $(dist-dirs:%/.=%/latest.tar.gz)
 
 check: latest.whl latest.tar.gz
-	twine check $(setup-files:%/setup.py=%/latest.whl)
-	twine check $(setup-files:%/setup.py=%/latest.tar.gz)
+	twine check $(whl-files)
+	twine check $(sdist-files)
 check-wheel-contents: latest.whl
-	check-wheel-contents `readlink $(setup-files:%/setup.py=%/latest.whl)`
-setup-clean: $(setup-files:setup.py=setup-clean)
+	check-wheel-contents `readlink $(whl-files)`
 clean:
-	rm -r $(setup-files) $(setup-files:%/setup.py=%/latest.whl) \
-		$(setup-files:%/setup.py=%/latest.tar.gz) */build
-setup.py: $(setup-files)
-latest.tar.gz: $(setup-files:%/setup.py=%/latest.tar.gz)
-latest.whl: $(setup-files:%/setup.py=%/latest.whl)
+	rm -r $(toml-files) $(whl-files) $(sdist-files) */build
+pyproject.toml: $(toml-files)
+latest.tar.gz: $(sdist-files)
+latest.whl: $(whl-files)
 upload: check
 	# only upload most recent version when that isn't everything anyway
-	twine upload `readlink $(setup-files:%/setup.py=%/latest.whl)` \
-		`readlink $(setup-files:%/setup.py=%/latest.tar.gz)`
+	twine upload `readlink $(whl-files) $(sdist-files)`
 
-.PHONY: setup.py check clean setup-clean latest.tar.gz latest.whl \
-	$(setup-files:setup.py=setup-clean)
-	$(setup-files:setup.py=twine-check)
+.PHONY: pyproject.toml check clean latest.tar.gz latest.whl \
+	$(whl-files:%/latest.whl=%/check)
 
-cherrypy-mount/setup.py: setup/cherrypy setup/wsgi
-django-apps/setup.py: setup/django setup/wsgi
-falcon-addroute/setup.py: setup/falcon setup/wsgi
-flask-dispatcher/setup.py: setup/flask setup/wsgi
-flask-blueprints/setup.py: setup/flask setup/wsgi
-helloworld-cherrypy-falcon/setup.py: setup/cherrypy setup/falcon setup/wsgi
-helloworld-cherrypy/setup.py: setup/cherrypy setup/wsgi
-helloworld-cherrypy-flask/setup.py: setup/cherrypy setup/wsgi
-helloworld-cherrypy-morepath/setup.py: setup/cherrypy setup/wsgi
-helloworld-cherrypy-quart/setup.py: setup/cherrypy setup/wsgi
-helloworld-django/setup.py: setup/django setup/wsgi
-helloworld-falcon/setup.py: setup/falcon setup/wsgi
-helloworld-falcon-cherrypy/setup.py: setup/falcon setup/wsgi
-helloworld-falcon-flask/setup.py: setup/falcon setup/wsgi
-helloworld-falcon-morepath/setup.py: setup/falcon setup/wsgi
-helloworld-falcon-quart/setup.py: setup/falcon setup/wsgi
-helloworld-flask/setup.py: setup/flask setup/wsgi
-helloworld-flask-cherrypy/setup.py: setup/flask setup/wsgi
-helloworld-flask-falcon/setup.py: setup/flask setup/falcon setup/wsgi
-helloworld-flask-morepath/setup.py: setup/flask setup/wsgi
-helloworld-flask-quart/setup.py: setup/flask setup/wsgi
-helloworld-morepath/setup.py: setup/morepath setup/wsgi
-helloworld-morepath-cherrypy/setup.py: setup/morepath setup/wsgi
-helloworld-morepath-falcon/setup.py: setup/morepath setup/falcon setup/wsgi
-helloworld-morepath-flask/setup.py: setup/morepath setup/wsgi
-helloworld-morepath-quart/setup.py: setup/morepath setup/wsgi
-helloworld-quart/setup.py: setup/quart
-helloworld-quart-cherrypy/setup.py: setup/quart setup/wsgi
-helloworld-quart-falcon/setup.py: setup/quart setup/wsgi
-helloworld-quart-flask/setup.py: setup/quart setup/wsgi
-helloworld-quart-morepath/setup.py: setup/quart setup/wsgi
-idtrust-db-peewee/setup.py: setup/peewee
-idtrust-django/setup.py: setup/jinja2 setup/django setup/wsgi
-idtrust-app-flask/setup.py: setup/flask setup/wsgi
-idtrust-flask-peewee/setup.py: setup/flask setup/wsgi
-morepath-mount/setup.py: setup/morepath setup/wsgi
+cherrypy-mount/pyproject.toml: pyproject/cherrypy pyproject/wsgi
+django-apps/pyproject.toml: pyproject/django pyproject/wsgi
+falcon-addroute/pyproject.toml: pyproject/falcon pyproject/wsgi
+flask-dispatcher/pyproject.toml: pyproject/flask pyproject/wsgi
+flask-blueprints/pyproject.toml: pyproject/flask pyproject/wsgi
+helloworld-cherrypy-falcon/pyproject.toml: pyproject/cherrypy pyproject/falcon pyproject/wsgi
+helloworld-cherrypy/pyproject.toml: pyproject/cherrypy pyproject/wsgi
+helloworld-cherrypy-flask/pyproject.toml: pyproject/cherrypy pyproject/wsgi
+helloworld-cherrypy-morepath/pyproject.toml: pyproject/cherrypy pyproject/wsgi
+helloworld-cherrypy-quart/pyproject.toml: pyproject/cherrypy pyproject/wsgi
+helloworld-django/pyproject.toml: pyproject/django pyproject/wsgi
+helloworld-falcon/pyproject.toml: pyproject/falcon pyproject/wsgi
+helloworld-falcon-cherrypy/pyproject.toml: pyproject/falcon pyproject/wsgi
+helloworld-falcon-flask/pyproject.toml: pyproject/falcon pyproject/wsgi
+helloworld-falcon-morepath/pyproject.toml: pyproject/falcon pyproject/wsgi
+helloworld-falcon-quart/pyproject.toml: pyproject/falcon pyproject/wsgi
+helloworld-flask/pyproject.toml: pyproject/flask pyproject/wsgi
+helloworld-flask-cherrypy/pyproject.toml: pyproject/flask pyproject/wsgi
+helloworld-flask-falcon/pyproject.toml: pyproject/flask pyproject/falcon pyproject/wsgi
+helloworld-flask-morepath/pyproject.toml: pyproject/flask pyproject/wsgi
+helloworld-flask-quart/pyproject.toml: pyproject/flask pyproject/wsgi
+helloworld-morepath/pyproject.toml: pyproject/morepath pyproject/wsgi
+helloworld-morepath-cherrypy/pyproject.toml: pyproject/morepath pyproject/wsgi
+helloworld-morepath-falcon/pyproject.toml: pyproject/morepath pyproject/falcon pyproject/wsgi
+helloworld-morepath-flask/pyproject.toml: pyproject/morepath pyproject/wsgi
+helloworld-morepath-quart/pyproject.toml: pyproject/morepath pyproject/wsgi
+helloworld-quart/pyproject.toml: pyproject/quart
+helloworld-quart-cherrypy/pyproject.toml: pyproject/quart pyproject/wsgi
+helloworld-quart-falcon/pyproject.toml: pyproject/quart pyproject/wsgi
+helloworld-quart-flask/pyproject.toml: pyproject/quart pyproject/wsgi
+helloworld-quart-morepath/pyproject.toml: pyproject/quart pyproject/wsgi
+idtrust-db-peewee/pyproject.toml: pyproject/peewee
+idtrust-django/pyproject.toml: pyproject/jinja2 pyproject/django pyproject/wsgi
+idtrust-app-flask/pyproject.toml: pyproject/flask pyproject/wsgi
+idtrust-flask-peewee/pyproject.toml: pyproject/flask pyproject/wsgi
+morepath-mount/pyproject.toml: pyproject/morepath pyproject/wsgi
 
-setup-gen.awk: setup/preamble setup/invocation
+pyproject-gen.awk: pyproject/preamble pyproject/all
 	touch $@
 
-%/setup.py: setup-gen.awk setup/%
-	$^ >$@
-	chmod a+x $@
+%/pyproject.toml: pyproject-gen.awk pyproject/%
+	$^ pyproject/all >$@
 
-%/setup-clean: %/setup.py
-	$< clean --all
+%/latest.tar.gz: %/pyproject.toml
+	python -m build $(dir $<)
+	ln -sbT dist/`sdistname.awk $<` $@
 
-%/latest.tar.gz: %/setup.py
-	$< sdist bdist_wheel
-	ln -sbT dist/`$< --fullname`.tar.gz $@
+%/latest.whl: %/pyproject.toml | %/latest.tar.gz
+	ln -sbT dist/`wheelname.awk $<` $@
 
-%/latest.whl: %/setup.py | %/latest.tar.gz
-	ln -sbT dist/`$< --fullname | sed -e s/-/_/g -e s/_23/-23/`-py3-none-any.whl $@
+%/check: %/latest.whl
+	check-wheel-contents `readlink $<`
+	twine check `readlink $<`
+#%/latest.tar.gz: %/setup.py
+#	$< sdist bdist_wheel
+#	ln -sbT dist/`$< --fullname`.tar.gz $@
+#
+#%/latest.whl: %/setup.py | %/latest.tar.gz
+#	ln -sbT dist/`$< --fullname | sed -e s/-/_/g -e s/_23/-23/`-py3-none-any.whl $@

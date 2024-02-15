@@ -1,0 +1,5 @@
+name	finitelycomputable-flask-blueprints
+description	The Flask-based wsgi app using blueprints to combine the microsites of finitelycomputable.net
+project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
+project.scripts	finitelycomputable-flask-blueprints = "finitelycomputable.flask_blueprints:run"
+project.optional-dependencies	helloworld = ["finitelycomputable-helloworld-flask"]

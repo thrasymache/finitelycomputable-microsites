@@ -1,8 +1,0 @@
-extras_require.update({
-    'bjoern': ['bjoern~=3.0'],
-    'cheroot': ['cheroot~=9.0'],
-    'cherrypy': ['cherrypy~=18.0'],
-    'gunicorn': ['gunicorn~=20.0'],
-    'waitress': ['waitress~=2.1'],
-    }
-)

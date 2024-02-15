@@ -1,3 +1,0 @@
-install_requires.append('Flask~=3.0')
-classifiers.append('Framework :: Flask')
-

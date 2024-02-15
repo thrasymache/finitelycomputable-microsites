@@ -1,0 +1,6 @@
+name	finitelycomputable-idtrust-flask-peewee
+description	A Flask+peewee microsite to explore identifying game-theory strategies
+project.urls	Homepage = "https://www.finitelycomputable.net/identification_of_trust"
+project.scripts	finitelycomputable-idtrust-flask-peewee = "finitelycomputable.idtrust_flask:run"
+dependencies	finitelycomputable-idtrust-app-flask
+dependencies	finitelycomputable-idtrust-db-peewee

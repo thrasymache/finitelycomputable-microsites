@@ -1,0 +1,5 @@
+project.optional-dependencies	bjoern = ["bjoern~=3.0"]
+project.optional-dependencies	cheroot = ["cheroot~=9.0"]
+project.optional-dependencies	cherrypy = ["cherrypy~=18.0"]
+project.optional-dependencies	gunicorn = ["gunicorn~=20.0"]
+project.optional-dependencies	waitress = ["waitress~=2.1"]

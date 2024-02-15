@@ -1,0 +1,4 @@
+name	finitelycomputable-helloworld-falcon-morepath
+description	hello_world in Falcon from an implementation in Morepath
+project.urls	Homepage = "https://www.finitelycomputable.net/hello_world"
+project.scripts	finitelycomputable-helloworld-falcon = "finitelycomputable.helloworld_falcon:run"

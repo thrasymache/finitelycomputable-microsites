@@ -1,0 +1,2 @@
+# to avoid cannot import name 'soft_unicode' from 'markupsafe'
+dependencies	jinja2~=3.1

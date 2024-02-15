@@ -1,3 +1,0 @@
-install_requires.append('CherryPy~=18.6')
-classifiers.append('Framework :: CherryPy')
-

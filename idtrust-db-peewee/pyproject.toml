@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
+license = {text = "AGPL-3.0-only"}
+readme = "README.rst"
+version = "24.1"
+name = "finitelycomputable-idtrust-db-peewee"
+requires-python = ">=3.7"
+description = "Peewee implementation of database layer for the Identification of Trust microsite"
+dependencies = [
+  "peewee~=3.15",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Affero General Public License v3",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+  "Topic :: Internet :: WWW/HTTP :: WSGI",
+]
+
+[project.urls]
+Homepage = "https://www.finitelycomputable.net/identification_of_trust"
+Documentation = "https://github.com/thrasymache/microsites"
+Source = "https://github.com/thrasymache/microsites"
+Gitlab = "https://gitlab.com/thrasymache/microsites"
+sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
+NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"

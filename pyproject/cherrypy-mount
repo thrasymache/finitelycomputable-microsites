@@ -1,0 +1,4 @@
+name	finitelycomputable-cherrypy-mount
+description	The CherryPy-based wsgi app using tree.mount() for the microsites of finitelycomputable.net
+project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
+project.scripts	finitelycomputable-cherrypy-mount = "finitelycomputable.cherrypy_mount:run"

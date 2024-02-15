@@ -1,2 +1,0 @@
-install_requires.append('Quart~=0.19')
-

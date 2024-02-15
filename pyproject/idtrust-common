@@ -1,0 +1,3 @@
+name	finitelycomputable-idtrust-common
+description	Shared files needed for the Identification of Trust microsite
+project.urls	Homepage = "https://www.finitelycomputable.net/identification_of_trust"

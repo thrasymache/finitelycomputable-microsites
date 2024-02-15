@@ -1,0 +1,5 @@
+name	finitelycomputable-idtrust-django
+description	A Django microsite to explore identifying game-theory strategies
+project.urls	Homepage = "https://www.finitelycomputable.net/identification_of_trust"
+project.scripts	finitelycomputable-idtrust-django = "finitelycomputable.idtrust_django:run"
+dependencies	finitelycomputable-idtrust-common

@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
+license = {text = "AGPL-3.0-only"}
+readme = "README.rst"

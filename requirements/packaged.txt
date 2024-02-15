@@ -7,3 +7,11 @@ finitelycomputable-helloworld-flask
 finitelycomputable-idtrust-db-peewee
 finitelycomputable-idtrust-app-flask
 finitelycomputable-idtrust-flask-peewee
+finitelycomputable-cherrypy-mount
+finitelycomputable-falcon-addroute
+finitelycomputable-flask-dispatcher
+finitelycomputable-helloworld-cherrypy
+finitelycomputable-helloworld-falcon
+finitelycomputable-helloworld-morepath
+finitelycomputable-helloworld-quart
+finitelycomputable-morepath-mount

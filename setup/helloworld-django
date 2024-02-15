@@ -1,8 +1,0 @@
-name='finitelycomputable-helloworld-django'
-description='A hello_world implementation in Django'
-#packages=['finitelycomputable.helloworld_django']
-entry_points={
-    'console_scripts': [
-        'finitelycomputable-helloworld-django = finitelycomputable.helloworld_django:run']
-    }
-url='https://www.finitelycomputable.net/hello_world'

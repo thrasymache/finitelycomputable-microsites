@@ -1,0 +1,5 @@
+name	finitelycomputable-flask-dispatcher
+description	The Flask-based wsgi app using werkzeug.middleware.dispatcher to combine the microsites of finitelycomputable.net
+project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
+project.scripts	finitelycomputable-flask-dispatcher = "finitelycomputable.flask_dispatcher:run"
+project.optional-dependencies	helloworld = ["finitelycomputable-helloworld-flask"]

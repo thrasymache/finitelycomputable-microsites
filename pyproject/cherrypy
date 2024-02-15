@@ -1,0 +1,3 @@
+dependencies	CherryPy~=18.6
+classifiers	Framework :: CherryPy
+
