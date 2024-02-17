@@ -1,5 +1,7 @@
+build
 pip
 setuptools
+tox
 twine
 wheel
 check-wheel-contents

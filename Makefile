@@ -81,14 +81,14 @@ pyproject-gen.awk: pyproject/preamble pyproject/all
 	touch $@
 
 %/pyproject.toml: pyproject-gen.awk pyproject/%
-	$^ pyproject/all >$@
+	awk -f $^ pyproject/all >$@
 
 %/latest.tar.gz: %/pyproject.toml
-	python -m build $(dir $<)
-	ln -sbT dist/`sdistname.awk $<` $@
+	python3 -m build $(dir $<)
+	ln -sbT dist/`awk -f sdistname.awk $<` $@
 
 %/latest.whl: %/pyproject.toml | %/latest.tar.gz
-	ln -sbT dist/`wheelname.awk $<` $@
+	ln -sbT dist/`awk -f wheelname.awk $<` $@
 
 %/check: %/latest.whl
 	check-wheel-contents `readlink $<`

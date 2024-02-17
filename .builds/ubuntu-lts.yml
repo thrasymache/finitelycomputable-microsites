@@ -1,0 +1,22 @@
+image: ubuntu/lts
+packages:
+  - python3.10
+  - python3.11
+  - python3-pip
+sources:
+  - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
+tasks:
+  - build: |
+        export PATH=$PATH:~/.local/bin
+        cd finitelycomputable-microsites
+        mkdir dist
+        pip install --upgrade -r requirements/dist.txt
+        make latest.whl
+  - test: |
+        export PATH=$PATH:~/.local/bin
+        cd finitelycomputable-microsites
+        tox
+  - check: |
+        export PATH=$PATH:~/.local/bin
+        cd finitelycomputable-microsites
+        make check check-wheel-contents

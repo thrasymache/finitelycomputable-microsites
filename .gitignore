@@ -4,7 +4,6 @@ __pycache__
 *.egg-info
 *.pyc
 db.sqlite3
-dist
 latest.whl
 latest.whl~
 latest.tar.gz
