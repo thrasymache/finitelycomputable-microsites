@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.1"
+version = "24.2"
 name = "finitelycomputable-helloworld-django"
 requires-python = ">=3.7"
 description = "description='A hello_world implementation in Django'"

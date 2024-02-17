@@ -27,7 +27,7 @@ check: latest.whl latest.tar.gz
 	twine check $(whl-files)
 	twine check $(sdist-files)
 check-wheel-contents: latest.whl
-	check-wheel-contents `readlink $(whl-files)`
+	check-wheel-contents --ignore W004 `readlink $(whl-files)`
 clean:
 	rm -r $(toml-files) $(whl-files) $(sdist-files) */build
 pyproject.toml: $(toml-files)
@@ -91,7 +91,7 @@ pyproject-gen.awk: pyproject/preamble pyproject/all
 	ln -sbT dist/`awk -f wheelname.awk $<` $@
 
 %/check: %/latest.whl
-	check-wheel-contents `readlink $<`
+	check-wheel-contents --ignore W004 `readlink $<`
 	twine check `readlink $<`
 #%/latest.tar.gz: %/setup.py
 #	$< sdist bdist_wheel
