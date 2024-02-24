@@ -1,4 +1,4 @@
 dependencies	Django~=4.2.6
 classifiers	Framework :: Django
 classifiers	Framework :: Django :: 4.2
-
+optional	tests	pytest-django

@@ -1,10 +1,13 @@
 #! /usr/bin/awk -f
 
 BEGIN { FS=" = " }
- {metadata[$1] = $2}
-END {
-  gsub("\"", "", metadata["name"]);
-  gsub("-", "_", metadata["name"]);
+$1 == "name" {
+  gsub("\"", "", $2);
+  gsub("-", "_", $2);
+  printf "%s-", $2;
   "cat pyproject/version" | getline;
-  printf "%s-%s-py3-none-any.whl\n", metadata["name"], $0;
+  print $0 "-py3-none-any.whl";
+  exit;
+}
+END {
 }

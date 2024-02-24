@@ -1,6 +1,0 @@
-ipdb
-pytest
-webtest
-pytest_django
-pytest-env
-pytest-asyncio

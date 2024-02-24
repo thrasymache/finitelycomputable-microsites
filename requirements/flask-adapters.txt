@@ -1,21 +1,17 @@
 -f dist
-finitelycomputable-helloworld-flask
-finitelycomputable-helloworld-cherrypy-flask
-finitelycomputable-helloworld-falcon-flask
-finitelycomputable-helloworld-morepath-flask
-finitelycomputable-helloworld-quart-flask
+finitelycomputable-helloworld-flask[tests]
+finitelycomputable-helloworld-cherrypy-flask[tests]
+finitelycomputable-helloworld-falcon-flask[tests]
+finitelycomputable-helloworld-morepath-flask[tests]
+finitelycomputable-helloworld-quart-flask[tests]
 
-finitelycomputable-cherrypy-mount
-finitelycomputable-falcon-addroute
-finitelycomputable-flask-blueprints
-finitelycomputable-flask-dispatcher
-finitelycomputable-morepath-mount
+finitelycomputable-idtrust-common[tests]
+finitelycomputable-idtrust-db-peewee[tests]
+finitelycomputable-idtrust-app-flask[tests]
+finitelycomputable-idtrust-flask-peewee[tests]
 
-# otherwise pytest-django will fail
-finitelycomputable-django-apps
-finitelycomputable-helloworld-django
-finitelycomputable-idtrust-common
-finitelycomputable-idtrust-django
-finitelycomputable-idtrust-db-peewee
-finitelycomputable-idtrust-app-flask
-finitelycomputable-idtrust-flask-peewee
+finitelycomputable-cherrypy-mount[tests]
+finitelycomputable-falcon-addroute[tests]
+finitelycomputable-flask-blueprints[tests]
+finitelycomputable-flask-dispatcher[tests]
+finitelycomputable-morepath-mount[tests]

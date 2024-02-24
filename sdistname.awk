@@ -1,9 +1,10 @@
 #! /usr/bin/awk -f
 
 BEGIN { FS=" = " }
- {metadata[$1] = $2}
-END {
+$1 == "name" {
+  gsub("\"", "", $2);
+  printf "%s-", $2;
   "cat pyproject/version" | getline;
-  gsub("\"", "", metadata["name"]);
-  printf "%s-%s.tar.gz\n", metadata["name"], $0;
+  print $0 ".tar.gz";
+  exit;
 }

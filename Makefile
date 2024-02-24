@@ -67,10 +67,10 @@ helloworld-morepath-falcon/pyproject.toml: pyproject/morepath pyproject/falcon p
 helloworld-morepath-flask/pyproject.toml: pyproject/morepath pyproject/wsgi
 helloworld-morepath-quart/pyproject.toml: pyproject/morepath pyproject/wsgi
 helloworld-quart/pyproject.toml: pyproject/quart
-helloworld-quart-cherrypy/pyproject.toml: pyproject/quart pyproject/wsgi
-helloworld-quart-falcon/pyproject.toml: pyproject/quart pyproject/wsgi
-helloworld-quart-flask/pyproject.toml: pyproject/quart pyproject/wsgi
-helloworld-quart-morepath/pyproject.toml: pyproject/quart pyproject/wsgi
+helloworld-quart-cherrypy/pyproject.toml: pyproject/quart
+helloworld-quart-falcon/pyproject.toml: pyproject/quart
+helloworld-quart-flask/pyproject.toml: pyproject/quart
+helloworld-quart-morepath/pyproject.toml: pyproject/quart
 idtrust-db-peewee/pyproject.toml: pyproject/peewee
 idtrust-django/pyproject.toml: pyproject/jinja2 pyproject/django pyproject/wsgi
 idtrust-app-flask/pyproject.toml: pyproject/flask pyproject/wsgi

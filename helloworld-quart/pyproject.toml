@@ -6,9 +6,9 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.1"
+version = "24.2"
 name = "finitelycomputable-helloworld-quart"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 description = "A hello_world implementation in Quart"
 dependencies = [
   "Quart~=0.19",
@@ -20,15 +20,18 @@ classifiers = [
   "License :: OSI Approved :: GNU Affero General Public License v3",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Topic :: Internet :: WWW/HTTP",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-  "Topic :: Internet :: WWW/HTTP :: WSGI",
 ]
+
+[project.optional-dependencies]
+tests = ["pytest-asyncio",
+  "pytest", "pytest-env"]
 
 [project.scripts]
 finitelycomputable-helloworld-quart = "finitelycomputable.helloworld_quart:run"

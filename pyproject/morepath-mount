@@ -2,4 +2,4 @@ name	finitelycomputable-morepath-mount
 description	The Morepath-based wsgi app using Morepath.mount to combine the microsites of finitelycomputable.net
 project.urls	Homepage = "https://www.finitelycomputable.net/wsgi_info"
 project.scripts	finitelycomputable-morepath-mount = "finitelycomputable.morepath_mount:run"
-project.optional-dependencies	helloworld = ["finitelycomputable-helloworld-morepath"]
+optional	helloworld	finitelycomputable-helloworld-morepath

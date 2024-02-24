@@ -6,37 +6,39 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.1"
+version = "24.2"
 name = "finitelycomputable-helloworld-morepath-falcon"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 description = "hello_world in Morepath from an implementation in Falcon"
 dependencies = [
   "morepath~=0.19",
   "falcon~=3.1",
 ]
 classifiers = [
+  "Topic :: Internet :: WWW/HTTP :: WSGI",
   "Development Status :: 3 - Alpha",
   "Environment :: Web Environment",
   "Intended Audience :: Developers",
   "License :: OSI Approved :: GNU Affero General Public License v3",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Topic :: Internet :: WWW/HTTP",
   "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-  "Topic :: Internet :: WWW/HTTP :: WSGI",
 ]
 
 [project.optional-dependencies]
-bjoern = ["bjoern~=3.0"]
-cheroot = ["cheroot~=9.0"]
-cherrypy = ["cherrypy~=18.0"]
-gunicorn = ["gunicorn~=20.0"]
+tests = ["webtest",
+  "pytest", "pytest-env"]
 waitress = ["waitress~=2.1"]
+cherrypy = ["cherrypy~=18.0"]
+cheroot = ["cheroot~=9.0"]
+bjoern = ["bjoern~=3.0"]
+gunicorn = ["gunicorn~=20.0"]
 
 [project.scripts]
 finitelycomputable-helloworld-morepath = "finitelycomputable.helloworld_morepath:run"
