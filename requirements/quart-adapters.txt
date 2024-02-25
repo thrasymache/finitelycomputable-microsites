@@ -1,12 +1,12 @@
 -f dist
-finitelycomputable-helloworld-quart[tests]
-finitelycomputable-helloworld-cherrypy-quart[tests]
-finitelycomputable-helloworld-falcon-quart[tests]
-finitelycomputable-helloworld-flask-quart[tests]
-finitelycomputable-helloworld-morepath-quart[tests]
+finitelycomputable-helloworld-quart[tests]~=24.2
+finitelycomputable-helloworld-cherrypy-quart[tests]~=24.2
+finitelycomputable-helloworld-falcon-quart[tests]~=24.2
+finitelycomputable-helloworld-flask-quart[tests]~=24.2
+finitelycomputable-helloworld-morepath-quart[tests]~=24.2
 
-finitelycomputable-cherrypy-mount[tests]
-finitelycomputable-falcon-addroute[tests]
-finitelycomputable-flask-blueprints[tests]
-finitelycomputable-flask-dispatcher[tests]
-finitelycomputable-morepath-mount[tests]
+finitelycomputable-cherrypy-mount[tests]~=24.2
+finitelycomputable-falcon-addroute[tests]~=24.2
+finitelycomputable-flask-blueprints[tests]~=24.2
+finitelycomputable-flask-dispatcher[tests]~=24.2
+finitelycomputable-morepath-mount[tests]~=24.2

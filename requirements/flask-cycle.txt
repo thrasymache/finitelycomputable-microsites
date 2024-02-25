@@ -1,16 +1,16 @@
 -f dist
-finitelycomputable-helloworld-flask[tests]
-finitelycomputable-helloworld-cherrypy-flask[tests]
-finitelycomputable-helloworld-morepath-cherrypy[tests]
-finitelycomputable-helloworld-falcon-morepath[tests]
+finitelycomputable-helloworld-flask[tests]~=24.2
+finitelycomputable-helloworld-cherrypy-flask[tests]~=24.2
+finitelycomputable-helloworld-morepath-cherrypy[tests]~=24.2
+finitelycomputable-helloworld-falcon-morepath[tests]~=24.2
 
-finitelycomputable-idtrust-common[tests]
-finitelycomputable-idtrust-db-peewee[tests]
-finitelycomputable-idtrust-app-flask[tests]
-finitelycomputable-idtrust-flask-peewee[tests]
+finitelycomputable-idtrust-common[tests]~=24.2
+finitelycomputable-idtrust-db-peewee[tests]~=24.2
+finitelycomputable-idtrust-app-flask[tests]~=24.2
+finitelycomputable-idtrust-flask-peewee[tests]~=24.2
 
-finitelycomputable-cherrypy-mount[tests]
-finitelycomputable-falcon-addroute[tests]
-finitelycomputable-flask-blueprints[tests]
-finitelycomputable-flask-dispatcher[tests]
-finitelycomputable-morepath-mount[tests]
+finitelycomputable-cherrypy-mount[tests]~=24.2
+finitelycomputable-falcon-addroute[tests]~=24.2
+finitelycomputable-flask-blueprints[tests]~=24.2
+finitelycomputable-flask-dispatcher[tests]~=24.2
+finitelycomputable-morepath-mount[tests]~=24.2

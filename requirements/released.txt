@@ -1,6 +1,6 @@
 finitelycomputable-django-apps[tests,gunicorn,waitress,cheroot]
-finitelycomputable-helloworld-django[tests]
-finitelycomputable-helloworld-flask[tests,gunicorn,waitress,cheroot,bjoern,cherrypy]
-finitelycomputable-idtrust-django[tests]
-finitelycomputable-flask-blueprints[tests]
-finitelycomputable-idtrust-flask-peewee[tests]
+finitelycomputable-helloworld-django[tests]~=24.2
+finitelycomputable-helloworld-flask[tests,gunicorn,waitress,cheroot,bjoern,cherrypy]~=24.2
+finitelycomputable-idtrust-django[tests]~=24.2
+finitelycomputable-flask-blueprints[tests]~=24.2
+finitelycomputable-idtrust-flask-peewee[tests]~=24.2

@@ -33,12 +33,15 @@ clean:
 pyproject.toml: $(toml-files)
 latest.tar.gz: $(sdist-files)
 latest.whl: $(whl-files)
+requirements:
+	sed -i s/~=2.\..*/~=`tr -d \\\n <pyproject/version`/ requirements/*.txt
+
 upload: check
 	# only upload most recent version when that isn't everything anyway
 	twine upload `readlink $(whl-files) $(sdist-files)`
 
-.PHONY: pyproject.toml check clean latest.tar.gz latest.whl \
-	$(whl-files:%/latest.whl=%/check)
+.PHONY: pyproject.toml check clean latest.tar.gz latest.whl requirements \
+	$(whl-files:%/latest.whl=%/check) upload
 
 cherrypy-mount/pyproject.toml: pyproject/cherrypy pyproject/wsgi
 django-apps/pyproject.toml: pyproject/django pyproject/wsgi
