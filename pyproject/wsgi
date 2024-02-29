@@ -1,6 +1,6 @@
 optional	bjoern	bjoern~=3.0
 optional	cheroot	cheroot~=9.0
 optional	cherrypy	cherrypy~=18.0
-optional	gunicorn	gunicorn~=20.0
+optional	gunicorn	gunicorn~=21.2
 optional	waitress	waitress~=2.1
 classifiers	Topic :: Internet :: WWW/HTTP :: WSGI

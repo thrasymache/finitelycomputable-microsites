@@ -37,7 +37,7 @@ waitress = ["waitress~=2.1"]
 cherrypy = ["cherrypy~=18.0"]
 cheroot = ["cheroot~=9.0"]
 bjoern = ["bjoern~=3.0"]
-gunicorn = ["gunicorn~=20.0"]
+gunicorn = ["gunicorn~=21.2"]
 
 [project.scripts]
 finitelycomputable-helloworld-flask = "finitelycomputable.helloworld_flask:run"
