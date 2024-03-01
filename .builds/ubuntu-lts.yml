@@ -6,6 +6,11 @@ packages:
 sources:
   - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
 tasks:
+  - clean-diff: |
+        cd finitelycomputable-microsites
+        make clean || true
+        make pyproject.toml requirements
+        git diff --exit-code
   - build: |
         export PATH=$PATH:~/.local/bin
         cd finitelycomputable-microsites
