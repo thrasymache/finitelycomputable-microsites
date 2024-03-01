@@ -3,10 +3,12 @@ packages:
   - python3.10
   - python3.11
   - python3-pip
+  - original-awk
 sources:
   - https://git.sr.ht/~thrasymache/finitelycomputable-microsites
 tasks:
   - clean-diff: |
+        sudo update-alternatives --set awk /usr/bin/original-awk
         cd finitelycomputable-microsites
         make clean || true
         make pyproject.toml requirements

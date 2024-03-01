@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.2"
+version = "24.3"
 name = "finitelycomputable-helloworld-falcon"
 requires-python = ">=3.8"
 description = "A hello_world implementation in Falcon"
