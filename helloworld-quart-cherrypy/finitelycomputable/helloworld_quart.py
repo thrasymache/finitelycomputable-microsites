@@ -20,7 +20,7 @@ impl = helloworld_cherrypy.HelloWorld()
 
 @blueprint.route('/')
 async def hello_world():
-    return impl.index()
+    return 'Quart adapts, ' + impl.index()
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

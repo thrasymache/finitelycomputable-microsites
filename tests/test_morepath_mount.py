@@ -1,4 +1,5 @@
 try:
+    import re
     import pytest
     from webtest import TestApp as Client
 
@@ -13,11 +14,10 @@ try:
         assert len(response.text) < 100
 
     def test_helloworld_morepath():
-        '''helloworld test that can handle adapters'''
         c = Client(application)
         response = c.get('/hello_world/')
         assert 200 == response.status_code
-        assert len(response.body) > 21
-        assert len(response.body) < 30
+        assert re.search('says "hello, world"\n', response.text)
+        assert re.search('Morepath', response.text)
 except ImportError:
     pass

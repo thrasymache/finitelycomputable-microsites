@@ -7,7 +7,7 @@ from finitelycomputable import helloworld_flask
 class HelloWorld(object):
     @cherrypy.expose
     def index(self):
-        return helloworld_flask.hello_world()
+        return "CherryPy adapts, " + helloworld_flask.hello_world()
 
 
 def setup_server():

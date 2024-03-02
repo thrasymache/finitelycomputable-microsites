@@ -20,7 +20,8 @@ model = helloworld_morepath.Root()
 
 @blueprint.route('/')
 async def hello_world():
-    return helloworld_morepath.hello_world(model, quart.request)
+    return 'Quart adapts, ' + \
+            helloworld_morepath.hello_world(model, quart.request)
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

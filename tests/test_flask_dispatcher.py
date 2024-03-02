@@ -1,4 +1,5 @@
 try:
+    import re
     import pytest
 
     from finitelycomputable import flask_dispatcher
@@ -22,7 +23,7 @@ try:
         '''helloworld test that can handle adapters'''
         response = client.get('/hello_world/')
         assert 200 == response.status_code
-        assert len(response.data) > 21
-        assert len(response.data) < 30
+        assert re.search(b'says "hello, world"\n', response.data)
+        assert re.search(b'Flask', response.data)
 except ImportError:
     pass

@@ -23,7 +23,7 @@ impl = helloworld_falcon.HelloWorld()
 async def hello_world():
     resp = Response()
     impl.on_get(quart.request, resp)
-    return resp.body
+    return 'Quart adapts, ' + resp.text
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

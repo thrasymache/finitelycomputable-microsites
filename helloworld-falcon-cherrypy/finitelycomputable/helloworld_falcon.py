@@ -11,10 +11,10 @@ class HelloWorld(object):
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
         resp.content_type = falcon.MEDIA_TEXT
-        resp.body = self.impl.index()
+        resp.text = 'Falcon adapts, ' + self.impl.index()
 
 
-application = falcon.API()
+application = falcon.App()
 application.req_options.strip_url_path_trailing_slash = True
 base_path = join('/', environ.get('BASE_PATH', ''))
 application.add_route(base_path, HelloWorld())

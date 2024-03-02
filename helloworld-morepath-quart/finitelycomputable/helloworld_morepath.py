@@ -18,7 +18,7 @@ class Root(object):
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return asyncio.run(helloworld_quart.hello_world())
+    return 'Morepath adapts, ' + asyncio.run(helloworld_quart.hello_world())
 
 
 if environ.get('BASE_PATH'):

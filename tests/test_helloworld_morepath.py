@@ -1,4 +1,5 @@
 try:
+    import re
     import pytest
     from webtest import TestApp as Client
 
@@ -9,8 +10,8 @@ try:
         c = Client(application)
         response = c.get('/')
         assert 200 == response.status_code
-        assert len(response.body) > 21
-        assert len(response.body) < 30
+        assert re.search('says "hello, world"\n', response.text)
+        assert re.search('Morepath', response.text)
 
     @pytest.mark.xfail
     def test_helloworld_morepath_exact():
@@ -18,6 +19,6 @@ try:
         c = Client(application)
         response = c.get('/')
         assert 200 == response.status_code
-        assert response.body == b'Morepath says "hello, world"\n'
+        assert response.text == 'Morepath says "hello, world"\n'
 except ImportError:
     pass

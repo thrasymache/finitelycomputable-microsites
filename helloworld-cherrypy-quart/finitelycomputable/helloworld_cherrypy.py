@@ -8,7 +8,7 @@ from finitelycomputable import helloworld_quart
 class HelloWorld(object):
     @cherrypy.expose
     def index(self):
-        return asyncio.run(helloworld_quart.hello_world())
+        return "CherryPy adapts, " + asyncio.run(helloworld_quart.hello_world())
 
 
 def setup_server():

@@ -1,5 +1,6 @@
 try:
     from falcon import testing
+    import re
     import pytest
 
     from finitelycomputable.helloworld_falcon import application
@@ -13,8 +14,8 @@ try:
         '''helloworld test that can handle adapters'''
         response = client.simulate_get('/')
         assert 200 == response.status_code
-        assert len(response.text) > 21
-        assert len(response.text) < 30
+        assert re.search('says "hello, world"\n', response.text)
+        assert re.search('Falcon', response.text)
 
     @pytest.mark.xfail
     def test_helloworld_falcon_exact(client):

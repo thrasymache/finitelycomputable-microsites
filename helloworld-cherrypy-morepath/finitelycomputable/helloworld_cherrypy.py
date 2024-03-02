@@ -9,7 +9,8 @@ class HelloWorld(object):
 
     @cherrypy.expose
     def index(self):
-        return helloworld_morepath.hello_world(self.model, cherrypy.request)
+        return "CherryPy adapts, " + \
+                helloworld_morepath.hello_world(self.model, cherrypy.request)
 
 
 def setup_server():

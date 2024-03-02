@@ -19,7 +19,7 @@ base_path = join('/', environ.get('BASE_PATH', ''))
 
 @blueprint.route('/')
 def hello_world():
-    return asyncio.run(helloworld_quart.hello_world())
+    return "Flask adapts, " + asyncio.run(helloworld_quart.hello_world())
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

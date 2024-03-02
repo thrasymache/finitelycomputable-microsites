@@ -17,7 +17,7 @@ class Root(helloworld_cherrypy.HelloWorld):
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return self.index()
+    return 'Morepath adapts, ' + self.index()
 
 
 if environ.get('BASE_PATH'):

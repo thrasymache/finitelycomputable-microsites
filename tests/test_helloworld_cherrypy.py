@@ -14,8 +14,9 @@ try:
         def test_helloworld_cherrypy(self):
             self.getPage('/')
             self.assertStatus('200 OK')
-            self.assertGreater(len(self.body), 21)
-            self.assertLess(len(self.body), 30)
+            self.assertInBody(b'says "hello, world"\n')
+            self.assertInBody(b'CherryPy')
+            #self.assertMatchesBody(b'"hello, world"\n')
 
         @pytest.mark.xfail
         def test_helloworld_cherrypy_exact(self):

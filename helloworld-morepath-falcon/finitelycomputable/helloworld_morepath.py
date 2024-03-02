@@ -20,7 +20,7 @@ class Root(helloworld_falcon.HelloWorld):
 def hello_world(self, request):
     resp = Response()
     self.on_get(request, resp)
-    return resp.body
+    return 'Morepath adapts, ' + resp.text
 
 
 if environ.get('BASE_PATH'):

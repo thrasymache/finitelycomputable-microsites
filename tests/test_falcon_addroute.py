@@ -1,5 +1,6 @@
 try:
     from falcon import testing
+    import re
     import pytest
 
     from finitelycomputable.falcon_addroute import application
@@ -17,10 +18,9 @@ try:
         assert len(response.text) < 100
 
     def test_helloworld(client):
-        '''helloworld test that can handle adapters'''
         response = client.simulate_get('/hello_world/')
         assert 200 == response.status_code
-        assert len(response.text) > 21
-        assert len(response.text) < 30
+        assert re.search('says "hello, world"\n', response.text)
+        assert re.search('Falcon', response.text)
 except ImportError:
     pass

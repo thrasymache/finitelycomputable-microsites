@@ -12,7 +12,7 @@ class HelloWorld(object):
     def index(self):
         resp = Response()
         self.impl.on_get(cherrypy.request, resp)
-        return resp.body
+        return "CherryPy adapts, " + resp.text
 
 
 def setup_server():

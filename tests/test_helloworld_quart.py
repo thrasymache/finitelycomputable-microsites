@@ -1,4 +1,5 @@
 try:
+    import re
     import pytest
 
     from finitelycomputable import helloworld_quart
@@ -11,8 +12,8 @@ try:
         response = await client.get('/')
         assert 200 == response.status_code
         data = await response.get_data()
-        assert len(data) > 21
-        assert len(data) < 30
+        assert re.search(b'says "hello, world"\n', data)
+        assert re.search(b'Quart', data)
 
     @pytest.mark.xfail
     @pytest.mark.asyncio

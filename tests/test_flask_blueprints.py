@@ -1,4 +1,5 @@
 try:
+    import re
     import pytest
 
     from finitelycomputable import flask_blueprints
@@ -17,8 +18,9 @@ try:
         assert 200 == response.status_code
 
     def test_helloworld(client):
-        '''helloworld test that can handle adapters'''
         response = client.get('/hello_world/')
         assert 200 == response.status_code
+        assert re.search(b'says "hello, world"\n', response.data)
+        assert re.search(b'Flask', response.data)
 except ImportError:
     pass

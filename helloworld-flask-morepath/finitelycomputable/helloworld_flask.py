@@ -19,7 +19,8 @@ model = helloworld_morepath.Root()
 
 @blueprint.route('/')
 def hello_world():
-    return helloworld_morepath.hello_world(model, flask.request)
+    return "Flask adapts, " + \
+            helloworld_morepath.hello_world(model, flask.request)
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

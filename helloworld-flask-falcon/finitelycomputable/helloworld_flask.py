@@ -22,7 +22,7 @@ impl = helloworld_falcon.HelloWorld()
 def hello_world():
     resp = Response()
     impl.on_get(flask.request, resp)
-    return resp.body
+    return "Flask adapts, " + resp.text
 
 
 @application.route(base_path + '/wsgi_app/')

@@ -17,7 +17,7 @@ class Root(object):
 
 @HelloWorldApp.view(model=Root, name='')
 def hello_world(self, request):
-    return helloworld_flask.hello_world()
+    return 'Morepath adapts, ' + helloworld_flask.hello_world()
 
 
 if environ.get('BASE_PATH'):
