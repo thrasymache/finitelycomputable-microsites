@@ -1,154 +1,143 @@
 try:
     import pytest
 
-    from finitelycomputable import idtrust_flask
-    from finitelycomputable.idtrust_db.models import (
-        SqliteDatabase, IdTrustJourney, IdTrustDialog, IdTrustExchange, MODELS
-    )
-    from finitelycomputable.idtrust_common.strategies import Strategy
-
-    test_db = SqliteDatabase(':memory:')
-
-    @pytest.fixture
-    def journey():
-        return IdTrustJourney.create(id=2)
+    from finitelycomputable import idtrust_app_flask
+    from finitelycomputable.idtrust_common.helpers_for_tests import *
+    from finitelycomputable.idtrust_db.helpers_for_tests import *
 
 
     @pytest.fixture
-    def dialog(journey):
-        return IdTrustDialog.create(
-            id=1,
-            journey_id=journey.id,
-            foil_strategy='C',
-            user_miscommunication=0.0,
-            foil_miscommunication=0.0,
-        )
-
-
-    @pytest.fixture
-    def client():
-            idtrust_flask.application.config['TESTING'] = True
-
-            # Bind model classes to test db. Since we have a complete list of
-            # all models, we do not need to recursively bind dependencies.
-            test_db.bind(MODELS, bind_refs=False, bind_backrefs=False)
-
-            # test_db.connect()
-            test_db.create_tables(MODELS)
-            IdTrustJourney.create(id=1)
-
-            with idtrust_flask.application.test_client() as client:
-                yield client
-            test_db.drop_tables(MODELS)
-            test_db.close()
-
+    def client(db):
+        idtrust_app_flask.application.config['TESTING'] = True
+        return idtrust_app_flask.application.test_client()
 
     def test_get_blind_begin_200(client):
-        # response = client.get('/identification_of_trust/')
-        response = client.get('/')
+        assert_no_dialogs_or_exchanges()
+        response = client.get(home_blind_url)
         assert 200 == response.status_code
+        assert_no_dialogs_or_exchanges()
 
     def test_get_reveal_begin_200(client):
-        # response = client.get('/identification_of_trust/choose_miscommunication')
-        response = client.get('/choose_miscommunication')
+        assert_no_dialogs_or_exchanges()
+        response = client.get(home_reveal_url)
         assert 200 == response.status_code
+        assert_no_dialogs_or_exchanges()
 
-    def test_get_interact_404(client):
-        # response = client.get('/identification_of_trust/interact/1')
-        response = client.get('/interact/4')
+    def test_get_interaction_404(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.get(interaction_url)
         assert 404 == response.status_code
+        assert_no_dialogs_or_exchanges()
 
-    def test_get_interact_200(client, dialog):
-        # response = client.get('/identification_of_trust/interact/1')
-        response = client.get('/interact/1')
+    def test_get_interaction_200(client, dialog):
+        assert_one_dialog_no_exchanges()
+        response = client.get(interaction_url)
         assert 200 == response.status_code
+        assert_one_dialog_no_exchanges()
 
-    def test_get_blind_continue_404(client):
-        # response = client.get('/identification_of_trust/journey/2')
-        response = client.get('/journey/2')
+    def test_get_journey_2_blind_404(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.get(journey_2_blind_url)
         assert 404 == response.status_code
+        assert_no_dialogs_or_exchanges()
 
-    def test_get_blind_continue_200(client, dialog):
-        # response = client.get('/identification_of_trust/journey/2')
-        response = client.get('/journey/2')
+    def test_get_journey_2_blind_200(client, dialog):
+        assert_one_dialog_no_exchanges()
+        response = client.get(journey_2_blind_url)
         assert 200 == response.status_code
+        assert_one_dialog_no_exchanges()
 
-    def test_get_reveal_continue_404(client):
-        response = client.get(
-                #'/identification_of_trust/journey/2/choose_miscommunication')
-                '/journey/2/choose_miscommunication')
+    def test_get_journey_2_reveal_404(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.get(journey_2_reveal_url)
         assert 404 == response.status_code
+        assert_no_dialogs_or_exchanges()
 
-    def test_get_reveal_continue_200(client, dialog):
-        response = client.get(
-                #'/identification_of_trust/journey/2/choose_miscommunication')
-                '/journey/2/choose_miscommunication')
+    def test_get_journey_2_reveal_200(client, dialog):
+        assert_one_dialog_no_exchanges()
+        response = client.get(journey_2_reveal_url)
         assert 200 == response.status_code
+        assert_one_dialog_no_exchanges()
 
-    def test_post_blind_begin_creates_interaction(client):
-        assert IdTrustDialog.select().count() == 0
-        # response = client.post('/identification_of_trust/',
-        response = client.post('/',
-                data={'user_intent': 'Trust'})
+    def test_post_home_blind_trust_creates_interaction(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_blind_url, data=trust_data)
         assert response.status_code == 302
-        assert IdTrustDialog.select().count() == 1
+        assert_one_dialog_and_trust_exchange()
 
-    def test_post_reveal_begin_creates_interaction(client):
-        assert IdTrustDialog.select().count() == 0
-        response = client.post(
-            #'/identification_of_trust/journey/1/choose_miscommunication', {
-            '/journey/1/choose_miscommunication', data={
-                'user_intent': 'Trust',
-                'user_miscommunication': 0.1,
-                'foil_miscommunication': 0.1, })
+    def test_post_home_blind_distrust_creates_interaction(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_blind_url, data=distrust_data)
         assert response.status_code == 302
-        assert IdTrustDialog.select().count() == 1
+        assert_one_dialog_and_distrust_exchange()
 
-    def test_post_blind_continue_creates_interaction(client):
-        assert IdTrustDialog.select().count() == 0
-        #response = client.post('/identification_of_trust/journey/1',
-        response = client.post('/journey/1',
-                data={'user_intent': 'Trust'})
+    def test_post_home_reveal_trust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_reveal_url, data=reveal_trust_data)
         assert response.status_code == 302
-        assert IdTrustDialog.select().count() == 1
+        assert_one_dialog_and_trust_exchange()
 
-    def test_post_reveal_continue_creates_interaction(client):
-        assert IdTrustDialog.select().count() == 0
-        #response = client.post('/identification_of_trust/', {
-        response = client.post('/', data={
-            'user_intent': 'Trust',
-            'user_miscommunication': 0.1,
-            'foil_miscommunication': 0.1,
-        })
+    def test_post_home_blind_reveal_distrust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_reveal_url, data=reveal_distrust_data)
         assert response.status_code == 302
-        assert IdTrustDialog.select().count() == 1
+        assert_one_dialog_and_distrust_exchange()
 
-    def test_post_trust_creates_exchange(client, dialog):
-        assert IdTrustExchange.select().count() == 0
-        #response = client.post('/identification_of_trust/interact/1',
-        response = client.post('/interact/1',
-                data={'user_intent': 'Trust'})
+    def test_post_home_blind_reveal_trust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_blind_url, data=reveal_trust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_trust_exchange()
+
+    def test_post_home_reveal_distrust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(home_blind_url, data=reveal_distrust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_distrust_exchange()
+
+    def test_post_journey_reveal_trust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(journey_reveal_url, data=reveal_trust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_trust_exchange()
+
+    def test_post_journey_reveal_distrust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(journey_reveal_url, data=reveal_distrust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_distrust_exchange()
+
+    def test_post_journey_blind_trust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(journey_blind_url, data=trust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_trust_exchange()
+
+    def test_post_journey_blind_distrust_creates_dialog(client):
+        assert_no_dialogs_or_exchanges()
+        response = client.post(journey_blind_url, data=distrust_data)
+        assert response.status_code == 302
+        assert_one_dialog_and_distrust_exchange()
+
+    def test_post_interaction_trust_creates_exchange(client, dialog):
+        assert_one_dialog_no_exchanges()
+        response = client.post(interaction_url, data=trust_data)
         assert response.status_code == 200
-        assert IdTrustExchange.select().count() == 1
+        assert_one_dialog_and_trust_exchange()
 
-    def test_post_distrust_creates_exchange(client, dialog):
-        assert IdTrustExchange.select().count() == 0
-        #response = client.post('/identification_of_trust/interact/1',
-        response = client.post('/interact/1',
-                data={'user_intent': 'Distrust'})
-        print(response.data)
+    def test_post_interaction_distrust_creates_exchange(client, dialog):
+        assert_one_dialog_no_exchanges()
+        response = client.post(interaction_url, data=distrust_data)
         assert response.status_code == 200
-        assert IdTrustExchange.select().count() == 1
+        assert_one_dialog_and_distrust_exchange()
 
-    def test_post_user_guess_sets_user_guess(client, dialog):
-        assert IdTrustExchange.select().count() == 0
-        #response = client.post('/identification_of_trust/interact/1',
-        response = client.post('/interact/1',
-                data={'user_guess': Strategy.Innocent.value})
-        print(response.data)
+    def test_post_interaction_user_guess_sets_user_guess(client, dialog):
+        assert_one_dialog_no_exchanges()
+        assert_no_user_guess()
+        response = client.post(interaction_url, data=user_guess_data)
         assert response.status_code == 200
-        assert IdTrustExchange.select().count() == 0
-        assert IdTrustDialog.get(id=1).user_guess == Strategy.Innocent.value
+        assert_one_dialog_no_exchanges()
+        assert_set_user_guess()
 
 except ImportError:
     pass

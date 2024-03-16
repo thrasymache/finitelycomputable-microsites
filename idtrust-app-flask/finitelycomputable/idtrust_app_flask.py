@@ -1,8 +1,7 @@
 import flask
 from os import environ
 from posixpath import join
-# when there are multiple implementations this will import the available one
-from finitelycomputable.idtrust_flask_peewee import Flask, Blueprint
+from finitelycomputable.idtrust_flask import Flask, Blueprint
 from finitelycomputable.idtrust_db.controller import (
         dialog_from_id, journey_from_id, create_dialog, interact_core
 )

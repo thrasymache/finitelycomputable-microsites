@@ -91,6 +91,11 @@ class IdTrustViews(TestCase):
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(models.Dialog.objects.count(), 1)
 
+    def test_get_interaction(self):
+        default_create()
+        resp = self.c.get('/identification_of_trust/interact/1')
+        self.assertEqual(resp.status_code, 200)
+
     def test_post_trust_creates_exchange(self):
         self.assertEqual(models.Exchange.objects.count(), 0)
         default_create()
