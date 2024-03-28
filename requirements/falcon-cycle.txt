@@ -4,6 +4,8 @@ finitelycomputable-helloworld-morepath-falcon[tests]~=24.3
 finitelycomputable-helloworld-cherrypy-morepath[tests]~=24.3
 finitelycomputable-helloworld-flask-cherrypy[tests]~=24.3
 
+finitelycomputable-idtrust-falcon-peewee[tests]~=24.3
+
 finitelycomputable-cherrypy-mount[tests]~=24.3
 finitelycomputable-falcon-addroute[tests]~=24.3
 finitelycomputable-flask-blueprints[tests]~=24.3

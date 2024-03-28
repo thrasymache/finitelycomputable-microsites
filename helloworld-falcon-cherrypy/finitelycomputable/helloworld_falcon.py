@@ -5,16 +5,18 @@ from posixpath import join
 from finitelycomputable import helloworld_cherrypy
 
 
+class App(falcon.App):
+    '''this will have __module__ == finitelycomputable.helloworld_falcon'''
+
 class HelloWorld(object):
     impl = helloworld_cherrypy.HelloWorld()
 
     def on_get(self, req, resp):
         resp.status = falcon.HTTP_200
-        resp.content_type = falcon.MEDIA_TEXT
         resp.text = 'Falcon adapts, ' + self.impl.index()
 
 
-application = falcon.App()
+application = App(media_type=falcon.MEDIA_TEXT)
 application.req_options.strip_url_path_trailing_slash = True
 base_path = join('/', environ.get('BASE_PATH', ''))
 application.add_route(base_path, HelloWorld())

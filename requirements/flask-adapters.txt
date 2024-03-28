@@ -5,9 +5,6 @@ finitelycomputable-helloworld-falcon-flask[tests]~=24.3
 finitelycomputable-helloworld-morepath-flask[tests]~=24.3
 finitelycomputable-helloworld-quart-flask[tests]~=24.3
 
-finitelycomputable-idtrust-common[tests]~=24.3
-finitelycomputable-idtrust-db-peewee[tests]~=24.3
-finitelycomputable-idtrust-app-flask[tests]~=24.3
 finitelycomputable-idtrust-flask-peewee[tests]~=24.3
 
 finitelycomputable-cherrypy-mount[tests]~=24.3

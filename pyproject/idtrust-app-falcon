@@ -1,0 +1,5 @@
+name	finitelycomputable-idtrust-app-falcon
+description	The Falcon-dependent code for a microsite to explore identifying game-theory strategies
+project.urls	Homepage = "https://www.finitelycomputable.net/identification_of_trust"
+project.scripts	finitelycomputable-idtrust-app-falcon = "finitelycomputable.idtrust_app_falcon:run"
+dependencies	finitelycomputable-idtrust-common

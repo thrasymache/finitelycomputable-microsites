@@ -15,3 +15,5 @@
 -e idtrust-db-peewee[tests]
 -e idtrust-app-flask[tests]
 -e idtrust-flask-peewee[tests]
+-e idtrust-app-falcon[tests]
+-e idtrust-falcon-peewee[tests]

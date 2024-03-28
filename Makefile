@@ -17,6 +17,7 @@ dist-dirs ::= cherrypy-mount/. django-apps/. flask-dispatcher/. \
 	helloworld-quart-falcon/. helloworld-quart-flask/. \
 	helloworld-quart-morepath/. \
 	idtrust-common/. idtrust-app-flask/. idtrust-flask-peewee/. \
+	idtrust-app-falcon/. idtrust-falcon-peewee/. \
 	idtrust-db-peewee/. idtrust-django/. \
 
 toml-files ::= $(dist-dirs:%/.=%/pyproject.toml)
@@ -76,7 +77,9 @@ helloworld-quart-flask/pyproject.toml: pyproject/quart
 helloworld-quart-morepath/pyproject.toml: pyproject/quart
 idtrust-db-peewee/pyproject.toml: pyproject/peewee
 idtrust-django/pyproject.toml: pyproject/jinja2 pyproject/django pyproject/wsgi
+idtrust-app-falcon/pyproject.toml: pyproject/falcon pyproject/wsgi
 idtrust-app-flask/pyproject.toml: pyproject/flask pyproject/wsgi
+idtrust-falcon-peewee/pyproject.toml: pyproject/falcon pyproject/wsgi
 idtrust-flask-peewee/pyproject.toml: pyproject/flask pyproject/wsgi
 morepath-mount/pyproject.toml: pyproject/morepath pyproject/wsgi
 

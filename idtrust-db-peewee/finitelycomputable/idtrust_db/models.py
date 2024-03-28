@@ -2,7 +2,6 @@ from datetime import datetime
 from peewee import *
 from finitelycomputable.idtrust_common import logic
 from finitelycomputable.idtrust_common.strategies import Strategy
-from finitelycomputable import idtrust_urlfor
 
 database = SqliteDatabase('db.sqlite3')
 
@@ -36,11 +35,6 @@ class IdTrustDialog(BaseModel):
         return Strategy(self.user_guess).name
     def get_foil_strategy_display(self):
         return Strategy(self.foil_strategy).name
-    def get_absolute_url(self):
-        return idtrust_urlfor.interact(
-            pk=self.id,
-            blind=True,
-        )
 
     class Meta:
         table_name = 'id_trust_dialog'

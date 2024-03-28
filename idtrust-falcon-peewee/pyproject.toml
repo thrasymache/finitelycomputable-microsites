@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
+license = {text = "AGPL-3.0-only"}
+readme = "README.rst"
+version = "24.3"
+name = "finitelycomputable-idtrust-falcon-peewee"
+requires-python = ">=3.8"
+description = "A Falcon+peewee microsite to explore identifying game-theory strategies"
+dependencies = [
+  "finitelycomputable-idtrust-app-falcon",
+  "finitelycomputable-idtrust-db-peewee",
+  "falcon~=3.1",
+]
+classifiers = [
+  "Topic :: Internet :: WWW/HTTP :: WSGI",
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Affero General Public License v3",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+
+[project.optional-dependencies]
+tests = ["pytest", "pytest-env"]
+waitress = ["waitress~=2.1"]
+cherrypy = ["cherrypy~=18.0"]
+cheroot = ["cheroot~=9.0"]
+bjoern = ["bjoern~=3.0"]
+gunicorn = ["gunicorn~=21.2"]
+
+[project.scripts]
+finitelycomputable-idtrust-falcon-peewee = "finitelycomputable.idtrust_falcon:run"
+
+[project.urls]
+Homepage = "https://www.finitelycomputable.net/identification_of_trust"
+Documentation = "https://github.com/thrasymache/microsites"
+Source = "https://github.com/thrasymache/microsites"
+Gitlab = "https://gitlab.com/thrasymache/microsites"
+sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
+NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"

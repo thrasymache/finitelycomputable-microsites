@@ -23,6 +23,11 @@ def interact(pk, blind=False):
     except:
         flask.abort(flask.Response(f"Dialog {pk} not found.", 404))
     return flask.render_template('interaction.html',
+        new_partner_url=flask.url_for(
+                'idtrust.new_dialogue',
+                journey_id=interaction.journey_id,
+                blind=blind),
+        new_journey_url=flask.url_for('idtrust.new_dialogue', blind=blind),
         **interact_core(
             interaction,
             blind,
@@ -60,7 +65,9 @@ def new_dialogue(blind, journey_id=None):
             flask.request.form.get('foil_miscommunication'),
     )
     interact_core(obj, not blind, flask.request.form.get('user_intent'))
-    return flask.redirect(obj.get_absolute_url())
+    return flask.redirect(
+            flask.url_for( 'idtrust.interact', pk=obj.id, blind=True)
+    )
 
 application.register_blueprint(blueprint, url_prefix = base_path)
 

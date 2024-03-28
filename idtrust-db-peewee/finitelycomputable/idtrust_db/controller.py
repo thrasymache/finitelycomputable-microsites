@@ -1,5 +1,4 @@
 import random
-from finitelycomputable import idtrust_urlfor
 from finitelycomputable.idtrust_db.models import (
     IdTrustJourney,
     IdTrustDialog,
@@ -80,8 +79,4 @@ def interact_core(interaction, blind, user_intent, user_guess=None):
         'blind': blind,
         'strategy_list': strategy_list,
         'strategies': Strategy,
-        'new_partner_url': idtrust_urlfor.new_dialogue(
-                journey_id=interaction.journey_id,
-                blind=blind),
-        'new_journey_url': idtrust_urlfor.new_dialogue(blind=blind),
     }

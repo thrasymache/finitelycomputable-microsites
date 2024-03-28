@@ -31,7 +31,7 @@ except ModuleNotFoundError:
     pass
 
 try:
-    from finitelycomputable.idtrust_flask import blueprint as idtrust_blue
+    from finitelycomputable.idtrust_app_flask import blueprint as idtrust_blue
     application.register_blueprint(
             idtrust_blue, url_prefix = join(base_path, 'identification_of_trust'))
     application.add_url_rule(
