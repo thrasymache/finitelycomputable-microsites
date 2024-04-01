@@ -9,7 +9,7 @@ from finitelycomputable.idtrust_common.strategies import Strategy
 from finitelycomputable.idtrust_falcon import App
 
 
-def idtrust_falcon_urlfor_new_dialog(blind, journey_id=None):
+def urlfor_new_dialog(blind, journey_id=None):
     if journey_id is None:
         if blind:
             return join(base_path, '')
@@ -22,7 +22,7 @@ def idtrust_falcon_urlfor_new_dialog(blind, journey_id=None):
             return join(base_path,
                     f'journey/{journey_idk}/choose_miscommunication')
 
-def idtrust_falcon_urlfor_interact(pk, blind):
+def urlfor_interact(pk, blind):
     if blind:
         return join(base_path, f'interact/{pk}')
     else:
@@ -40,7 +40,7 @@ class HomeBlind(object):
             'blind': True,
             'journey': None,
             'form': None,
-            'blind_toggle_url': idtrust_falcon_urlfor_new_dialog(False),
+            'blind_toggle_url': urlfor_new_dialog(False),
         })
         resp.status = falcon.HTTP_200
 
@@ -52,7 +52,7 @@ class HomeBlind(object):
                 media.get('foil_miscommunication'),
         )
         interact_core(obj, True, media.get('user_intent'))
-        raise falcon.HTTPFound(idtrust_falcon_urlfor_interact(obj.id, True))
+        raise falcon.HTTPFound(urlfor_interact(obj.id, True))
 
 
 class HomeReveal(object):
@@ -63,7 +63,7 @@ class HomeReveal(object):
             'blind': False,
             'journey': None,
             'form': None,
-            'blind_toggle_url': idtrust_falcon_urlfor_new_dialog(True),
+            'blind_toggle_url': urlfor_new_dialog(True),
         })
         resp.status = falcon.HTTP_200
 
@@ -75,7 +75,7 @@ class HomeReveal(object):
                 media.get('foil_miscommunication'),
         )
         interact_core(obj, True, media.get('user_intent'))
-        raise falcon.HTTPFound(idtrust_falcon_urlfor_interact(obj.id, True))
+        raise falcon.HTTPFound(urlfor_interact(obj.id, True))
 
 
 class JourneyBlind(object):
@@ -90,7 +90,7 @@ class JourneyBlind(object):
             'blind': True,
             'journey': journey,
             'form': None,
-            'blind_toggle_url': idtrust_falcon_urlfor_new_dialog(True),
+            'blind_toggle_url': urlfor_new_dialog(True),
         })
         resp.status = falcon.HTTP_200
 
@@ -106,7 +106,7 @@ class JourneyBlind(object):
                 media.get('foil_miscommunication'),
         )
         interact_core(obj, True, media.get('user_intent'))
-        raise falcon.HTTPFound(idtrust_falcon_urlfor_interact(obj.id, True))
+        raise falcon.HTTPFound(urlfor_interact(obj.id, True))
 
 
 class JourneyReveal(object):
@@ -121,7 +121,7 @@ class JourneyReveal(object):
             'blind': False,
             'journey': journey,
             'form': None,
-            'blind_toggle_url': idtrust_falcon_urlfor_new_dialog(True),
+            'blind_toggle_url': urlfor_new_dialog(True),
         })
         resp.status = falcon.HTTP_200
 
@@ -137,7 +137,7 @@ class JourneyReveal(object):
                 media.get('foil_miscommunication'),
         )
         interact_core(obj, False, media.get('user_intent'))
-        raise falcon.HTTPFound(idtrust_falcon_urlfor_interact(obj.id, False))
+        raise falcon.HTTPFound(urlfor_interact(obj.id, False))
 
 
 class InteractBlind(object):
@@ -149,7 +149,12 @@ class InteractBlind(object):
         except:
             raise falcon.HTTPNotFound(description=f"Dialog {pk} not found.")
         resp.text = self.template.render(
-                **interact_core(interaction, True, None, None)
+            new_partner_url=urlfor_new_dialog(
+                    blind=True,
+                    journey_id=interaction.journey_id,
+            ),
+            new_journey_url=urlfor_new_dialog(blind=True),
+            **interact_core(interaction, True, None, None)
         )
         resp.status = falcon.HTTP_200
 
@@ -159,11 +164,17 @@ class InteractBlind(object):
         except:
             raise falcon.HTTPNotFound(description=f"Dialog {pk} not found.")
         media = req.get_media()
-        resp.text = self.template.render(**interact_core(
-            interaction,
-            True,
-            media.get('user_intent'),
-            media.get('user_guess'),
+        resp.text = self.template.render(
+            new_partner_url=urlfor_new_dialog(
+                    blind=True,
+                    journey_id=interaction.journey_id,
+            ),
+            new_journey_url=urlfor_new_dialog(blind=True),
+            **interact_core(
+                interaction,
+                True,
+                media.get('user_intent'),
+                media.get('user_guess'),
         ))
         resp.status = falcon.HTTP_200
 
