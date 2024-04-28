@@ -16,8 +16,8 @@ base_path = join('/', environ.get('BASE_PATH', ''))
 @blueprint.route('interact/<int:pk>', defaults={'blind': True},
         methods=('GET', 'POST'))
 @blueprint.route('interact/<int:pk>/reveal_miscommunication',
-        methods=('GET', 'POST'))
-def interact(pk, blind=False):
+        defaults={'blind': False}, methods=('GET', 'POST'))
+def interact(pk, blind):
     try:
         interaction = dialog_from_id(pk)
     except:
@@ -28,6 +28,10 @@ def interact(pk, blind=False):
                 journey_id=interaction.journey_id,
                 blind=blind),
         new_journey_url=flask.url_for('idtrust.new_dialogue', blind=blind),
+        blind_toggle_url=flask.url_for(
+                'idtrust.interact',
+                pk=pk,
+                blind=not blind),
         **interact_core(
             interaction,
             blind,
@@ -66,7 +70,7 @@ def new_dialogue(blind, journey_id=None):
     )
     interact_core(obj, not blind, flask.request.form.get('user_intent'))
     return flask.redirect(
-            flask.url_for( 'idtrust.interact', pk=obj.id, blind=True)
+            flask.url_for( 'idtrust.interact', pk=obj.id, blind=blind)
     )
 
 application.register_blueprint(blueprint, url_prefix = base_path)

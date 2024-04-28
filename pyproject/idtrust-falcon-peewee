@@ -1,6 +1,6 @@
 name	finitelycomputable-idtrust-falcon-peewee
 description	A Falcon+peewee microsite to explore identifying game-theory strategies
 project.urls	Homepage = "https://www.finitelycomputable.net/identification_of_trust"
-project.scripts	finitelycomputable-idtrust-falcon-peewee = "finitelycomputable.idtrust_falcon:run"
+project.scripts	finitelycomputable-idtrust-falcon-peewee = "finitelycomputable.idtrust_app_falcon:run"
 dependencies	finitelycomputable-idtrust-app-falcon
 dependencies	finitelycomputable-idtrust-db-peewee

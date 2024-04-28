@@ -17,4 +17,4 @@ project.urls	Source = "https://github.com/thrasymache/microsites"
 project.urls	Gitlab = "https://gitlab.com/thrasymache/microsites"
 project.urls	sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
 project.urls	NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"
-optional	tests	pytest", "pytest-env
+optional	tests	pytest", "pytest-env", "finitelycomputable-tests

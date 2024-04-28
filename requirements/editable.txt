@@ -17,3 +17,4 @@
 -e idtrust-flask-peewee[tests]
 -e idtrust-app-falcon[tests]
 -e idtrust-falcon-peewee[tests]
+-e finitelycomputable-tests

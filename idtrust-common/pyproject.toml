@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.3"
+version = "24.4"
 name = "finitelycomputable-idtrust-common"
 requires-python = ">=3.8"
 description = "Shared files needed for the Identification of Trust microsite"
@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-tests = ["pytest", "pytest-env"]
+tests = ["pytest", "pytest-env", "finitelycomputable-tests"]
 
 [project.urls]
 Homepage = "https://www.finitelycomputable.net/identification_of_trust"

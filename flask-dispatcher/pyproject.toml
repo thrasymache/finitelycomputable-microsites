@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.3"
+version = "24.4"
 name = "finitelycomputable-flask-dispatcher"
 requires-python = ">=3.8"
 description = "The Flask-based wsgi app using werkzeug.middleware.dispatcher to combine the microsites of finitelycomputable.net"
@@ -32,7 +32,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-tests = ["pytest", "pytest-env"]
+tests = ["pytest", "pytest-env", "finitelycomputable-tests"]
 waitress = ["waitress~=2.1"]
 cherrypy = ["cherrypy~=18.0"]
 cheroot = ["cheroot~=9.0"]

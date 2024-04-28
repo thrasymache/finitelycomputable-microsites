@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.3"
+version = "24.4"
 name = "finitelycomputable-helloworld-quart-cherrypy"
 requires-python = ">=3.8"
 description = "hello_world in Quart from an implementation in Cherrypy"
@@ -31,7 +31,7 @@ classifiers = [
 
 [project.optional-dependencies]
 tests = ["pytest-asyncio",
-  "pytest", "pytest-env"]
+  "pytest", "pytest-env", "finitelycomputable-tests"]
 
 [project.scripts]
 finitelycomputable-helloworld-quart = "finitelycomputable.helloworld_quart:run"

@@ -1,0 +1,4 @@
+name	finitelycomputable-tests
+description	Imports for all the test modules for the apps in the microsites of finitelycomputable.net.
+project.urls	Homepage = "https://www.finitelycomputable.net/"
+project.scripts	finitelycomputable-tests = "pytest:main"

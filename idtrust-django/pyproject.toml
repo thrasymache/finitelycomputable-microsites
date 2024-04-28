@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
 license = {text = "AGPL-3.0-only"}
 readme = "README.rst"
-version = "24.3"
+version = "24.4"
 name = "finitelycomputable-idtrust-django"
 requires-python = ">=3.8"
 description = "A Django microsite to explore identifying game-theory strategies"
@@ -36,7 +36,7 @@ classifiers = [
 
 [project.optional-dependencies]
 tests = ["pytest-django",
-  "pytest", "pytest-env"]
+  "pytest", "pytest-env", "finitelycomputable-tests"]
 waitress = ["waitress~=2.1"]
 cherrypy = ["cherrypy~=18.0"]
 cheroot = ["cheroot~=9.0"]

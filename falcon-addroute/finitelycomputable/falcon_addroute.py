@@ -17,7 +17,7 @@ at {base_path} with {', '.join(included_apps) or "nothing"}
         )
 
 
-application = falcon.App()
+application = falcon.App(media_type=falcon.MEDIA_HTML)
 application.req_options.strip_url_path_trailing_slash = True
 base_path = join('/', environ.get('BASE_PATH', ''))
 version_text = environ.get('MICROSITES_VERSION_TEXT', '')
@@ -31,6 +31,13 @@ try:
 except ModuleNotFoundError:
     pass
 
+try:
+    from finitelycomputable.idtrust_app_falcon import add_routes
+    app_path = join(base_path, 'identification_of_trust')
+    add_routes(application, app_path)
+    included_apps.append('idtrust_falcon')
+except ModuleNotFoundError:
+    pass
 
 def run():
     from sys import argv, exit, stderr

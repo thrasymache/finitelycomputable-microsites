@@ -11,7 +11,7 @@ tasks:
         sudo update-alternatives --set awk /usr/bin/original-awk
         cd finitelycomputable-microsites
         make clean || true
-        make pyproject.toml requirements
+        make pyproject.toml requirements tests
         git diff --exit-code
   - build: |
         export PATH=$PATH:~/.local/bin

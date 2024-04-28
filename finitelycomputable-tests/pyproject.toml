@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Samuel Newbold", email = "sam@rwsh.org"}]
+license = {text = "AGPL-3.0-only"}
+readme = "README.rst"
+version = "24.4"
+name = "finitelycomputable-tests"
+requires-python = ">=3.8"
+description = "Imports for all the test modules for the apps in the microsites of finitelycomputable.net."
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: GNU Affero General Public License v3",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+
+[project.optional-dependencies]
+tests = ["pytest", "pytest-env", "finitelycomputable-tests"]
+
+[project.scripts]
+finitelycomputable-tests = "pytest:main"
+
+[project.urls]
+Homepage = "https://www.finitelycomputable.net/"
+Documentation = "https://github.com/thrasymache/microsites"
+Source = "https://github.com/thrasymache/microsites"
+Gitlab = "https://gitlab.com/thrasymache/microsites"
+sourcehut = "https://git.sr.ht/~thrasymache/finitelycomputable-microsites"
+NotABug = "https://notabug.org/thrasymache/finitelycomputable-microsites"

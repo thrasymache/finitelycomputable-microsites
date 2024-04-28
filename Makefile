@@ -1,5 +1,6 @@
 dist-dirs ::= cherrypy-mount/. django-apps/. flask-dispatcher/. \
 	flask-blueprints/. falcon-addroute/. morepath-mount/. \
+	finitelycomputable-tests/. \
 	helloworld-cherrypy/. helloworld-cherrypy-falcon/. \
 	helloworld-cherrypy-flask/. helloworld-cherrypy-morepath/. \
 	helloworld-cherrypy-quart/. \
@@ -23,6 +24,7 @@ dist-dirs ::= cherrypy-mount/. django-apps/. flask-dispatcher/. \
 toml-files ::= $(dist-dirs:%/.=%/pyproject.toml)
 whl-files ::= $(dist-dirs:%/.=%/latest.whl)
 sdist-files ::= $(dist-dirs:%/.=%/latest.tar.gz)
+tests-files ::= tests/test_idtrust_falcon.py tests/test_idtrust_flask.py
 
 check: latest.whl latest.tar.gz
 	twine check $(whl-files)
@@ -30,19 +32,22 @@ check: latest.whl latest.tar.gz
 check-wheel-contents: latest.whl
 	check-wheel-contents --ignore W004 `readlink $(whl-files)`
 clean:
-	rm -r $(toml-files) $(whl-files) $(sdist-files) */build
+	rm -r $(toml-files) $(whl-files) $(sdist-files) $(tests-files) */build
 pyproject.toml: $(toml-files)
+tests: $(tests-files)
 latest.tar.gz: $(sdist-files)
 latest.whl: $(whl-files)
 requirements:
 	sed -i s/~=2.\..*/~=`tr -d \\\n <pyproject/version`/ requirements/*.txt
+test:
+	pytest --pyargs finitelycomputable.tests.tests_with_import_guards
 
 upload: check
 	# only upload most recent version when that isn't everything anyway
 	twine upload `readlink $(whl-files) $(sdist-files)`
 
 .PHONY: pyproject.toml check clean latest.tar.gz latest.whl requirements \
-	$(whl-files:%/latest.whl=%/check) upload
+	$(whl-files:%/latest.whl=%/check) test tests upload
 
 cherrypy-mount/pyproject.toml: pyproject/cherrypy pyproject/wsgi
 django-apps/pyproject.toml: pyproject/django pyproject/wsgi
@@ -99,9 +104,8 @@ pyproject-gen.awk: pyproject/preamble pyproject/all
 %/check: %/latest.whl
 	check-wheel-contents --ignore W004 `readlink $<`
 	twine check `readlink $<`
-#%/latest.tar.gz: %/setup.py
-#	$< sdist bdist_wheel
-#	ln -sbT dist/`$< --fullname`.tar.gz $@
-#
-#%/latest.whl: %/setup.py | %/latest.tar.gz
-#	ln -sbT dist/`$< --fullname | sed -e s/-/_/g -e s/_23/-23/`-py3-none-any.whl $@
+
+tests/test_%_falcon.py: fragments_of_tests/head_%_falcon.py fragments_of_tests/tail_%.py
+	cat $^ >$@
+tests/test_%_flask.py: fragments_of_tests/head_%_flask.py fragments_of_tests/tail_%.py
+	cat $^ >$@

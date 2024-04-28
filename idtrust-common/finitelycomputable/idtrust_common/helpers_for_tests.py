@@ -28,4 +28,6 @@ journey_2_reveal_url = '/journey/2/choose_miscommunication'
 #'/identification_of_trust/journey/2/choose_miscommunication', {
 interaction_url = '/interact/1'
 #'/identification_of_trust/interact/1'
+interaction_reveal_url = '/interact/1/reveal_miscommunication'
+#'/identification_of_trust/interact/1/reveal_miscommunication'
 
