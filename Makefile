@@ -24,7 +24,7 @@ dist-dirs ::= cherrypy-mount/. django-apps/. flask-dispatcher/. \
 toml-files ::= $(dist-dirs:%/.=%/pyproject.toml)
 whl-files ::= $(dist-dirs:%/.=%/latest.whl)
 sdist-files ::= $(dist-dirs:%/.=%/latest.tar.gz)
-tests-files ::= tests/test_idtrust_falcon.py tests/test_idtrust_flask.py
+tests-files ::= unguarded_tests/test_idtrust_falcon.py unguarded_tests/test_idtrust_flask.py
 
 check: latest.whl latest.tar.gz
 	twine check $(whl-files)
@@ -105,7 +105,7 @@ pyproject-gen.awk: pyproject/preamble pyproject/all
 	check-wheel-contents --ignore W004 `readlink $<`
 	twine check `readlink $<`
 
-tests/test_%_falcon.py: fragments_of_tests/head_%_falcon.py fragments_of_tests/tail_%.py
+unguarded_tests/test_%_falcon.py: fragments_of_tests/head_%_falcon.py fragments_of_tests/tail_%.py
 	cat $^ >$@
-tests/test_%_flask.py: fragments_of_tests/head_%_flask.py fragments_of_tests/tail_%.py
+unguarded_tests/test_%_flask.py: fragments_of_tests/head_%_flask.py fragments_of_tests/tail_%.py
 	cat $^ >$@

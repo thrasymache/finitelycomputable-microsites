@@ -21,7 +21,7 @@ tasks:
         make latest.whl
   - test: |
         export PATH=$PATH:~/.local/bin
-        cd finitelycomputable-microsites
+        # cd finitelycomputable-microsites
         tox
   - check: |
         export PATH=$PATH:~/.local/bin

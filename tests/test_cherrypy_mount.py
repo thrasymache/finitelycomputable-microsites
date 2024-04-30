@@ -1,4 +1,4 @@
 try:
-    from finitelycomputable.tests.cherrypy_mount import *
+    from finitelycomputable.tests.test_cherrypy_mount import *
 except ImportError:
     pass
